@@ -167,6 +167,192 @@ public class Java8Fequentasking {
            
            System.out.println(string);
 
+		////////////////////////////////
+
+		  System.out.println("Start");
+        List<String> words = List.of("apple", "pineapple", "ball", "cat", "apricot", "dog", "bourbon");
+        groupByWordLength(words);
+
+        countOfEachCharInStr();
+//        String str = "WordsInCamelCase";
+//        camelCaseToSentence(str);
+
+//        sumOfNumbers();
+
+//        getNthMaxNumber();
+
+//        countWordHavingChar();
+
+//        getAvg();
+
+//        getLongestStr();
+
+//        get1stNonRepeatingEle();
+
+//        listOf1stNonRepeatingChar();
+
+//            groupAnagramWords();
+
+//        listNonRepeatingEle();
+
+
+
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put(new String("Jone"), 1);
+        map.put("Jone", 2);
+
+//        map.values().forEach(System.out::println);
+
+    }
+
+    private static void groupAnagramWords() {
+
+        List<String> list = List.of("cat" , "dog", "god" , "eat" , "ate");
+
+        Map<String, List<String>> m = list.stream().collect(Collectors.groupingBy(w -> {
+            char[] chars = w.toCharArray();
+            Arrays.sort(chars);
+            return new String(chars);
+        }));
+
+        m.values().forEach(System.out::println);
+    }
+
+    public static void groupByWordLength(List<String> list){
+        System.out.println("Start: Group the words by length and sort them");
+        list.stream().collect(Collectors.groupingBy(String::length)).entrySet().stream().collect(
+                Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().stream().sorted().toList()
+                )
+        ).forEach(
+                (k,v) -> System.out.println(k + "=" + v)
+        );
+    }
+
+    public static void camelCaseToSentence(String str){
+        System.out.println("Start camelCaseToSentence");
+        String result = str.chars().mapToObj(c -> (char) c)
+                .map(ch -> Character.isUpperCase(ch) ? " " + ch : ch.toString())
+                .peek(c -> System.out.println(c))
+                .collect(Collectors.joining()).trim(); // To remove leading space if the first character is uppercase
+        System.out.println(result);
+    }
+
+
+    public static void countOfEachCharInStr(){
+        String str = "Now is the winter";
+        str.chars().mapToObj(c -> (char) c).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .forEach((key, value) -> System.out.println(key + ": " + value));
+//        or
+        Arrays.stream(str.split("")).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .forEach((key, value) -> System.out.println(key + ": " + value));
+    }
+
+    public static void countWordHavingChar() {
+        char c = 'a';
+        List<String> words = List.of("apple", "mango", "rat", "ball", "cat", "apricot", "dog", "banana");
+        Long count = words.stream().filter(w -> w.contains(String.valueOf(c))).count();
+        System.out.println(count);
+
+    }
+
+    public static void getLongestStr() {
+        List<String> words = List.of("apple", "mango", "rat", "ball", "cat", "apricot", "dog", "banana");
+        String word = words.stream().max(Comparator.comparingInt(String::length)).get();
+        System.out.println(word);
+//        or
+        word = words.stream().max(Comparator.comparingInt(String::length)).get();
+        System.out.println(word);
+
+    }
+
+    public static void mergeAndGetDistinct() {
+
+
+
+    }
+
+    public static void groupByAnagram(){
+        List<String> words = List.of("apple", "leppa", "god", "ball", "cat", "apricot", "dog", "banana");
+
+        System.out.println(words);
+    }
+
+    public static void listOf1stNonRepeatingChar() {
+        List<String> words = List.of("apple", "pineapple", "ball", "cat", "apricot", "dog", "bourbon");
+        words.stream().map(word -> word.chars().mapToObj(c -> (char)c).collect(
+                        Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream().filter(entry -> entry.getValue() == 1).map(Map.Entry::getKey)
+                .findFirst()).forEach(o -> o.ifPresent(System.out::println));
+    }
+
+    public static void listNonRepeatingEle() {
+        int[] arr = {2, 1, 3, 7, 4, 2, 6, 1, 6, 3};
+
+        // Wrong as it will create stream of one element arr
+        Stream.of(arr).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet().stream().filter(entry -> entry.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .forEach(System.out::println);
+
+        // Right approach
+        Stream.of(2, 1, 3, 7, 4, 2, 6, 1, 6, 3).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet().stream().filter(entry -> entry.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .forEach(System.out::println);
+
+        // Right approach
+        Arrays.stream(arr).boxed().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet().stream().filter(entry -> entry.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .forEach(System.out::println);
+
+
+    }
+
+    public static void get1stNonRepeatingEle() {
+        List<Integer> numbers = List.of(2, 1, 3, 7, 4, 2, 6, 1, 6, 3);
+        int firstNonRep =
+                numbers.stream().collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                        .entrySet().stream().filter(entry ->  entry.getValue() == 1).map(Map.Entry::getKey).findFirst().orElse(-1);
+        System.out.println(firstNonRep);
+
+    }
+
+    public static void sumOfNumbers(){
+
+        List<Integer> numbers = List.of(10, 20, 67, 98, 24, 50);
+        //OPTION 1
+        int sum = numbers.stream().reduce((i, j) -> i +=  j).orElse(0);
+        System.out.println(sum);
+
+        //OPTION 2
+        sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        System.out.println(sum);
+    }
+
+    public static void getNthMaxNumber() {
+        List<Integer> numbers = List.of(10, 20, 67, 98, 24, 50);
+        int max =
+                numbers.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().orElse(0);
+        System.out.println(max);
+
+    }
+
+    public static void getAvg() {
+        List<Integer> numbers = List.of(10, 20, 67, 98, 24, 50);
+        double avg =
+                numbers.stream().collect(Collectors.averagingLong(Integer::longValue));
+        System.out.println(avg);
+
+    }
+
+//    public static void getPrimeList() {
+//        List<Integer> numbers = List.of(2, 3, 8, 11, 24, 9);
+//        numbers.stream().map(n -> n%(n/2))
+//    }
+
            
 
 	}
