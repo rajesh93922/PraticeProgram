@@ -1,0 +1,376 @@
+1.What is pillars of oops concept ?
+2.where did you use the above concepts ?
+3.parent child override in java ?
+4.can you override static and private method ?
+6.what is diff between b/w java 7 and java 8  ?
+7.final and finally , finalize ?
+8.what is equals and hashcode method and its contract ?
+9.what is exception and its hierarchy ?
+10.how to write custom exception ?
+11.Throw and throws keyword
+12.Try , catch , finally 
+13.How many we can create String Object ?
+14.String Object creation scenario
+15.What is scp and how its work ?
+16.Why is String is immutable ?A. Immutable means unchangeable
+17.How to write our custom immutable class 
+18.Which one is good store password in java string & char   and why ?
+19.What is marker interface ? Can you create our own marker interface in java
+20.How to use mutable calss and what is diff b/w String Buffer and String builder
+21.Singleton design pattern ?
+22.what is marker interface ?
+23. What is a concurrent modification exception in Java?
+24.How will you convert string in to array and make it use
+
+can you provide each questions related to details explanation answers ; we are looking for looks good structure and easy to study and more real-world examples, code snippets, interview-focused answers
+
+
+////////////////////////////////////////////////////{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}/////////////////////
+
+
+
+1.what is multithreading in java ?
+2. Synchronized Block and Synchronized Method ?
+3.How many you can create a thread in java ?
+4.How many types of threads are there in java ?
+5.What is the purpose of join method in java ?
+6.What is synchronization ?
+7.Different b/w wait and sleep ?
+8.Diff b/w start and run ?
+9.what is deadlock ?
+10. What is ThreadPoolExecutor?
+11. What is thread priority?
+12. What is synchronization?
+13. notify() vs notifyAll()?
+14. What is volatile and transient keyword ?
+15. What is ExecutorService?
+16.What is false sharing?
+17.Why use immutability?
+18.How to handle thread interruption?
+19.Difference between yield and sleep?
+20.How to implement thread-safe singleton?
+21.What is CompletableFuture and future in java?
+22.When to use volatile over synchronized?
+
+can you provide each questions related to details explanation answers ; we are looking for looks good structure and easy to study and more real-world examples, code snippets, interview-focused answers
+
+
+////////////////////////////////////////////////////{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}/////////////////////
+
+
+1.What all collection are your used in project ?
+2.What is diff b/w list and set ?
+3.How can I write custom array list where I don’t want to allow duplicate ?
+4.Why set doesn’t allow duplicate elements ?
+5.what is diff between b/w comparable and comparator ?
+6.what is diff between fail fast and fail safe iterator ?
+7.what is need of concurrent Hash map and how it is diff form hash map ?
+8.Hash map  and hashset internally flow ?
+9. diff b/w hashmap and treemap in java ?
+
+10.Can we extends functional interface from another functional interface ?
+11.What are all functional interface introduced in java 8 ?
+12.When to use map and flat map ?
+13.Stream vs parallel stream ?
+14.What is the difference between lazy and eager in java8?
+15.What is a weak hash map
+16.explain Design pattern in microservices
+17.Any exposure on using Lambda function
+18.What is an optional class in Java?
+
+
+can you provide each questions related to details explanation answers ; we are looking for looks good structure and easy to study and more real-world examples, code snippets, interview-focused answers
+
+
+1.Type bean scope in spring ?
+2. explain @autowired , @inject, 3.@componect and @bean ?
+3. explain @Primary ,@Qualifier
+4.Types of ioc containers
+5.what is stereotype annotations in spring 
+6.Spring mvc workflow
+7.what is spring bean and java bean ?
+8. diff b/w CrudRepository and JpaRepository
+9.SOLID Principles in Programming
+
+Single Responsibility Principle (SRP): A class should have only one reason to change, meaning it should have only one responsibility.
+Open/Closed Principle (OCP): Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+Liskov Substitution Principle (LSP): Subtypes should be substitutable for their base types without altering the correctness of the program.
+Interface Segregation Principle (ISP): Clients should not be forced to depend on interfaces they do not use.
+Dependency Inversion Principle (DIP): Depend upon abstractions, not concretions
+
+
+Current project details
+What is the difference between execution in executor framework?
+What is blocking queue?
+How do we know thread pool is exhausted or has empty thread?
+Different design patterns?
+What if we initialize Date class object in singleton class, will the date object be singleton too?
+What design pattern is used with async data update between different clients?
+Different design patterns.
+What is the return type of different List interface methods
+What is the role of zookeepers?
+How to handle failure retry in Kafka
+Spring boot annotations
+Write controller class
+stream api v/s parallel streams api
+Pagination Vs JPA Repository
+Different – different design patterns
+database related questions, Cursor, Normalization, query
+Spring security – Login process / how to implement the login and which springboot application you use
+Annotations
+Database connections
+which version of java you worked on
+multithreading
+Which framework of java is used for multithreading
+Which executor services have you used
+What is the type of Executor service and for what you have used executor service
+What are thread pools? Have u used cache thread pool
+New Fixed thread pool and new Fixed Executor
+What are different types of queue in java, synchronous queue
+Which version of spring boot you worked on
+How do you claim that you have worked on microservice?
+wallet service in java spring boot
+If 25 connections are required, then how will you set it up in microservices
+What is dialect
+Return type of Void method
+Java 8 or Java 17
+Difference in java 8 and java 21
+Explain pagination concept and types of pagination with working example
+Explain Kubernetes config
+project related question
+You have call system A. how to call system B using service line
+What is the purpose of Lombok
+What is the purpose of records in Java? Have you used Java records earlier?
+Rest end point
+
+
+{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+
+/* JAVA:
+
+    * 1. Why serialVersionUID required in Serialization and what the diff btw manually serialVersionUID declared and without manually?
+
+    * 2. How to create Trippleton class in spring?
+
+    * 3. Will it work two api URI methods same and except method name in spring boot?
+
+    * 4. How to handle millions of records using coding (without any cloud) in spring boot?
+
+    * 5. How to handle multiple databases in one spring boot application?
+
+    * 6. What is diff btw Integer.parseInt and Integer.valueOf in java?
+
+    * 7. How to cover a test case for static method which is in injected mock class in current class in spring boot?
+
+    * 8. What is diff btw (a==1) & (b==2) and (a==1) && (b==2) ?
+
+    * 9. Why wait and notify methods are in Object class?
+
+    * 10. If the list having student objecting by name is 'abc', then you need to add a new student object with id 4 and name 'def'.
+
+          Write a logic using java8 features.
+
+    * 11. What is constructor called in java
+
+    * 12. What special symbols allowed for identifiers in java?
+
+    * 13. Java SOLID Principles
+
+    * 14. How Concurrent HashMap differentiate with HashMap in java?
+
+    * 15. Interface allows static and default methods, but still abstract class is there, and why?
+
+    * 16. Why does abstract class still there since already have interfaces and what's the diff btw?
+
+    * 17. What is functional interface?
+
+    * 18. What is diff btw functional and normal interfaces?
+
+    * 19. What are aggregation and composition?
+
+    * 20. What are short circuit operations in java 8 streams?
+
+    * 21. What are the business scenarios for abstract class and interface?
+
+    * 22. HashSet internal flow?
+
+    * 23. Create notifications using an Observer Pattern and like event subscribes, and if a user subscribes they will get only subscribed event in java
+
+    * 24. Execute parallel tasks using parallel streams in java
+
+    *
+
+    * */
+
+   /*
+
+   * Spring boot:
+
+   * 1. How to handle 1000 multiple requests in spring boot code level
+
+   * 2. We have 100 microservices, one of it got down. The root cause is it will take 24H to resolve it.
+
+   *    But we need to provide immediate resolution ? how can we achieve it?
+
+   * 3. How does Maven application become a spring application not spring boot app, and it expects one lib to become spring app (i.e : spring-context)?
+
+   *    What is it?
+
+   * 4. How white label error display when we give the wrong url ? what is that default handler code in spring boot (i.e.: BasicErrorController)?
+
+   * 5. How does Transactional annotation work and what are the params in it in spring boot?
+
+   * 6. What is the response if two api methods have the same URI and params except method name in spring boot?
+
+   * 7. Spring security with JWT
+
+   * 8. How does Caching work in spring boot and implementation?
+
+   * 9. How to create triple ton class in spring boot?
+
+   * 10. How to lock table in a database and manage in spring boot?
+
+   * 11. How to use two diff database schemas in spring boot?
+
+   * 12. How to config two diff databases in spring boot?
+
+   * 13. How to load bean based on a property file or by giving class name? (i.e.: @ConditionalOnProperty annotation)
+
+   * 14. How many ways spring boot applications communicate?
+
+   * 15. How health check done for databases in spring boot?
+
+   * 16. What are the spring cloud dependencies and Spring boot starter/parent?
+
+   * 17. What is n+1 problem in spring data jpa?
+
+   * 18. Explain about Many-to-Many association in hibernate/jpa ()
+
+   * 19. What is optimistic and pessimistic locks in JPA and how to achieve it?
+     20 .Spring boot annotations
+     21 .Write controller class
+     22 .Pagination Vs JPA Repository
+     23. Spring security – Login process / how to implement the login and which springboot application you use
+     24. Annotations
+     25. Database connections
+     26. Which version of spring boot you worked on
+     27 .wallet service in java spring boot
+     28 .If 25 connections are required, then how will you set it up in microservices
+     29 .Write controller and create Get API  to fetch employee record and Post API to  create employee record
+     30 .Explain pagination concept and types of pagination with working example
+     31 .database related questions, Cursor, Normalization, query
+
+   * */
+
+    /*
+
+    * SQL:
+
+    * 1. Can you please write down an SQL query to get a 'nth' the highest salary from an Employee table and using a sub query also?
+
+    * 2. Write a query for JOINS
+
+    * 3. Write a query for UNION and UNION ALL
+
+    * 4. What are ACID properties and how transaction integrity works
+
+    * 5. What are the new DDL features?
+
+    * 6. What is config server?
+
+    * 7. Print list of Departments whose employees have more than 10
+
+    * 8. Print each employee belongs department
+
+    *
+
+     * */
+
+    /*
+
+    * Microservices:
+
+    * 1. Microservices high level architecture
+
+    * 2. What API gateway and how it works
+
+    * 3. What Service Discovery server like Eureka server and how it can work and how to integrate with spring boot?
+
+    * 4. What are the ways to communicate btw each spring boot microservice?
+
+    * 5. What are design patterns and explain each?
+
+    * 6. To implement microservices, what are the things to do follow?
+	  7. What is the role of zookeepers?
+      8. How to handle failure retry in Kafka
+      9. How do you claim that you have worked on microservice?
+      10 .Different design patterns?
+      11 .What if we initialize Date class object in singleton class, will the date object be singleton too?
+      12.What design pattern is used with async data update between different clients?
+      13.Different design patterns.
+
+    *
+
+    *
+
+    * */
+   
+   
+   }}[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[               }}}}}}}}}}]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+   
+   ////////////////////////////    Java ////////////////////////////////////
+What is the difference between execution in executor framework?
+What is blocking queue?
+How do we know thread pool is exhausted or has empty thread?
+What is the return type of different List interface methods
+stream api v/s parallel streams api
+which version of java you worked on
+multithreading
+Which framework of java is used for multithreading
+Which executor services have you used
+What is the type of Executor service and for what you have used executor service
+What are thread pools? Have u used cache thread pool
+New Fixed thread pool and new Fixed Executor
+What are different types of queue in java, synchronous queue
+What is dialect
+Return type of Void method
+Java 8 or Java 17
+Difference in java 8 and java 21
+What is the purpose of Lombok
+What is the purpose of records in Java? Have you used Java records earlier?
+
+
+
+ 
+Programming questions
+ 
+User input: abc-123+xyz_897^a12
+Output: [abc,xyz]
+[123,897]
+[a12]
+User input: abc-123+xyz_897^a12  fgh
+Output: [abc,xyz]
+[123,897]
+[a12]
+ 
+{
+ "inputs": [
+   {
+     "input": ["abc", "lmn", "ijk"]
+   },
+   {
+     "input": ["hg", "ieo"]
+   },
+   {
+     "input": ["df"]
+   }
+ ]
+}
+ 
+{"output":["lmn","hg","df"]}
+ 
+Create database connection.
+Explain H2 database with example
+Write third party api mappings 
+ 
