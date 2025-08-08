@@ -1897,13 +1897,21 @@ Sets use equals() and hashCode() to check for uniqueness. If two objects retur
 
 
 
-5. Difference between Comparable and Comparator
-Comparable	Comparator
-1) Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price.	The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.
-2) Comparable affects the original class, i.e., the actual class is modified.	Comparator doesn't affect the original class, i.e., the actual class is not modified.
-3) Comparable provides compareTo() method to sort elements.	Comparator provides compare() method to sort elements.
-4) Comparable is present in java.lang package.	A Comparator is present in the java.util package.
-5) We can sort the list elements of Comparable type by Collections.sort(List) method.	We can sort the list elements of Comparator type by Collections.sort(List, Comparator) method.
+5. Here’s a clean **side-by-side comparison table** of `Comparable` vs `Comparator` that you can use in interviews or study notes:
+
+| **Feature**                          | **Comparable**                                                                 | **Comparator**                                                                 |
+|--------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| **Sorting Sequence**                 | Provides a **single sorting sequence**                                         | Provides **multiple sorting sequences**                                        |
+| **Impact on Class**                  | Affects the **original class** (must implement `Comparable`)                  | Does **not affect the original class** (external implementation)              |
+| **Method Used**                      | Uses `compareTo(Object o)` method                                             | Uses `compare(Object o1, Object o2)` method                                   |
+| **Package Location**                 | Located in `java.lang` package                                                | Located in `java.util` package                                                |
+| **Sorting Usage**                    | Used with `Collections.sort(List)`                                            | Used with `Collections.sort(List, Comparator)`                                |
+| **Flexibility**                      | Less flexible — only one way to sort                                          | More flexible — can define multiple sorting strategies                        |
+
+---
+
+### 🧠 Interview Tip:
+> "Use `Comparable` when natural ordering is needed and the class itself should define the comparison logic. Use `Comparator` when you want to sort objects in different ways without modifying the class."
 
 
 
@@ -1975,34 +1983,62 @@ So, it inherits all behaviors of HashMap — hashing, collisions, etc.
 🔸 Why No Duplicates in HashSet?
 Because HashMap does not allow duplicate keys — so when put() is called with an existing key, it replaces the value (no duplicate is added).
 
-✅ Summary Comparison:
-Feature	HashMap<K, V>	HashSet<E>
-Purpose	Stores key-value pairs	Stores unique values only
-Underlying DS	Array + LinkedList / Tree	Uses HashMap<E, Object>
-Collision Handling	LinkedList / Tree (Java 8+)	Same as HashMap
-Null Allowed	One null key, many null values	One null element
-Duplicate Check	Based on key’s equals() and hashCode()	Based on element’s equals() and hashCode()
+✅ Here’s a clean **summary comparison table** of `HashMap<K, V>` vs `HashSet<E>` that you can use in interviews or study notes:
+
+| **Feature**           | **HashMap<K, V>**                                           | **HashSet<E>**                                      |
+|-----------------------|-------------------------------------------------------------|-----------------------------------------------------|
+| **Purpose**           | Stores **key-value pairs**                                  | Stores **unique values only**                       |
+| **Underlying DS**     | Array + LinkedList / Tree (for collision handling)          | Internally uses `HashMap<E, Object>`                |
+| **Collision Handling**| LinkedList / Tree (Java 8+ uses Red-Black Tree for buckets) | Same as `HashMap`                                   |
+| **Null Allowed**      | Allows **one null key** and **multiple null values**        | Allows **one null element**                         |
+| **Duplicate Check**   | Based on **key’s `equals()` and `hashCode()`**              | Based on **element’s `equals()` and `hashCode()`**  |
+
+---
+
+### 🧠 Interview Tip:
+> "Since `HashSet` is backed by a `HashMap`, many of its behaviors like hashing, collision handling, and null handling are inherited from `HashMap`. The key difference is that `HashSet` only stores values, not key-value pairs."
+
+Would you like a **visual diagram** showing how `HashSet` wraps around `HashMap` internally?
 🔍 Real-World Analogy:
 * HashMap → A locker room with labeled lockers (keys). You can store a name tag and item inside (key + value).
 * HashSet → Just the labels on lockers (you don’t care about the item inside — dummy object).
 
-9. Difference between HashMap and TreeMap
-Feature	HashMap	TreeMap
-Ordering	No order	Sorted by key (natural or comparator)
-Null Keys	One allowed	Not allowed
-Performance	Faster	Slower (Red-Black tree)
+9Here’s a clean **table format** comparing `HashMap` and `Hashtable` that you can use during interviews:
 
-Here's a simple and clear explanation of the difference between HashMap and TreeMap in Java:
+| Feature                          | **HashMap**                                      | **Hashtable**                                      |
+|----------------------------------|--------------------------------------------------|----------------------------------------------------|
+| **Synchronization**              | Not synchronized                                 | Key methods are synchronized                       |
+| **Thread Safety**                | Not thread-safe                                  | Thread-safe                                        |
+| **Iteration Mechanism**          | Uses **Iterator**                                | Uses **Enumerator**                                |
+| **Null Handling**                | Allows **one null key** and **multiple null values** | Does **not allow any null key or value**          |
+| **Performance**                  | Faster due to lack of synchronization            | Slower due to synchronized methods                 |
+| **Legacy Status**                | Part of Java 1.2 Collections Framework           | Legacy class from Java 1.0                         |
+| **Preferred Usage**              | Recommended for single-threaded applications     | Rarely used; replaced by `ConcurrentHashMap`       |
 
-✅ HashMap vs TreeMap — Side-by-Side Comparison
-Feature	HashMap	TreeMap
-Ordering	❌ No order (random or hash-based)	✅ Sorted by keys (natural or custom order)
-Underlying Structure	Hash Table (Buckets + LinkedList/Tree)	Red-Black Tree (Self-balancing BST)
-Performance	✅ Faster (O(1) average for get/put)	❌ Slower (O(log n) for get/put)
-Allows null key?	✅ Yes (only one null key allowed)	❌ No (NullPointerException if key is null)
-Thread-safe?	❌ No (use Collections.synchronizedMap)	❌ No (same here)
-Use Case	When speed matters, no need for order	When sorted keys are required
-Implements	Map, Cloneable, Serializable	NavigableMap, SortedMap, Map
+---
+
+### 🧠 Interview Tip:
+> "In modern Java applications, `HashMap` is preferred for non-threaded environments, while `ConcurrentHashMap` is used for thread-safe operations instead of `Hashtable`, due to better scalability and performance."
+
+
+✅ Here’s a clean **side-by-side comparison table** of `HashMap` vs `TreeMap` that you can use in interviews or study notes:
+
+| **Feature**              | **HashMap**                                                                 | **TreeMap**                                                                 |
+|--------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Ordering**             | ❌ No order (random or hash-based)                                           | ✅ Sorted by keys (natural or custom order using `Comparator`)              |
+| **Underlying Structure** | Hash Table (Buckets + LinkedList/Tree for collision handling)               | Red-Black Tree (Self-balancing Binary Search Tree)                          |
+| **Performance**          | ✅ Faster — Average time complexity is **O(1)** for `get()` and `put()`      | ❌ Slower — Time complexity is **O(log n)** for `get()` and `put()`         |
+| **Allows null key?**     | ✅ Yes — Allows **one null key** and multiple null values                    | ❌ No — Throws **NullPointerException** if key is null                      |
+| **Thread-safe?**         | ❌ No — Use `Collections.synchronizedMap()` for thread safety                | ❌ No — Also needs external synchronization for thread safety               |
+| **Use Case**             | When **speed** matters and **ordering is not required**                     | When **sorted keys** are required                                           |
+| **Implements**           | `Map`, `Cloneable`, `Serializable`                                          | `NavigableMap`, `SortedMap`, `Map`                                          |
+
+---
+
+### 🧠 Interview Tip:
+> "Use `HashMap` for fast access and storage when order doesn't matter. Use `TreeMap` when you need keys to be sorted, such as for range queries or ordered traversal."
+
+Would you like a **code example** showing how both behave differently with ordering and null keys?
 🔹 Code Example: HashMap
 Map<String, Integer> hashMap = new HashMap<>();
 hashMap.put("Banana", 20);
@@ -2043,17 +2079,25 @@ If a key is no longer referenced anywhere else in your program, it can be garbag
 11. ArrayList vs LinkedList
 Here's a clear and simple comparison of ArrayList vs LinkedList in Java — perfect for interviews or practical use:
 
-✅ ArrayList vs LinkedList — Side-by-Side Comparison
-Feature	ArrayList	LinkedList
-Underlying Data Structure	Dynamic Array	Doubly Linked List
-Access Time (get)	✅ Fast (O(1)) – index-based	❌ Slow (O(n)) – must traverse from head/tail
-Insertion Time (add at end)	✅ Fast (amortized O(1))	✅ Fast (O(1))
-Insertion in Middle	❌ Slow (O(n)) – needs shifting elements	✅ Fast (O(1) if position is known)
-Deletion	❌ Slow – needs shifting	✅ Fast – just change links
-Memory Usage	🟢 Lower (only data stored)	🔴 Higher (stores data + two pointers per node)
-Search by Index	✅ Very fast	❌ Slower
-Better For	Random access, less insert/delete	Frequent add/remove, sequential access
-Thread-safe?	❌ No	❌ No
+✅ Here’s a clean **side-by-side comparison table** of `ArrayList` vs `LinkedList` that you can use in interviews or study notes:
+
+| **Feature**               | **ArrayList**                                               | **LinkedList**                                               |
+|---------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
+| **Underlying Data Structure** | Dynamic Array                                              | Doubly Linked List                                           |
+| **Access Time (`get`)**   | ✅ Fast (**O(1)**) — index-based                             | ❌ Slow (**O(n)**) — must traverse from head/tail            |
+| **Insertion at End**      | ✅ Fast (amortized **O(1)**)                                 | ✅ Fast (**O(1)**)                                            |
+| **Insertion in Middle**   | ❌ Slow (**O(n)**) — needs shifting elements                 | ✅ Fast (**O(1)** if position is known)                      |
+| **Deletion**              | ❌ Slow — needs shifting                                     | ✅ Fast — just change links                                  |
+| **Memory Usage**          | 🟢 Lower — stores only data                                 | 🔴 Higher — stores data + two pointers per node              |
+| **Search by Index**       | ✅ Very fast                                                 | ❌ Slower                                                    |
+| **Better For**            | Random access, less insert/delete                           | Frequent add/remove, sequential access                      |
+| **Thread-safe?**          | ❌ No                                                        | ❌ No                                                        |
+
+---
+
+### 🧠 Interview Tip:
+> "Use `ArrayList` when you need fast random access and fewer insertions/deletions. Use `LinkedList` when your application involves frequent insertions or deletions, especially in the middle of the list."
+
 🔹 Example Code
 🔸 ArrayList
 List<String> list = new ArrayList<>();
