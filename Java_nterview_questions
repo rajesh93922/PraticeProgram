@@ -1589,13 +1589,19 @@ CompletableFuture<String> completable = CompletableFuture.supplyAsync(() -> {
 completable.thenAccept(result -> System.out.println(result));  // Non-blocking
 
 🧠 Key Differences (Interview Table):
-Feature	Future	CompletableFuture
-Introduced In	Java 5	Java 8
-Blocking	Yes (get() blocks)	No (can be non-blocking)
-Chaining Tasks	❌ Not supported	✅ Yes (thenApply, thenAccept, etc.)
-Combining Multiple Tasks	❌ Hard	✅ Easy with thenCombine, allOf, etc.
-Exception Handling	❌ Try-catch manually	✅ exceptionally(), handle()
-Reactive Programming	❌ No	✅ Yes
+
+| **Feature**                  | **Future** (Java 5)                        | **CompletableFuture** (Java 8)                          |
+|------------------------------|--------------------------------------------|----------------------------------------------------------|
+| **Introduced In**            | Java 5                                     | Java 8                                                   |
+| **Blocking**                 | ✅ Yes (`get()` blocks)                    | ✅ Optional (supports non-blocking async operations)      |
+| **Chaining Tasks**           | ❌ Not supported                           | ✅ Supported (`thenApply`, `thenAccept`, etc.)            |
+| **Combining Multiple Tasks** | ❌ Difficult                               | ✅ Easy (`thenCombine`, `allOf`, `anyOf`, etc.)           |
+| **Exception Handling**       | ❌ Manual (`try-catch`)                   | ✅ Built-in (`exceptionally`, `handle`, `whenComplete`)   |
+| **Reactive Programming**     | ❌ Not supported                           | ✅ Supported (can be used in reactive pipelines)          |
+
+### Summary:
+- Use **`Future`** for simple, blocking asynchronous tasks.
+- Use **`CompletableFuture`** for complex, non-blocking, and reactive workflows.
 🗣 Interview Summary:
 "Future is basic and blocking; CompletableFuture is modern, flexible, and supports true async programming with task chaining, callbacks, and better error handling."
 Let me know if you’d like real-time use cases or combined examples!
