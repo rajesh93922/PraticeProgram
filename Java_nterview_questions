@@ -1,5 +1,5 @@
 Java Interview questions and answers
-
+                                                        OOPS Topic
 
 1. What are the Pillars of OOP (Object-Oriented Programming)?
 The 4 Pillars of OOP:
@@ -466,7 +466,7 @@ Multiple (interfaces)	✅ Yes	Interface A, B → Class C implements
 Let me know if you'd like a diagram to visualize these types.
 
 
-[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[                  {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[        String Topic          {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
  
 
@@ -812,7 +812,7 @@ Would you like this compiled into a visual PDF, PowerPoint-style slides, or a ch
 Here is a well-structured, interview-focused guide for your Java Exception Handling questions. It includes clear explanations, real-world examples, and code snippets, designed to be easy to study and perfect for interviews.
 
 
-[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[                  {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[            Exception Topic      {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
 
 
@@ -1270,7 +1270,7 @@ Thread pool	Efficient resource usage
 Singleton	Double-checked locking pattern
 
 
-[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[                  {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[         JAVA8 Topic         {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
     
 
 ✅ What is volatile?
@@ -1708,14 +1708,28 @@ Let me know if you want a diagram or real-world analogy to remember this better!
 
 
 15. Stream vs Parallel Stream
-Here’s a simple and interview-friendly explanation of Stream vs Parallel Stream in Java — with real examples to make it easy to understand:
+| **Feature**       | **Stream (Sequential)**                          | **ParallelStream**                                  |
+|-------------------|--------------------------------------------------|-----------------------------------------------------|
+| **Execution**     | Single thread (usually the main thread)          | Multiple threads (uses ForkJoinPool)                |
+| **Performance**   | Slower for large datasets                        | Faster for CPU-intensive tasks on large datasets    |
+| **Use Case**      | Small collections, simple operations             | Large collections, CPU-bound operations             |
+| **Thread Safety** | Not inherently thread-safe                       | Requires careful handling to avoid concurrency issues |
+| **Order**         | Maintains encounter order                        | May not maintain order unless explicitly handled    |
+| **Debugging**     | Easier to debug                                  | Harder due to concurrent execution                  |
+| **Overhead**      | Minimal                                           | Higher due to thread management                     |
 
-✅ What’s the Difference: Stream vs ParallelStream?
-Feature	Stream (Sequential)	Parallel Stream
-Execution	One thread (main thread)	Multiple threads (splits tasks)
-Performance	Slower (for big data)	Faster (for CPU-heavy operations)
-Use case	Simple or small tasks	Large collections / CPU-bound tasks
-Thread-safe?	No	Must be used carefully
+### When to Use Which?
+- ✅ Use **`Stream`** when:
+  - You need predictable order.
+  - You're working with small or medium-sized data.
+  - Simplicity and readability are priorities.
+
+- 🚀 Use **`ParallelStream`** when:
+  - You're processing large datasets.
+  - Tasks are CPU-intensive and independent.
+  - You want to leverage multi-core processors.
+
+Would you like a code example to illustrate the difference in usage or performance?
 🔹 1. Stream (Sequential)
 Processes elements one-by-one using a single thread.
 ✅ Example:
@@ -1740,21 +1754,8 @@ Roy - ForkJoinPool.commonPool-worker-1
 Robert - main
 John - ForkJoinPool.commonPool-worker-3
 
-🧠 When to Use Parallel Stream?
-✅ Use when:
-* Large collections
-* CPU-intensive tasks
-* No shared mutable state (i.e., thread-safe)
-❌ Avoid when:
-* Tasks are small or IO-heavy (overhead > performance gain)
-* You modify shared variables (may cause issues)
-
 🗣 Interview Summary:
 “Stream works sequentially with one thread, while parallelStream() splits the data and processes using multiple threads — offering faster performance for large, CPU-heavy tasks. But use it only when thread-safety and task nature allow.”
-
-Let me know if you’d like a visual diagram or a real-world analogy (like restaurant kitchens)!
-
-
 
 16. Intermediate vs Terminal Operations
 🔹 Intermediate Operations
@@ -1773,7 +1774,7 @@ Think of intermediate operations as setting up a recipe but not cooking yet.
 Think of terminal operations as actually cooking the recipe and serving the food.
 
 Type	Description	Example
-Intermediate	Lazy operations, return stream	filter(), map(), flatmate, distinct , sorted, skip , limit
+Intermediate	Lazy operations, return stream	filter(), map(), flatmap, distinct , sorted, skip , limit
 Terminal	Trigger execution, return result	forEach(), collect(), reduce , count
 
 
@@ -1848,7 +1849,7 @@ Date API	Thread-safe, immutable
 CompletableFuture	Async + chaining
 Functional Interfaces	Reusability and expressiveness
 
-[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[                  {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[          Collections Topic        {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
 
 
