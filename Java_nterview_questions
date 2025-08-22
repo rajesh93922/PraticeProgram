@@ -82,12 +82,13 @@ interface Flyable {
 
 
 
-3. Access Modifiers in Java
-Modifier	Class	Package	Subclass	World
-public	✔	✔	✔	✔
-protected	✔	✔	✔	✖
-default	✔	✔	✖	✖
-private	✔	✖	✖	✖
+| **Modifier**              | **Class (same class)** | **Package (same package non-subclass)** | **Subclass (different package)** | **World (anywhere)** | **Explanation**                                                                                                                              |
+| ------------------------- | ---------------------- | --------------------------------------- | -------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **public**                | ✔                      | ✔                                       | ✔                                | ✔                    | Accessible from **anywhere** (same class, same package, subclasses, and even outside the package).                                           |
+| **protected**             | ✔                      | ✔                                       | ✔                                | ✖                    | Accessible within the same class, same package, and subclasses in other packages, but **not from non-subclass classes outside the package**. |
+| **default** (no modifier) | ✔                      | ✔                                       | ✖                                | ✖                    | Also called **package-private**. Accessible within the same class and same package only. **Not accessible outside the package.**             |
+| **private**               | ✔                      | ✖                                       | ✖                                | ✖                    | Accessible **only within the same class**. Not visible in package, subclass, or world.                                                       |
+
 
 
 3. Exception Handling:
