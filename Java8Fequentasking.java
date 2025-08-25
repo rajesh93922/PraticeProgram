@@ -19,14 +19,6 @@ public class Java8Fequentasking {
 		
 		String input = "ilovejavatechie";
 		
-		String[] split = input.split("");
-		
-		//System.out.println(Arrays.toString(split));
-		
-		Map<String, List<String>> collect = Arrays.stream(input.split("")).collect(Collectors.groupingBy(t -> t));
-		
-		//System.out.println(collect);
-		
 		Map<String, Long> collectResult = Arrays.stream(input.split("")).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
 		
 		System.out.println("count each chartertar " + "  "+collectResult);
@@ -60,6 +52,24 @@ public class Java8Fequentasking {
 						.findFirst().get().getKey();
 				 
 					System.out.println(" non repeat : "+ "  " +fristNonRepate);
+		 String input = "rajesh mogga rajesh";
+      // second non repeat char by given string
+        Map<Character, Long> freqMap = input.replaceAll(" ", "")
+                .chars()
+                .mapToObj(c -> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        List<Map.Entry<Character, Long>> sorted = freqMap.entrySet()
+                .stream()
+                .sorted((a, b) -> Long.compare(b.getValue(), a.getValue()))
+                .collect(Collectors.toList());
+
+        if (sorted.size() > 1) {
+            System.out.println("Second most repeated char: " + sorted.get(1).getKey() +
+                    " -> " + sorted.get(1).getValue());
+        } else {
+            System.out.println("Not enough unique characters.");
+        }
 					
 		//java program to find second highest number from given array
 					
@@ -240,6 +250,20 @@ public class Java8Fequentasking {
         String inReverse = "jack";
         String string = new StringBuilder(inReverse).reverse().toString();
         System.out.println(string);
+       // integer reverse 
+		  int numbers =123;
+
+        String ss = new StringBuilder(
+                String.valueOf(numbers)
+                        .chars()
+                        .mapToObj(c -> String.valueOf((char) c))
+                        .collect(Collectors.joining())
+        ).reverse().toString();
+
+        int reversedInt = Integer.parseInt(ss);
+
+        System.out.println("Original: " + numbers);
+        System.out.println("Reversed: " + reversedInt);
 
 
            
