@@ -167,6 +167,81 @@ public class Java8Fequentasking {
            
            System.out.println(string);
 
+
+		  // palidrome
+        String s4 = "madam";
+
+        String reverse = new StringBuilder(s4).reverse().toString();
+        if(s4.equals(reverse)){
+            System.out.println("its palidorme");
+        }else {
+            System.out.println("not palidrome");
+        }
+
+        //Anagram
+        String str1 = "listen";
+        String str2 = "silent";
+
+        String anagram1 = str1.replaceAll("\\s", "").toLowerCase();
+        String anagram2 = str2.replaceAll("\\s", "").toLowerCase();
+
+        boolean prgAnagram = anagram1.chars().sorted().boxed().collect(Collectors.toList())
+                            .equals(anagram2.chars().sorted().boxed().collect(Collectors.toList()));
+        System.out.println(prgAnagram);
+
+        //find Vowels
+        String inputVowels = "This is a sample string with vowels";
+        Map<Character, Long> vowelCount = inputVowels.toLowerCase()
+                .chars()
+                .mapToObj(c -> (char) c)
+                .filter(ch -> "aeiou".indexOf(ch) != -1)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        //common string
+        String[] strArray = {"flow", "flight", "flower"};
+        String commonString = Arrays.stream(strArray).reduce((s1, s2) -> {
+            int i = 0;
+            while (i < s1.length() && i < s2.length() && s1.charAt(i) == s2.charAt(i)) {
+                i++;
+            }
+            return s1.substring(0, i);
+        }).orElse("");
+        System.out.println(commonString);
+
+        //Max and Min words lenght
+        String s ="Rajesh mogga and rajesh";
+
+        Map<String, Long> collectMain = Arrays.stream(s.toLowerCase().split("\\s+"))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        Map.Entry<String, Long> maxWOrd = collectMain.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
+
+        Map.Entry<String, Long> minWord = collectMain.entrySet().stream().min(Map.Entry.comparingByValue()).orElse(null);
+
+        System.out.println(maxWOrd + "  " + minWord);
+
+        //Each word count
+        String input = "Java Developer Interview Java";
+        Map<String, Long> wordCount1 = Arrays.stream(input.split(" "))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        wordCount1.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .forEach(System.out::println);
+
+        // print duplicate number
+        int[] nums = {2,3,4,2,5,3};
+        Set<Integer> seen = new HashSet<>();
+        Set<Integer> collect = Arrays.stream(nums)
+                .filter(n -> !seen.add(n))
+                .boxed().collect(Collectors.toSet());
+        System.out.println(collect);
+
+        String inReverse = "jack";
+        String string = new StringBuilder(inReverse).reverse().toString();
+        System.out.println(string);
+
+
            
 
 	}
