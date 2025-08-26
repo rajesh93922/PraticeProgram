@@ -263,25 +263,10 @@ class B extends A {
 }
 
 
-
-14. What are the different access modifiers in Java, and what do they signify?
-Already covered in Q3.
-
-
-
-15. What is the difference between method overloading and method overriding?
-Already covered in Q5.
-
-
-
-16. Explain the concept of polymorphism in Java with an example.
-Already covered in Q7.
-
-
-
-17. What is the purpose of the 'static' keyword in Java? How is it used?
-Already covered in Q8.
-Here’s a simple explanation of the types of memory in Java:
+Interview-Style Short Answer
+If parent method throws a checked exception, child can throw the same or narrower checked exception.
+If parent does not throw, child cannot newly add a checked exception.
+Runtime exceptions are always allowed.
 
 
 
@@ -1829,16 +1814,38 @@ list.forEach(System.out::println);            // Method ref
 ✅ Why use?
 · 
 Lambda compatible
-· 
-· 
+
 Better readability
-· 
-· 
+
 Simplified boilerplate code
-· 
-· 
+
 Improved API design
 · 
+Interview Short Answer
+Enable Lambda Expressions
+Before Java 8, anonymous inner classes were bulky.
+Java 8 introduced lambdas for clean, concise functional programming.
+
+Purpose of Functional Interfaces
+Simplify Code
+Reduce boilerplate of anonymous inner classes.
+Example: Runnable, Comparator, Callable.
+
+Support Functional Programming
+Brings Java closer to functional style programming.
+Can pass behavior (functions) as arguments.
+
+Enable Built-in Java 8 Features
+Java 8 provides many predefined functional interfaces in java.util.function package:
+Consumer<T> → accepts input, returns nothing.
+Supplier<T> → no input, returns result.
+Function<T, R> → transforms input to output.
+Predicate<T> → returns boolean.
+
+A lambda needs exactly one abstract method to target → hence Functional Interface.
+Introduced in Java 8 to support Lambda Expressions and functional programming.
+A functional interface has exactly one abstract method and allows us to pass behavior as data.
+It improves code readability, reusability, and conciseness.
 
 
 
@@ -2324,8 +2331,6 @@ list.removeAll(toRemove);  // ✅ Safe after iteration
 23. When to use ArrayList vs LinkedList?
 · 
 Use ArrayList when frequent access.
-· 
-· 
 Use LinkedList when frequent insertions/removals.
 
 
@@ -2485,6 +2490,41 @@ if (active == max) {
 [[[[[[[[[[[[[[[[[[[[[[[[[[                  ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][[[[[[[[[[[[[[[[[                             [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 
 Interview coding test questions
+
+
+DESIGN PATTERNS (WHAT TO NAME + 1-LINE USE)
+Singleton (one instance, config/cache)
+Factory (create objects without exposing concrete classes)
+Builder (build complex objects stepwise, immutable)
+Strategy (swap algorithms at runtime)
+Observer (publish/subscribe events)
+Template Method (fixed steps, override hooks)
+Decorator (add behavior without subclassing)
+Proxy (lazy/load, security, AOP)
+
+WHAT IS CQRS
+CQRS = separate Commands (writes) from Queries (reads).
+Commands update write model (often emit events). Queries read from a read model/materialized view tuned for queries.
+Often paired with Event Sourcing (state = events).
+
+HOW SPRING BOOT WORKS (STEP-BY-STEP)
+@SpringBootApplication → component scan + auto-config.
+SpringApplication.run() creates ApplicationContext.
+Scans @Component/@Service/@Repository/@Controller and registers beans.
+Applies AutoConfiguration (starters) based on classpath/props.
+Creates DispatcherServlet, starts embedded Tomcat/Jetty.
+Maps routes (@RequestMapping/@GetMapping…), wires dependencies, app ready.
+
+
+SPRING BOOT ANNOTATIONS (QUICK HITS)
+Core: @SpringBootApplication, @Configuration, @Bean, @Component, @Service, @Repository, @Controller, @RestController
+Web: @RequestMapping, @Get/Post/Put/DeleteMapping, @PathVariable, @RequestParam, @RequestBody, @ResponseStatus, @CrossOrigin
+DI: @Autowired (prefer constructor injection), @Qualifier, @Primary, @Value, @ConfigurationProperties
+Validation: @Valid, @NotNull, @Size, etc.
+Persistence: @Entity, @Table, @Id, @GeneratedValue, @Column, @OneToOne, @OneToMany, @ManyToOne, @Transactional
+Error: @ControllerAdvice, @ExceptionHandler
+Test: @SpringBootTest, @MockBean
+
 
 
 Great question! This is a classic Java interview puzzle about try-catch-finally and return statements.
