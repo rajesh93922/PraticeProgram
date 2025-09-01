@@ -104,14 +104,10 @@ try {
 }
 · 
 try: Contains risky code.
-· 
-· 
-catch: Handles exceptions.
-· 
-· 
-finally: Executes regardless of exception.
-· 
 
+catch: Handles exceptions.
+
+finally: Executes regardless of exception.
 
 
 5. Method Overloading vs Overriding
@@ -193,7 +189,7 @@ class Counter {
 
 
 9. How to handle Memory Management & Garbage Collector
-· 
+
 JVM manages memory using heap and stack.
 · 
 · 
@@ -449,7 +445,6 @@ Multiple (classes)	❌ No	A, B → C (Not allowed)
 Multiple (interfaces)	✅ Yes	Interface A, B → Class C implements
 
 
-Let me know if you'd like a diagram to visualize these types.
 
 
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[        String Topic          {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -557,9 +552,6 @@ Fields must be private & final
 · 
 · 
 No setters
-· 
-
-
 
 19. Which Is Better for Storing Passwords: String or char[]?
 �� Answer: char[] is better
@@ -626,8 +618,6 @@ public class Test {
 * Can be replaced in modern Java by annotations, but still useful in some cases.
 
 Let me know if you'd like an example with Serializable or a real-world use case of marker interfaces.
-
-
 
 
 21. How to Use Mutable Classes? Difference Between String ,  StringBuffer and StringBuilder
@@ -1081,6 +1071,8 @@ Daemon Thread	Background service (e.g., GC)
 Thread t = new Thread();
 t.setDaemon(true);
 
+✅ 1-line interview answer:
+“A daemon thread in Java is a background service thread that runs until all user threads finish, after which the JVM terminates it automatically.”
 
 
 5. Purpose of join() Method
@@ -1163,19 +1155,16 @@ executor.shutdown();
 �� Performance issue in multithreading where threads modify variables that reside on the same cache line, causing cache invalidation.
 �� Rare in Java but important in high-performance systems.
 
+Error : 
+In Java, an Error is a serious problem that occurs in the JVM (Java Virtual Machine) and is usually not recoverable by the program.
+Examples:
+OutOfMemoryError
+StackOverflowError
+VirtualMachineError
+⚡ Difference from Exception:
 
+Error → problem with JVM/system (cannot be handled normally).
 
-15. Why Use String Immutability? (Revisited)
-�� Strings are immutable to:
-· 
-Enable string pooling
-· 
-· 
-Ensure thread-safety
-· 
-· 
-Support secure usage (e.g., passwords, class loading)
-· 
 
 
 
@@ -1254,6 +1243,73 @@ volatile	Ensures visibility (lightweight)
 Deadlock	Avoid nested locking
 Thread pool	Efficient resource usage
 Singleton	Double-checked locking pattern
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[         Expection  Topic         {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+Is it possible to execute a program without a catch block? If so, how would you use try and finally together?
+Yes, we can use try with finally without a catch block to ensure cleanup occurs even if we allow the exception to propagate up.
+
+How does exception handling with try-catch-finally affect the performance of a Java application?
+Using try-catch-finally can affect performance slightly due to overhead of managing exceptions but is generally minimal unless exceptions are thrown frequently.
+
+
+Can you tell me a condition where the finally block will not be executed?
+The finally block will not execute if the JVM exits via System.exit() during try or catch execution.
+
+
+Can we write multiple finally blocks in Java?
+No, each try can only have one finally block. Multiple finally blocks are not allowed within a single try-catch-finally structure.
+
+How would you handle multiple exceptions in a single catch block
+Use a single catch block for multiple exceptions by separating them with a pipe (l), e.g., catch (IOException | SQLException e), to handle both exceptions with the same logic.
+
+Is java a 100% object-oriented programming language?
+No, Java is not considered 100% object-oriented because it uses primitive types (like int, char, etc.) that are not objects. In a fully object-oriented language, everything is treated as an object.
+
+
+Explain public static void main(string args[])?
+In Java, public static void main(Stringl] args) is the entry point of any standalone Java application.
+public makes this method accessible from anywhere, static means I don't need to create an object to call this method, void means it doesn't return any value, and main is the name of this method.
+The String] args part is an array that holds any command-line arguments passed to the program.
+So, when I run a Java program, this is the first method that gets called
+
+
+Why we use wrapper class in collections
+Because ArrayList, HashMap, and others in the Java Collections Framework, can only hold objects and not primitive types. Wrapper classes allow primitive values to be treated as objects, enabling them to be stored and managed within these collections.
+Examples of wrapper classes are Integer, Boolean, Double etc
+
+
+What is the purpose of "join" method?
+The join method will make sure that calling thread waits for the completion of another thread.
+*   Suppose there is ThreadA that calls the join () method on ThreadB
+*   Then ThreadA will have to wait until ThreadB completes its
+* execution When ThreadB finishes, ThreadA will continue it's execution
+
+out Join
+w Thread; w Thread);
+With Join
+Thread t1=new Thread();
+Thread t2=new Thread);
+t1. start);
+try {
+t1. join);
+} catch (InterruptedException e) {
+e. printStackTrace();
+}
+t2. start);
+
+Explain the concept of Virtual Threads vs Normal Threads?
+Virtual threads are lightweight threads managed by a runtime environment or a virtual machine.
+Introduced in Java 19 and finalized in Java 21
+Tradition Threads → One to One Mapping with Native Threads Virtual Threads → Many to One Mapping with Native Threads
+
+
+What are the advantages of Executor Service?
+*   Thread Pool Management
+*   Task Queuing
+*   Simplified Thread Management
+*   Schedule Future Task Execution
+*   Decoupling Task Submission from Execution
 
 
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[         JAVA8 Topic         {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -1849,9 +1905,6 @@ It improves code readability, reusability, and conciseness.
 
 
 
-21. filter, map, reduce with Streams (Covered Above in Q9)
-
-
 
 ✅ Summary Table (Quick Revision)
 Topic	Key Insight
@@ -2067,6 +2120,25 @@ Sets use equals() and hashCode() to check for uniqueness. If two objects retur
 | **Package Location**                 | Located in `java.lang` package                                                | Located in `java.util` package                                                |
 | **Sorting Usage**                    | Used with `Collections.sort(List)`                                            | Used with `Collections.sort(List, Comparator)`                                |
 | **Flexibility**                      | Less flexible — only one way to sort                                          | More flexible — can define multiple sorting strategies                        |
+
+
+
+| Map Type              | Ordering        | Thread-Safe | Allows Null Keys | Performance                  | Use Case                      |
+| --------------------- | --------------- | ----------- | ---------------- | ---------------------------- | ----------------------------- |
+| **HashMap**           | No order        | ❌           | ✅ (1 null key)   | Very fast (O(1) avg)         | General-purpose, fast lookup  |
+| **LinkedHashMap**     | Insertion order | ❌           | ✅ (1 null key)   | Slightly slower than HashMap | Maintain insertion order      |
+| **TreeMap**           | Sorted by keys  | ❌           | ❌                | Slower (O(log n))            | Sorted data, range queries    |
+| **Hashtable**         | No order        | ✅           | ❌                | Legacy, slower               | Legacy thread-safe map        |
+| **ConcurrentHashMap** | No order        | ✅           | ❌                | High performance             | Thread-safe concurrent access |
+
+| Set Type                | Ordering                   | Allows Null | Thread-Safe | Performance                  | Use Case                                 |
+| ----------------------- | -------------------------- | ----------- | ----------- | ---------------------------- | ---------------------------------------- |
+| **HashSet**             | No order                   | ✅ (1 null)  | ❌           | Very fast (O(1) avg)         | General-purpose, fast lookup             |
+| **LinkedHashSet**       | Insertion order            | ✅ (1 null)  | ❌           | Slightly slower than HashSet | Maintain insertion order                 |
+| **TreeSet**             | Sorted (natural or custom) | ❌           | ❌           | Slower (O(log n))            | Sorted data, range queries               |
+| **CopyOnWriteArraySet** | Insertion order            | ✅ (1 null)  | ✅           | Slower writes, fast reads    | Thread-safe iteration, concurrency cases |
+
+
 
 ---
 
@@ -2328,12 +2400,6 @@ for (String item : list) {
 list.removeAll(toRemove);  // ✅ Safe after iteration
 
 
-23. When to use ArrayList vs LinkedList?
-· 
-Use ArrayList when frequent access.
-Use LinkedList when frequent insertions/removals.
-
-
 {{{{{{{{{{{{{{{{{{{{{{{{{{{ }}}}}}}}}}}}}}}}}}}}}}}}[[[[[[[[[[[[[[[[[[[[[[[[[[[           ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
         1. What is super class of all object in java ?
@@ -2516,14 +2582,23 @@ Creates DispatcherServlet, starts embedded Tomcat/Jetty.
 Maps routes (@RequestMapping/@GetMapping…), wires dependencies, app ready.
 
 
-SPRING BOOT ANNOTATIONS (QUICK HITS)
-Core: @SpringBootApplication, @Configuration, @Bean, @Component, @Service, @Repository, @Controller, @RestController
-Web: @RequestMapping, @Get/Post/Put/DeleteMapping, @PathVariable, @RequestParam, @RequestBody, @ResponseStatus, @CrossOrigin
-DI: @Autowired (prefer constructor injection), @Qualifier, @Primary, @Value, @ConfigurationProperties
-Validation: @Valid, @NotNull, @Size, etc.
-Persistence: @Entity, @Table, @Id, @GeneratedValue, @Column, @OneToOne, @OneToMany, @ManyToOne, @Transactional
-Error: @ControllerAdvice, @ExceptionHandler
-Test: @SpringBootTest, @MockBean
+13. Common Spring Boot Annotations (brief cheat-sheet)
+* @SpringBootApplication — main entry.
+* @Configuration — marks config class.
+* @Bean — defines a bean in config.
+* @Component, @Service, @Repository — stereotype annotations (auto-detected).
+* @Controller / @RestController — MVC controller (@RestController = @Controller + @ResponseBody).
+* @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping — map HTTP endpoints.
+* @RequestParam — query param; @PathVariable — path param; @RequestBody — request JSON -> object.
+* @Autowired — dependency injection (constructor injection preferred).
+* @Qualifier / @Primary — disambiguate beans.
+* @Value("${prop}") — inject property.
+* @ConfigurationProperties — bind complex props.
+* @Entity, @Table, @Id, @GeneratedValue — JPA mapping.
+* @Transactional — transaction boundary.
+* @ControllerAdvice / @ExceptionHandler — global error handling.
+* @Valid — trigger bean validation on request body.
+* @EnableScheduling / @Scheduled — scheduled tasks.
 
 
 
@@ -2673,3 +2748,203 @@ B value: 10
 🧠 Interview Summary:
 “Overloading depends on reference type at compile time, while overriding depends on actual object at runtime. So a.init() calls B’s version (override), but a.init(int) fails unless casted, because A doesn’t declare it.”
 Let me know if you want the same logic with constructors or static methods too!
+
+
+
+
+
+Main Components
+1. Class Loader Subsystem
+    * Loads .class files into memory.
+    * Phases: Loading → Linking → Initialization.
+    * Delegation model (Bootstrap → Extension → Application classloader).
+2. Runtime Data Areas
+    * Method Area: Stores class metadata, static variables.
+    * Heap: Stores objects (shared memory).
+    * Stack: Each thread has its own stack → stores method frames, local variables.
+    * PC Register: Stores address of current instruction for each thread.
+    * Native Method Stack: For methods written in C/C++ (JNI).
+3. Execution Engine
+    * Interpreter: Reads bytecode line by line (slow).
+    * JIT Compiler: Compiles hot code into native code for speed.
+    * Garbage Collector (GC): Manages memory (removes unused objects).
+4. Native Libraries
+    * JNI interface → connects JVM with OS-dependent native libraries.
+
+Real-Time Example to Impress Interviewer
+👉 Suppose you run a Spring Boot microservice.
+1. JVM loads classes like EmployeeService.class via Class Loader.
+2. Heap stores all Employee objects created when requests come.
+3. Stack stores request thread variables (like requestId).
+4. JIT optimizes repeated service methods.
+5. GC removes old Employee objects after request completes.
+
+5. Quick Summary (Good to tell interviewer)
+👉 JVM Architecture = Class Loader + Runtime Data Areas + Execution Engine.
+* Class Loader → loads classes.
+* Memory Areas → stores code, objects, variables.
+* Execution Engine → runs bytecode (Interpreter + JIT + GC).
+
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+Java Memory Management — Interview-Ready Explanation
+“Java memory management is primarily handled by the JVM, and it ensures efficient allocation, usage, and cleanup of memory during program execution. It’s divided into several key areas, each with a specific role.”
+
+    * Method Area: Stores class metadata, static variables.
+    * Heap: Stores objects (shared memory).
+    * Stack: Each thread has its own stack → stores method frames, local variables. ; Stores method calls, local variables, and references. Each thread has its own stack.
+    * PC Register: Stores address of current instruction for each thread.
+    * Native Method Stack: For methods written in C/C++ (JNI).
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+Garbage Collection in Java — Interview-Ready Explanation
+“Garbage Collection in Java is an automatic memory management process handled by the JVM. Its main job is to identify and remove objects that are no longer reachable, freeing up heap memory and preventing memory leaks.”
+
+
+How GC Works — Step-by-Step
+1. Object Allocation
+    * Objects are created in the heap using new.
+    * References to these objects are stored in the stack.
+2. Reachability Analysis
+    * GC checks which objects are reachable from active threads, static references, or method stacks.
+    * Unreachable objects are marked for collection.
+3. Mark-and-Sweep Algorithm
+    * Mark: Traverse object graph and mark reachable objects.
+    * Sweep: Remove unmarked (unreachable) objects from memory.
+4. Compacting (Optional)
+    * After sweeping, GC may compact memory to reduce fragmentation.
+
+Types of Garbage Collectors
+Java offers several GC algorithms:
+GC Type	Best For
+Serial GC	Single-threaded, good for small apps
+Parallel GC	Multi-threaded, high throughput
+CMS (Concurrent Mark-Sweep)	Low pause time
+G1 GC	Balanced performance, default in Java 9+
+ZGC / Shenandoah	Ultra-low pause time, large heaps
+
+
+Category	Purpose	Examples
+Creational	Object creation mechanisms	Singleton, Factory, Builder
+Structural	Composition of classes and objects	Adapter, Decorator, Composite
+Behavioral	Communication between objects	Observer, Strategy, Command
+
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+What is CQRS
+CQRS (Command Query Responsibility Segregation)
+* Separates writes/commands from reads/queries.
+* Write model optimized for updates/business rules; read model optimized for querying (often denormalized).
+* Often paired with Event Sourcing (store events rather than current state). Real-world example: E-commerce orders
+* Command: PlaceOrderCommand handled by command handler -> persists order, emits OrderPlacedEvent.
+* Query: GetOrderSummaryQuery reads from a denormalized read store (fast query). Benefits: scalability, independent optimization, simpler read models. Tradeoffs: complexity, eventual consistency between write/read models.
+Practical Approaches
+1. Direct Read from Write Store (Bypass Read Model)
+* For critical queries where the latest value is needed (e.g., “get latest balance”), bypass the read model.
+* Query the write database (source of truth) directly.
+👉 Example:
+* In a banking app, transaction history can come from read DB (slightly stale),
+* But current balance comes from write DB to avoid stale data.
+
+2. Eventual Consistency with Real-Time Sync
+* Keep read and write models synced asynchronously via events (Kafka, RabbitMQ, etc.).
+* Use fast event propagation to reduce lag.
+* Still eventual consistency, but usually good enough.
+👉 Example: E-commerce → After placing order (write side), an OrderCreatedEvent updates the read store immediately. UI queries read DB for the latest order.
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+How Spring Boot Works — step by step
+1. Main class with @SpringBootApplication and public static void main calls SpringApplication.run().
+2. SpringApplication bootstraps: creates ApplicationContext, loads Environment and properties.
+3. Auto-configuration: Spring Boot scans spring.factories and applies auto-configs based on classpath and properties.
+4. Component scan registers @Component/@Service/@Controller/@Repository beans.
+5. Embedded server (Tomcat/Jetty/Undertow) starts if web app. Spring registers DispatcherServlet.
+6. Beans initialization: lifecycle callbacks (PostConstruct, InitializingBean) run.
+7. ApplicationStarted/ApplicationReady events fired — user code can listen.
+8. Application runs, handling requests through DispatcherServlet → controllers.
+
+
+Flow of a REST Service (request → response)
+1. Client sends HTTP request.
+2. Network/Load Balancer → hits application instance.
+3. Servlet Container receives request; DispatcherServlet (Spring MVC) receives it.
+4. HandlerMapping finds Controller method (based on @RequestMapping, HTTP verb).
+5. Interceptors / Filters run (preHandle).
+    1. Controller method executes — calls Service layer → Repository/DAO layer to access DB.
+6. Service returns DTO; Controller returns ResponseEntity (status + body).
+7. HTTP Message Converters serialize object to JSON (Jackson).
+8. Interceptors / Filters (postHandle, afterCompletion) run, response is sent.
+9. Client receives response.
+
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+SELECT *                    
+FROM employee
+WHERE salary = (SELECT MAX(salary) FROM employee);     or.   
+
+   SELECT * FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 0;
+
+
+SELECT DISTINCT salary
+FROM employee
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+
+
+@FunctionalInterface
+interface StudentFactory {
+    Student create(int id, String name, String location, String address);
+}
+
+@FunctionalInterface
+interface MathOperation {
+    int operate(int a, int b);
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Student Creation
+        StudentFactory factory = (id, name, location, address) -> new Student(id, name, location, address);
+
+        Student s1 = factory.create(1, "Rajesh", "Hyderabad", "Kukatpally");
+        System.out.println(s1);
+
+        // Math Operations
+        MathOperation sum = (a, b) -> a + b;
+        MathOperation multiply = (a, b) -> a * b;
+
+        System.out.println("Sum: " + sum.operate(10, 20));
+        System.out.println("Multiply: " + multiply.operate(10, 20));
+    }
+}
+
+
+
