@@ -1,6 +1,6 @@
-Java Interview questions and answers
                                                         OOPS Topic
 
+Java Interview questions and answers
 1. What are the Pillars of OOP (Object-Oriented Programming)?
 The 4 Pillars of OOP:
 Encapsulation is  to the bundling of data and methods that operate on that data within a single unit, which is called a class in Java. Java Encapsulation is a way of hiding the implementation details of a class from outside access and only exposing a public interface that can be used to interact with the class.
@@ -265,9 +265,9 @@ If parent does not throw, child cannot newly add a checked exception.
 Runtime exceptions are always allowed.
 
 
+· 
 
 �� 1. Heap Memory
-· 
 Used for: Objects and instance variables
 · 
 · 
@@ -2138,6 +2138,16 @@ Sets use equals() and hashCode() to check for uniqueness. If two objects retur
 | **TreeSet**             | Sorted (natural or custom) | ❌           | ❌           | Slower (O(log n))            | Sorted data, range queries               |
 | **CopyOnWriteArraySet** | Insertion order            | ✅ (1 null)  | ✅           | Slower writes, fast reads    | Thread-safe iteration, concurrency cases |
 
+
+| Map Type              | Ordering        | Thread-Safe | Allows Null Keys | Performance                  | Use Case                      |
+| --------------------- | --------------- | ----------- | ---------------- | ---------------------------- | ----------------------------- |
+| **HashMap**           | No order        | ❌           | ✅ (1 null key)   | Very fast (O(1) avg)         | General-purpose, fast lookup  |
+| **LinkedHashMap**     | Insertion order | ❌           | ✅ (1 null key)   | Slightly slower than HashMap | Maintain insertion order      |
+| **TreeMap**           | Sorted by keys  | ❌           | ❌                | Slower (O(log n))            | Sorted data, range queries    |
+| --------------------- | --------------- | ----------- | ---------------- | ---------------------------- | ----------------------------- |
+| **HashSet**           | No order        | ❌           | ✅ (1 null key)   | Very fast (O(1) avg)         | General-purpose, fast lookup  |
+| **LinkedHasSet**     | Insertion order | ❌           | ✅ (1 null key)   | Slightly slower than HashMap | Maintain insertion order      |
+| **TreeSet**           | Sorted by keys  | ❌           | ❌                | Slower (O(log n))            | Sorted data, range queries    |
 
 
 ---
