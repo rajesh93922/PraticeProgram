@@ -1811,30 +1811,32 @@ John - ForkJoinPool.commonPool-worker-3
 * They are lazy, meaning they don’t process data immediately.
 * Instead, they build up a pipeline of operations to be executed later.
 * You can chain multiple intermediate operations.
-* Examples include: filter(), map(), sorted(), distinct()
+* Examples include: filter(), map(), sorted(), distinct() ,skip , limit ,peek
 Think of intermediate operations as setting up a recipe but not cooking yet.
+
 
 🔹 Terminal Operations
 * These are operations that trigger the processing of the stream pipeline.
 * Terminal operations produce a result or side effect like a value, collection, or printing.
 * Once a terminal operation is called, the stream is considered consumed and can’t be reused.
-* Examples include: forEach(), collect(), reduce(), count()
+* Examples include: forEach(), collect(), reduce(), count(), anymatch , all match , non match , min , max
 Think of terminal operations as actually cooking the recipe and serving the food.
 
 Type	Description	Example
 Intermediate	Lazy operations, return stream	filter(), map(), flatmap, distinct , sorted, skip , limit
 Terminal	Trigger execution, return result	forEach(), collect(), reduce , count
 
+Predicate is used when you want to check a condition and return true/false.
+Consumer is used when you want to process input without returning anything (like printing or saving). 
+Supplier is used when you want to generate/return a value without taking any input.
 
 17. Exposure to Lambda Functions
 ✅ Used in:
 · 
 Threads: new Thread(() -> {})
-· 
-· 
+
 Collections: stream().map()
-· 
-· 
+
 Events: button.setOnClickListener(() -> {})
 · 
 Example:
@@ -1902,8 +1904,6 @@ A lambda needs exactly one abstract method to target → hence Functional Interf
 Introduced in Java 8 to support Lambda Expressions and functional programming.
 A functional interface has exactly one abstract method and allows us to pass behavior as data.
 It improves code readability, reusability, and conciseness.
-
-
 
 
 ✅ Summary Table (Quick Revision)
