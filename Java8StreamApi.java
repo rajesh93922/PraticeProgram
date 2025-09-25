@@ -105,6 +105,24 @@ public class Java8StreamApi{
                 .filter(name -> name.toLowerCase().startsWith("a"))
                 .count();
         System.out.println("Count of names starting with 'a': " + count);
+
+        //// Output: [2, 2]
+        List<Integer> i11 = new ArrayList<>(Arrays.asList(1, 2, 2, 1));
+        List<Integer> i22 = new ArrayList<>(Arrays.asList(2, 2));
+        checkDuplicate(i11,i22);
+        System.out.println("  Check Duplicate TWice" + checkDuplicate(i11,i22));
+
+    }
+
+    private static int[] checkDuplicate(List<Integer> i11, List<Integer> i22) {
+        List<Integer> list = new ArrayList<>();
+        for (Integer num : i22) {
+            if (i11.contains(num)){
+                list.add(num);
+                list.remove(i11);
+            }
+        }
+        return new int[] {};
     }
 
     private static boolean checktwice(int[] i1) {
