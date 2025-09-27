@@ -16,12 +16,6 @@ public class Java8StreamApi{
         int n=50;
         primeNumber(n);
 
-        String str1 = "badasgffgwxb";
-        String str2 = "xcaxbabg";
-        //find common duplicate in String
-        //out put: [a, a, b, b, g, g, x] print common duplicate
-        findDuplicatesCommon(str1,str2);
-
         //output : R
         String nonRepeated ="Rajesh";
         findFirstNonRepeatedChar(nonRepeated);
@@ -304,26 +298,6 @@ public class Java8StreamApi{
                 .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new, Collectors.counting()))
                 .entrySet().stream().filter(v -> v.getValue() == 1).findFirst().get().getKey();
         System.out.println(key);
-    }
-
-    private static void findDuplicatesCommon(String str1, String str2) {
-        List<Character> char1 = str1.chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.toList());
-        List<Character> char2 = str2.chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.toList());
-        List<Character> common = char1.stream()
-                .filter(char2::contains)
-                .collect(Collectors.toList());
-
-        List<String> duplicateCommon = common.stream()
-                .sorted()
-                .map(String::valueOf)
-                .collect(Collectors.toList());
-
-        System.out.println(duplicateCommon);
-
     }
 
     private static void primeNumber(int n) {
