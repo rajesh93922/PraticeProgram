@@ -87,25 +87,6 @@ public class Java8Fequentasking {
 			
 			System.out.println(" secondLowestnumber : "+ "  " +secondLowestnumber);
 			
-		// java program to find longest string from given array
-			
-			String [] strarray = {"java" , "techie" , "Springboot" ,"Microservices"};
-			
-			String longeststring = Arrays.stream(strarray)
-					.reduce((word1 , word2) -> word1.length() > word2.length() ? word1 : word2)
-					.get();
-			System.out.println(" longeststring : "+ " " +  longeststring);
-			
-			
-	  //java program to find all elements from array who start with 1
-			
-			List<String> startwithone = Arrays.stream(numbers)
-					.boxed().map(s -> s + " ")
-					.filter(s -> s.startsWith("1"))
-					.collect(Collectors.toList());
-			
-			System.out.println(" startwithone : "+ " " +  startwithone);
-			
 			// java program string.join method 
 			
 			List<String> asList = Arrays.asList("1" ,"2", "3" ,"4");
@@ -138,25 +119,6 @@ public class Java8Fequentasking {
 			
 			System.out.println(x + "  " +y);
 
-					
-			/// prime number
-			System.out.println("enter the String :");
-	    	Scanner sc = new Scanner(System.in);
-	    	int num = sc.nextInt();
-			// int num = 10;
-			 int count =0;
-			 
-           for(int i = 1 ; i <= num ; i++) {
-        	   if(num %i ==0) {
-        		   count ++;
-        	   }
-           }
-           if(count ==2) {
-        	   System.out.println("prime" + num);
-           }else {
-        	   System.out.println("not prime" + num);
-           }
-           
          ////////////////////////////////////////  
            String rom = "Geeks for Geeks";
 
@@ -171,12 +133,7 @@ public class Java8Fequentasking {
            System.out.println(input1);
            
      ////////////////////////////////////////////////      
-           String [] log = {"kil" ,"road" ,"iphone 15 plus"};
-           
-           String string = Arrays.stream(log).reduce((word1 , word2) -> word1.length() >word2.length() ? word1 :word2).get();
-           
-           System.out.println(string);
-
+          
 
 		  // palidrome
         String s4 = "madam";
@@ -247,26 +204,30 @@ public class Java8Fequentasking {
                 .boxed().collect(Collectors.toSet());
         System.out.println(collect);
 
-        String inReverse = "jack";
-        String string = new StringBuilder(inReverse).reverse().toString();
-        System.out.println(string);
-       // integer reverse 
-		  int numbers =123;
 
-        String ss = new StringBuilder(
-                String.valueOf(numbers)
-                        .chars()
-                        .mapToObj(c -> String.valueOf((char) c))
-                        .collect(Collectors.joining())
-        ).reverse().toString();
+		
 
-        int reversedInt = Integer.parseInt(ss);
-
-        System.out.println("Original: " + numbers);
-        System.out.println("Reversed: " + reversedInt);
+        List<Employee> collect = employees.stream().map(employee -> {
+            if (employee.getSalary() > 1000) {
+                employee.setSalary(employee.getSalary() + 1000);
+            }
+                    return employee;
+                })
+                .collect(Collectors.toList());
+        System.out.println(collect);
 
 
+      int  empFindById  =1002 ;
+        Optional<Employee> first = employees.stream().filter(e -> e.getId() == empFindById).findFirst();
+
+        first.ifPresentOrElse( employee -> System.out.println(" emp found" + employee),
+                () -> System.out.println("not fourd" ));
+		
            
+        listEmp.stream().collect(Collectors.groupingBy(Employee::getDepartment,
+                Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))))
+                .forEach((dep,salary) -> System.out.println(dep + "dept wise salary " +salary));
+
 
 	}
 
