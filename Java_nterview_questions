@@ -2956,5 +2956,394 @@ public class Main {
     }
 }
 
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+| Feature        | `map()`                        | `flatMap()`                           |
+| -------------- | ------------------------------ | ------------------------------------- |
+| Mapping type   | 1-to-1 transformation          | 1-to-many transformation              |
+| Output         | Stream of transformed elements | Flattened Stream of all elements      |
+| Nested Streams | Can produce nested streams     | Flattens nested streams automatically |
+| Use-case       | Transform object to object     | Transform object to multiple objects  |
+
+
+
+23. Java 17 Features Implemented
+* Sealed Classes: Control subclassing (used in transaction types).
+* Records: Immutable data carriers (record CustomerDTO(String id, String name)).
+* Pattern Matching for instanceof: Simplifies casting.
+* Text Blocks: Multi-line SQL queries cleanly.
+* Switch Expressions: Cleaner control flow.
+
+21. Multithreading, Multi-JVM, and Synchronized
+* Multithreading: Multiple threads share same memory → need synchronization.
+* synchronized keyword ensures atomic access to shared resources.
+* Multi-JVM: Different JVMs have separate memory → use distributed cache or message queues for coordination.
+Example:Example: In a payment gateway, synchronized ensures one thread updates account balance at a time.
+
+---
+
+### **1. Why do we have `static` keyword in Java?**
+
+* The `static` keyword allows members (variables/methods/blocks) to belong to the **class** rather than an **instance**.
+* Use-cases:
+
+  * **Memory efficiency:** Shared across all instances.
+  * **Utility methods:** Methods that do not depend on instance data (e.g., `Math.max()`).
+  * **Constants:** `static final` variables (e.g., `public static final int MAX_USERS = 100;`).
+
+**Example:**
+
+```java
+class Bank {
+    static String bankName = "ABC Bank"; // shared across all accounts
+}
+```
+
+---
+
+### **2. Why we create static methods and their benefits**
+
+* Belong to class rather than instance.
+* Can be called without creating an object.
+* Benefits:
+
+  * Memory-efficient.
+  * Easy utility methods (like `Collections.sort()`).
+  * Improves performance when shared logic is needed.
+
+---
+
+### **3. Try with multiple catch & exception handling**
+
+* Java allows **multiple catch blocks** to handle different exceptions separately.
+* **Exception handling flow:** JVM looks for matching catch block; if none found, exception propagates.
+
+**Example:**
+
+```java
+try {
+    int[] arr = new int[5];
+    arr[10] = 100; // ArrayIndexOutOfBoundsException
+} catch (ArithmeticException e) {
+    System.out.println("Arithmetic error: " + e.getMessage());
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Array index error: " + e.getMessage());
+} finally {
+    System.out.println("Cleanup code runs here.");
+}
+```
+
+---
+
+### **4. How `HashMap` identifies unique objects**
+
+* HashMap uses **hashCode()** and **equals()**:
+
+  * `hashCode()` → identifies bucket location.
+  * `equals()` → checks if two keys are logically equal.
+* If `hashCode()` matches but `equals()` is false → treated as unique key.
+
+---
+
+### **5. How to create synchronized ArrayList**
+
+```java
+List<String> list = Collections.synchronizedList(new ArrayList<>());
+```
+
+* Ensures thread-safe operations on the list.
+* In high-concurrency, `CopyOnWriteArrayList` is better.
+
+---
+
+### **6. Interfaces in Java**
+
+* Define **contract** without implementation.
+* Types:
+
+  * **Marker interface:** e.g., `Serializable`.
+  * **Functional interface:** e.g., `Runnable`, `Callable`.
+  * **Normal interface:** e.g., `List`.
+* **Runnable vs Callable:**
+
+| Feature     | Runnable                | Callable                     |
+| ----------- | ----------------------- | ---------------------------- |
+| Return type | void                    | T (generic type)             |
+| Exception   | Cannot throw checked    | Can throw checked exceptions |
+| Used with   | Thread, ExecutorService | ExecutorService + Future     |
+
+---
+
+### **7. `Thread.yield()`**
+
+* Suggests scheduler to **pause current thread** and allow other threads to execute.
+* No guarantee; purely a hint to JVM.
+
+---
+
+### **8. Read a file from a directory**
+
+```java
+Path path = Paths.get("C:/data/input.txt");
+List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+lines.forEach(System.out::println);
+```
+
+---
+
+### **9. `ConcurrentHashMap`**
+
+* Thread-safe alternative to HashMap.
+* Internal working:
+
+  * Uses **lock striping / segments** (Java 8 uses **synchronized on bins + CAS operations**).
+  * Allows **concurrent read/writes** without blocking entire map.
+
+---
+
+### **10. Internal working of HashMap**
+
+* Buckets based on `hashCode() % capacity`.
+* **Collision resolution:** Linked list → Java 8 uses **balanced tree (Red-Black Tree)** if list grows beyond threshold.
+* **Put operation:**
+
+  1. Compute hash
+  2. Locate bucket
+  3. Check `equals()` for duplicate keys
+  4. Add/update value
+* **Remove:** Locate bucket → remove node → rehash if needed.
+
+---
+
+### **11. Immutable objects & classes**
+
+* **Immutable class rules:**
+
+  * Mark class as `final`.
+  * Fields `private final`.
+  * No setters; only getters.
+  * Deep copy mutable fields in constructor.
+
+**Example:**
+
+```java
+final class Employee {
+    private final String name;
+    private final int id;
+    public Employee(String name, int id) { this.name = name; this.id = id; }
+    public String getName() { return name; }
+    public int getId() { return id; }
+}
+```
+
+---
+
+### **12. Create a final class**
+
+```java
+public final class Utility {
+    // No subclass can extend
+}
+```
+
+---
+
+### **13. Object class methods**
+
+* Every class inherits from `Object`.
+* Important methods:
+
+  * `toString()`, `equals()`, `hashCode()`, `clone()`, `finalize()`.
+* Internally:
+
+  * `equals()` compares references unless overridden.
+  * `hashCode()` provides integer representation for hashing.
+
+---
+
+### **14. OOP vs Functional Programming**
+
+| Feature  | OOP                   | Functional Programming      |
+| -------- | --------------------- | --------------------------- |
+| Paradigm | Object-oriented       | Function-oriented           |
+| State    | Mutable               | Immutable                   |
+| Example  | Java, C++             | Java Streams, Lambda        |
+| Focus    | Objects and behaviors | Functions & transformations |
+
+---
+
+### **15. JVM**
+
+* **Java Virtual Machine:** Runs bytecode on any platform.
+* Components:
+
+  * Class Loader
+  * Memory Area (Heap, Stack)
+  * Execution Engine
+  * Garbage Collector
+
+---
+
+### **16. Inheritance, Association, Composition**
+
+* **Inheritance:** `extends` (is-a relation).
+* **Association:** Object uses another object (has-a).
+* **Composition:** Stronger association; part cannot exist without whole.
+
+---
+
+### **17. Aggregation**
+
+* Weak association; part can exist independently.
+* Example: `Library` has many `Books` → books can exist outside library.
+
+---
+
+### **18. Abstract class**
+
+* Cannot be instantiated; can have both abstract and concrete methods.
+* Call methods via subclass:
+
+```java
+abstract class Shape { abstract void draw(); }
+class Circle extends Shape { void draw() { System.out.println("Circle"); } }
+```
+
+---
+
+### **19. String immutability**
+
+* Strings are **final and immutable**.
+* Benefits:
+
+  * Thread-safe
+  * Memory-efficient (String Pool)
+  * Safe as Map key
+
+---
+
+### **20. HashMap vs ConcurrentHashMap**
+
+| Feature          | HashMap              | ConcurrentHashMap                         |
+| ---------------- | -------------------- | ----------------------------------------- |
+| Thread-safety    | No                   | Yes                                       |
+| Null keys/values | Allowed              | Null keys not allowed                     |
+| Locking          | None / external sync | Bucket-level (Java 8: CAS + synchronized) |
+| Use-case         | Single-threaded      | Multi-threaded                            |
+
+---
+
+### **21. TreeSet internal working**
+
+* Implemented using **Red-Black tree**.
+* Automatically sorts elements.
+* No duplicates allowed.
+
+---
+
+### **22. HashMap `remove()`**
+
+* `map.remove(key)` → removes key-value pair, returns value.
+
+---
+
+### **23. Synchronized vs Concurrent Collections**
+
+| Feature     | Synchronized Collection        | Concurrent Collection                       |
+| ----------- | ------------------------------ | ------------------------------------------- |
+| Locking     | Full object lock               | Fine-grained locking (bucket-level)         |
+| Performance | Low under concurrency          | High under concurrency                      |
+| Examples    | `Collections.synchronizedList` | `ConcurrentHashMap`, `CopyOnWriteArrayList` |
+
+---
+
+### **24. Remove duplicates from ArrayList**
+
+```java
+List<Integer> list = Arrays.asList(1,2,2,3);
+List<Integer> uniqueList = new ArrayList<>(new HashSet<>(list));
+```
+
+---
+
+### **25. Convert List to Array**
+
+```java
+List<String> list = Arrays.asList("A","B");
+String[] arr = list.toArray(new String[0]);
+```
+
+---
+
+### **26. Thread Concepts**
+
+* **Thread Creation:** `extends Thread` or `implements Runnable`.
+* **Thread States:** New, Runnable, Running, Waiting, Timed Waiting, Terminated.
+* **Synchronization:** Prevents race conditions.
+* **Deadlocks:** Occur when threads wait infinitely for each other.
+* **Volatile:** Ensures visibility across threads.
+* **Synchronized method/block:** Locks to avoid conflicts.
+* **Thread Dump:** Snapshot of thread states for debugging.
+
+---
+
+### **27. Thread creation example**
+
+```java
+class MyThread extends Thread {
+    public void run() { System.out.println("Thread running"); }
+}
+new MyThread().start();
+```
+
+**Difference:**
+
+| Method    | Description                       |
+| --------- | --------------------------------- |
+| `start()` | Creates new thread, calls `run()` |
+| `run()`   | Executes in current thread        |
+
+---
+
+### **28. Executor Framework**
+
+* Manages thread pools efficiently.
+* Key classes:
+
+  * `ThreadPoolExecutor`, `ScheduledThreadPoolExecutor`
+  * `Callable` + `Future` for async tasks
+  * `ThreadLocal` for thread-specific storage
+
+---
+
+### **29. Java 8 HashMap updates**
+
+* Collisions handled with **Red-Black tree** if bucket > 8.
+* More efficient get/put operations.
+* Improved iteration using **forEach, stream**.
+
+---
+
+### **30. Synchronize a collection**
+
+```java
+List<String> list = Collections.synchronizedList(new ArrayList<>());
+```
+
+---
+
+### **31. Design Patterns**
+
+* Common patterns used in enterprise:
+
+  * **Singleton:** DB connection pool
+  * **Factory:** Create service objects based on type
+  * **Proxy:** Remote service proxy
+  * **Observer:** Event listeners
+
+**Proxy pattern:** Controls access to object (e.g., lazy loading in Hibernate).
+**Factory pattern:** Encapsulates object creation (e.g., `ShapeFactory.create("Circle")`).
+
+---
 
 
