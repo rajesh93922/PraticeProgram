@@ -108,15 +108,14 @@ public class Java8StreamApi{
 
     }
 
-    private static int[] checkDuplicate(List<Integer> i11, List<Integer> i22) {
+    private static void checkDuplicate(List<Integer> i11, List<Integer> i22) {
         List<Integer> list = new ArrayList<>();
         for (Integer num : i22) {
             if (i11.contains(num)){
                 list.add(num);
-                list.remove(i11);
             }
         }
-        return new int[] {};
+       System.out.println(list);
     }
 
     private static boolean checktwice(int[] i1) {
@@ -164,10 +163,11 @@ public class Java8StreamApi{
     }
 
     private static void missingNumber(int[] arr, int nu) {
-        int expectedSum = nu * (nu + 1) / 2;
-        int actualSum = Arrays.stream(arr).sum();
-
-        System.out.println("Missing number is: " + (expectedSum - actualSum));
+        Set<Integer>set = new HashSet<>();
+        Set<Integer> collect1 = Arrays.stream(arr).boxed().collect(Collectors.toSet());
+        List<Integer> collect = IntStream.range(1, 4).boxed().filter(e -> !collect1.contains(e))
+                .collect(Collectors.toList());
+        System.out.println(collect);
 
 
     }
