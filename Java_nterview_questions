@@ -280,7 +280,6 @@ Student s = new Student(); // Stored in heap
 ✅ Big memory area, shared among all threads.
 
 
-
 �� 2. Stack Memory
 · 
 Used for: Method calls, local variables
@@ -3343,6 +3342,121 @@ List<String> list = Collections.synchronizedList(new ArrayList<>());
 
 **Proxy pattern:** Controls access to object (e.g., lazy loading in Hibernate).
 **Factory pattern:** Encapsulates object creation (e.g., `ShapeFactory.create("Circle")`).
+
+
+
+Feature	stream()	parallelStream()
+Execution	Single thread	Multiple threads (ForkJoinPool)
+Order	Preserved	Not guaranteed
+Performance	Good for small tasks	Good for large CPU-heavy tasks
+Safety	Safe if stateless	Must avoid shared mutable state
+Splitting	No splitting	Splits data source into chunks
+
+Explain Collection vs Stream
+1) Nature
+* Collection: A data structure that stores elements in memory (e.g., List, Set, Map). Represents data at rest.
+* Stream: A data processing pipeline that operates on elements from a source (like a collection). Represents data in motion.
+2) Storage
+* Collection: Physically stores elements; you can add, remove, or update data.
+* Stream: Does not store elements; only processes them.
+3) Mutability
+* Collection: Mutable — elements can be added, removed, or updated.
+* Stream: Immutable — operations produce new streams, source remains unchanged.
+4) Operations
+* Collection: CRUD operations (Create, Read, Update, Delete).
+* Stream: Functional operations — map, filter, reduce, collect.
+
+Functional Interfaces (Real-life Usage)
+Predicate
+Predicate<User> isActive = user -> user.isActive();
+
+List<User> activeUsers = users.stream()
+    .filter(isActive)
+    .collect(Collectors.toList());
+Consumer
+Consumer<User> sendNotification = user -> notificationService.send(user);
+
+users.forEach(sendNotification);
+Function
+Function<User, UserDTO> toDTO = user -> new UserDTO(user.getId(), user.getName());
+
+List<UserDTO> dtoList = users.stream()
+    .map(toDTO)
+    .collect(Collectors.toList());
+
+CopyOnWriteArrayList — What & When to Use
+Definition
+A thread-safe list using a copy-on-write strategy:
+* Every write (add/remove) → creates a new copy of the internal array.
+* Reads are fast, lock-free, and use a snapshot.
+* Iterators never throw ConcurrentModificationException.
+How It Works
+* Reads: Happen on a volatile snapshot → super fast.
+* Writes: Lock, copy array, modify, replace reference.
+* Iterators: Snapshot-based, fail-safe.
+Best Use Case
+* Read-heavy, rarely updated lists (e.g., listeners, app config lists).
+* Avoid for large lists or frequent writes.
+
+How Resize Happens in HashMap
+HashMap resizes by doubling capacity when size exceeds capacity * loadFactor.
+* Entries are redistributed.
+* Since Java 8, rehashing uses a bitwise method (low/high bucket split).
+* Maintains O(1) amortized performance.
+
+Internal Working of ConcurrentHashMap
+Key Concepts
+* Thread-safe without locking the entire map.
+* Uses CAS, bucket-level locking, and parallel resizing.
+* Reads: Lock-free
+* Writes: Lock only the bucket
+* Much more scalable than Hashtable or synchronizedMap.
+
+Java 17 Features (Implemented)
+* Sealed Classes → Controlled inheritance
+* Records → Immutable DTOs
+* Pattern Matching for instanceof
+* Switch Expressions
+* Text Blocks → Clean JSON/SQL
+
+ClassNotFoundException vs NoClassDefFoundError
+ClassNotFoundException
+* Checked exception
+* Occurs when: Class is dynamically loaded (Class.forName, ClassLoader.loadClass) but not found at runtime.
+Real Example: JDBC driver missing from classpath → Class.forName("com.mysql.Driver") fails.
+NoClassDefFoundError
+* Unchecked error
+* Occurs when: Class was present at compile time but missing/corrupted at runtime.
+Real Example: Deployed JAR missing a dependency → application crashes immediately.
+
+Why synchronized Doesn’t Scale
+* Works only inside a single JVM.
+* Causes blocking & lock contention.
+* Not suitable for distributed systems or high concurrency.
+* Use distributed locks or concurrent utilities instead.
+
+How to Improve JVM Performance
+* Tune GC
+* Optimize heap regions
+* Reduce object creation
+* Use JIT optimizations
+* Minimize lock contention
+* Use profilers (JFR, VisualVM, YourKit)
+* Reduce allocations and synchronized blocks
+
+What Does Immutable Mean?
+An object whose state cannot change after creation. Example: String — stored in String Pool, safe for caching, thread-safe.
+
+map() vs flatMap()
+Feature	map()	flatMap()
+Transformation	One-to-one	One-to-many
+Output	Same size as input	Flattened stream
+Use Case	Convert strings → lengths	Combine lists of phone numbers
+Checked vs Unchecked Exception
+* Checked: Must handle (IOException, SQLException, ClassNotFoundException).
+* Unchecked: No handling required (NullPointerException, ArithmeticException).
+
+
 
 ---
 
