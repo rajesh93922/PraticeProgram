@@ -492,23 +492,194 @@ Set<Integer> syncSet = Collections.synchronizedSet(new HashSet<>());
 * Proxy → Logging, access control
 * Observer → Notification/event-driven systems
 * Strategy → Pluggable algorithms (InterestCalculationStrategy)
+Here’s a **detailed explanation of each design pattern you listed**, tailored for interview clarity:
 
-40. Proxy Pattern
-* Provides a surrogate for another object to control access. Example: In banking, proxy checks user permissions before delegating to AccountServiceImpl.
+***
 
-41. Factory Design Pattern
-* Creates objects without exposing instantiation logic. Example:
-class PaymentFactory {
-  static Payment getPayment(String type) {
-     return switch (type) {
-         case "CARD" -> new CardPayment();
-         case "UPI" -> new UpiPayment();
-         default -> throw new IllegalArgumentException();
-     };
-  }
+## ✅ **1. Singleton Pattern**
+
+**Definition**: Ensures **only one instance** of a class exists in the application and provides a global access point to it.
+
+**Use Case in Spring**:
+
+*   Spring Beans are **Singleton by default**.
+*   Common for **configuration classes**, **logging**, **cache managers**.
+
+**Example**:
+
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public DataSource dataSource() {
+        return new HikariDataSource();
+    }
+}
+```
+
+Spring ensures only **one DataSource bean** exists.
+
+**Key Points**:
+
+*   Controls object creation.
+*   Saves memory.
+*   Thread-safe implementation is critical.
+
+***
+
+## ✅ **2. Factory Pattern**
+
+**Definition**: Provides an interface for creating objects without exposing the creation logic to the client.
+
+**Use Case**:
+
+*   When object creation is **complex** or depends on **runtime conditions**.
+*   Example: `PaymentFactory` creates different payment processors (CreditCard, UPI, PayPal).
+
+**Example**:
+
+```java
+public class PaymentFactory {
+    public static PaymentProcessor getProcessor(String type) {
+        return switch (type) {
+            case "UPI" -> new UpiProcessor();
+            case "CARD" -> new CardProcessor();
+            default -> throw new IllegalArgumentException("Unknown type");
+        };
+    }
+}
+```
+
+**Key Points**:
+
+*   Decouples object creation from usage.
+*   Improves maintainability.
+
+***
+
+## ✅ **3. Builder Pattern**
+
+**Definition**: Helps create **complex objects step-by-step** without needing a telescoping constructor.
+
+**Use Case**:
+
+*   When an object has **many optional parameters**.
+*   Example: `LoanBuilder` for creating Loan objects with multiple attributes.
+
+**Example**:
+
+```java
+Loan loan = new LoanBuilder()
+                .withAmount(500000)
+                .withInterestRate(7.5)
+                .withTenure(60)
+                .build();
+```
+
+**Key Points**:
+
+*   Improves readability.
+*   Avoids constructor overloads.
+
+***
+
+## ✅ **4. Proxy Pattern**
+
+**Definition**: Provides a **surrogate or placeholder** for another object to control access to it.
+
+**Use Case**:
+
+*   Logging, security checks, caching.
+*   Example: Spring AOP uses proxies for **transaction management** and **method interception**.
+
+**Example**:
+
+```java
+public class LoggingProxy implements Service {
+    private final Service target;
+    public LoggingProxy(Service target) { this.target = target; }
+
+    @Override
+    public void execute() {
+        System.out.println("Before execution");
+        target.execute();
+        System.out.println("After execution");
+    }
+}
+```
+
+**Key Points**:
+
+*   Adds functionality without modifying original code.
+*   Common in **Spring AOP**.
+
+***
+
+## ✅ **5. Observer Pattern**
+
+**Definition**: Defines a **one-to-many dependency** so that when one object changes state, all dependents are notified.
+
+**Use Case**:
+
+*   Event-driven systems, notifications.
+*   Example: Spring’s **ApplicationEventPublisher**.
+
+**Example**:
+
+```java
+@Component
+public class OrderEventListener {
+    @EventListener
+    public void handleOrderCreated(OrderCreatedEvent event) {
+        System.out.println("Order created: " + event.getOrderId());
+    }
+}
+```
+
+**Key Points**:
+
+*   Loose coupling.
+*   Used in **pub-sub systems**.
+
+***
+
+## ✅ **6. Strategy Pattern**
+
+**Definition**: Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+
+**Use Case**:
+
+*   When you need **pluggable algorithms**.
+*   Example: `InterestCalculationStrategy` for different loan types.
+
+**Example**:
+
+```java
+public interface InterestStrategy {
+    double calculate(double amount);
 }
 
-Would you like me to turn this entire Q&A into a formatted “Java Interview Master Notes (Senior Developer)” PDF (2–3 pages, bullet-styled, ideal for quick prep)?
+public class HomeLoanStrategy implements InterestStrategy {
+    public double calculate(double amount) { return amount * 0.07; }
+}
+
+public class PersonalLoanStrategy implements InterestStrategy {
+    public double calculate(double amount) { return amount * 0.12; }
+}
+```
+
+**Key Points**:
+
+*   Promotes **Open/Closed Principle**.
+*   Avoids `if-else` chains.
+
+***
+
+### ✅ Interview Tips:
+
+*   Always mention **why** the pattern is used and **real-world examples**.
+*   Highlight **Spring usage** (Singleton beans, AOP proxies, Event listeners).
+*   Show **code snippet** if asked.
 
 
 
