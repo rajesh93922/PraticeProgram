@@ -1345,6 +1345,808 @@ Why Spring Boot is Preferred for Microservices
 
 If you want, I can also convert this into an interview-ready PDF, or split the topics into flashcards.
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                  
+
+Question:
+What is Spring Boot and what are the advantages of it?
+
+✅ Bullet Points for Quick Recall
+
+Spring Boot is a framework built on top of Spring that simplifies application development by providing defaults and auto-configuration.
+Eliminates boilerplate configuration required in Spring.
+Provides embedded servers (Tomcat, Jetty) → no need for external deployment.
+Supports production-ready features like health checks, metrics via Actuator.
+Convention over configuration → reduces complexity.
+Starter dependencies → easy integration of common libraries.
+Microservices-friendly → lightweight and fast to start.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question:
+Why is Spring Boot preferred for Microservices?
+
+✅ Bullet Points for Quick Recall
+
+Lightweight & Standalone: Each microservice runs independently with its own embedded server.
+Auto-Configuration: Reduces boilerplate and speeds up development.
+Starter Dependencies: Simplifies integration of common features like JPA, Security, Messaging.
+Production-Ready Features: Actuator for health checks, metrics, monitoring.
+Cloud & Container Friendly: Easy to deploy in Docker/Kubernetes environments.
+Rapid Development: Faster prototyping and minimal configuration.
+Easy Integration: Works well with Spring Cloud for service discovery, load balancing, and distributed configuration.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question:
+How do you design a database and what are the best practices?
+
+✅ Bullet Points for Quick Recall
+
+Understand Requirements → Gather business and data requirements first.
+Identify Entities & Relationships → Use ER diagrams to model data.
+Normalize Data → Apply normalization (up to 3NF) to reduce redundancy.
+Choose Right Data Types → Optimize for storage and performance.
+Primary & Foreign Keys → Ensure proper constraints for integrity.
+Indexing → Add indexes for frequently queried columns.
+Partitioning & Sharding → For large-scale systems.
+Security → Implement encryption, access control, and roles.
+Backup & Recovery Strategy → Plan for disaster recovery.
+Scalability → Design for future growth (horizontal/vertical scaling).
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+1.what is circular dependency and how to avoid it.
+
+✅ Bullet Points
+
+Definition: Circular dependency occurs when two or more beans depend on each other, creating a cycle.
+Example: Class A depends on Class B, and Class B depends on Class A.
+Problems:
+
+Causes BeanCurrentlyInCreationException in Spring.
+Hard to maintain and test.
+
+How to Avoid:
+Refactor Design: Break the cycle by introducing a third class or interface.
+Use @Lazy: Delays bean initialization to break the cycle.
+Constructor Injection → Field Injection: Use setter injection instead of constructor injection.
+Event-driven approach: Decouple dependencies using events.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+3. What is API Security and How to Implement It?
+✅ Bullet Points
+
+Definition: Protecting APIs from unauthorized access, data breaches, and attacks.
+Key Principles:
+
+Authentication: Verify identity (OAuth2, JWT).
+Authorization: Role-based access control.
+Data Protection: HTTPS/TLS encryption.
+Rate Limiting: Prevent DoS attacks.
+Input Validation: Avoid injection attacks.
+
+
+Implementation:
+Use Spring Security for authentication & authorization.
+Implement OAuth2/JWT for token-based security.
+Enable HTTPS for secure communication.
+Add API Gateway for centralized security and throttling.
+Use CORS policies for cross-origin requests.
+
+✅ Explanation
+API security ensures only authorized users can access resources. In my projects, I implemented OAuth2 with JWT tokens for authentication and authorization, enforced HTTPS, and used Spring Security for role-based access. We also added rate limiting at the API Gateway level and validated all inputs to prevent injection attacks.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+3. Java 17 Features Implemented
+✅ Bullet Points
+
+Sealed Classes → Restricted inheritance for better control.
+Pattern Matching for instanceof → Cleaner type checks.
+Switch Expressions → More concise and readable.
+Text Blocks → Simplified multi-line strings.
+Enhanced Pseudo-Random Number Generators.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+4. What all Spring modules have you worked on?
+✅ Bullet Points
+
+Spring Core → Dependency Injection.
+Spring MVC → REST API development.
+Spring Boot → Auto-configuration and starters.
+Spring Data JPA → Database operations.
+Spring Security → Authentication & Authorization.
+Spring Cloud → Service discovery, config server, circuit breaker.
+Spring Batch → For batch processing.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+7. Internal workings of ConcurrentHashMap
+✅ Bullet Points
+
+Thread-safe alternative to HashMap.
+Uses segment-based locking (Java 7) or CAS + synchronized blocks (Java 8).
+No global lock → better concurrency.
+Buckets use Node + TreeBin for collisions.
+Read operations are mostly lock-free; writes use fine-grained locking.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ Predicate<Integer> isEven = num -> num % 2 == 0;
+        System.out.println(isEven.test(10)); // true
+        System.out.println(isEven.test(7));  // false
+
+
+Consumer<String> printUpperCase = str -> System.out.println(str.toUpperCase());
+        printUpperCase.accept("hello"); // HELLO
+
+
+Supplier<Double> randomNumber = () -> Math.random();
+        System.out.println(randomNumber.get()); // e.g., 0.4567
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+✅ Difference Between Extending Thread Class and Implementing Runnable Interface
+
+1. Extending Thread Class
+
+You create a class that extends Thread and override the run() method.
+
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread running...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();
+    }
+}
+
+2. Implementing Runnable Interface
+
+You create a class that implements Runnable and pass it to a Thread object.
+
+class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Runnable running...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread t = new Thread(new MyRunnable());
+        t.start();
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+2. CopyOnWriteArrayList & CopyOnWriteArraySet
+
+Reason:
+
+These collections create a new copy of the underlying array on every modification.
+Allowing null could cause:
+
+NullPointerException during iteration or comparison.
+Issues in sorting or searching because null cannot be compared naturally.
+
+They are designed for safe iteration in concurrent environments, and null introduces complexity.
+
+
+Conclusion: Disallowing null ensures predictable behavior and avoids exceptions during concurrent reads/writes.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+✅ 1. @SpringBootTest
+Purpose: Used for integration testing in Spring Boot.
+
+Internally:
+Uses SpringApplication to start the application context.
+Can load properties from application.yml or custom test configs.
+
+ 2. @EnableScheduling
+Purpose: Enables Spring’s scheduled tasks.
+
+3. @EnableAsync
+Purpose: Enables asynchronous method execution.
+
+4. @ModelAttribute
+Purpose: Used in Spring MVC to bind request parameters to model objects.
+
+@SpringBootTest loads the full Spring context for integration tests. @EnableScheduling activates scheduled tasks, while @EnableAsync enables asynchronous execution using @Async. @ModelAttribute binds request parameters to model objects in Spring MVC. Internally, these annotations register bean post-processors and proxies to enable their respective features.”
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+What are the ways to call jwt security ?
+
+✅ 1. At API Gateway Level
+Purpose: Validate JWT before routing requests to microservices.
+
+“JWT can be validated at the API Gateway level using a custom filter or at each microservice using Spring Security. For enterprise setups, we often integrate OAuth2 Resource Server or Keycloak for centralized authentication. The goal is to ensure every request is authenticated and authorized before accessing resources.”
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+✅ What is Auto-Configuration?
+Spring Boot’s auto-configuration automatically configures beans based on:
+
+Classpath contents (e.g., if spring-web is present → configure DispatcherServlet).
+Existing beans in the context.
+Properties defined in application.properties or application.yml.
+Internal Working
+
+How to Explain to Interviewer
+
+“Spring Boot auto-configuration works by scanning the classpath and loading configuration classes listed in spring.factories. These classes use conditional annotations to decide whether to create beans. For example, if spring.datasource.url is present, DataSourceAutoConfiguration creates a DataSource bean. This mechanism is triggered by @EnableAutoConfiguration inside @SpringBootApplication.”
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Here’s an **overview of a sample Spring Boot microservices setup** with **API Gateway**, **Eureka Server**, and two services (Service A and Service B). I’ll give you the **main code snippets** and then explain the architecture.
+
+***
+
+## ✅ **Architecture**
+
+*   **Eureka Server** → Service registry for discovery.
+*   **API Gateway** → Routes requests to Service A and Service B.
+*   **Service A & Service B** → Simple REST services registered with Eureka.
+
+***
+
+### **1. Eureka Server**
+
+**pom.xml**:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+```
+
+**Main Class**:
+
+```java
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+```
+
+**application.yml**:
+
+```yaml
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+```
+
+***
+
+### **2. API Gateway**
+
+**pom.xml**:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+**Main Class**:
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public, args);
+    }
+}
+```
+
+**application.yml**:
+
+``````yaml
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: serviceA
+          uri: lb://SERVICE-A
+          predicates:
+            - Path=/serviceA/**
+        - id: serviceB
+          uri: lb://SERVICE-B
+          predicates:
+            - Path=/serviceB/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+`````xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+``````
+
+**Main Class**:
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ServiceAApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceAApplication.class, args);
+    }
+}
+```
+
+**Controller**:
+
+```java
+@RestController
+@RequestMapping("/serviceA")
+public class ServiceAController {
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from Service A";
+    }
+}
+```
+
+**application.yml**:
+
+```yaml
+server:
+  port: 8081
+spring:
+  application:
+    name: SERVICE-A
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+***
+
+### **4. Service B**
+
+Similar to Service A:
+
+```java
+@RestController
+@RequestMapping("/serviceB")
+public class ServiceBController {
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from Service B";
+    }
+}
+```
+
+**application.yml**:
+
+```yaml
+server:
+  port: 8082
+spring:
+  application:
+    name: SERVICE-B
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+***
+
+## ✅ **How It Works**
+
+*   **Eureka Server** runs on `8761` → acts as service registry.
+*   **Service A** and **Service B** register themselves with Eureka.
+*   **API Gateway** uses **Spring Cloud Gateway** and Eureka for **load-balanced routing**.
+*   When you hit:
+    *   `http://localhost:8080/serviceA/hello` → Gateway routes to Service A.
+    *   `http://localhost:8080/serviceB/hello` → Gateway routes to Service B.
+
+***
+
+### ✅ **Key Points to Explain**
+
+*   **Service Discovery**: Eureka allows dynamic IP resolution.
+*   **Gateway Routing**: API Gateway routes based on path predicates.
+*   **Load Balancing**: `lb://SERVICE-A` uses Ribbon internally for client-side load balancing.
+*   **Scalability**: You can run multiple instances of Service A/B, Gateway will distribute traffic.
+
+***
+
+👉 Do you want me to **also include security (JWT) at API Gateway level** or **add Resilience4j for circuit breaker in this setup**? Or should I **prepare a diagram showing the full architecture flow**?
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+how you will manage secrets, like  Hashi crop vault, etc.
+ Implementation in Project
+
+Integrated Spring Boot with HashiCorp Vault using spring-cloud-starter-vault-config.
+Configured Vault to store DB credentials and API keys.
+Application retrieves secrets at runtime using Vault’s KV engine.
+Enabled token-based authentication for microservices.
+Added audit logging for secret access.
+
+“We used HashiCorp Vault for centralized secret management. Secrets were never hardcoded; instead, they were fetched securely at runtime using Spring Cloud Vault integration. Vault provided dynamic credentials, access control policies, and automated rotation, which improved security and compliance.”
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+(issue → explanation → solution → example) 
+
+Here are the **Top 5 Challenges** for your GenAI backend platform and their **solutions**:
+
+***
+
+### **1. Challenge: Latency in AI Response**
+
+*   **Why it happens:** Generative AI models (like GPT or Claude) can take time to process prompts, especially for complex or multi-turn conversations. Network calls to external APIs add additional delay.
+*   **Solution:**
+    *   **Caching:** Use Redis to cache frequent prompt responses.
+    *   **Async Processing:** Implement asynchronous calls using `CompletableFuture` or Spring’s `@Async` to avoid blocking threads.
+    *   **Streaming Responses:** Enable partial response streaming from LLM APIs for faster perceived response times.
+    *   **Load Balancing:** Distribute requests across multiple AI endpoints or use a queue-based architecture (e.g., RabbitMQ/Kafka).
+
+***
+
+Here’s the **improved format** for your example challenge using **issue → explanation → solution → example**:
+
+***
+
+### ✅ **Challenge 1: Latency in AI Response**
+
+***
+
+#### **Issue: Network Latency**
+
+*   **Explanation:**  
+    When your backend calls external AI APIs (like OpenAI or Claude), the request travels over the network. If the API is slow or far away, the thread waits until the response comes back. In traditional Spring MVC (blocking), this ties up server threads, reducing scalability and increasing response time.
+
+***
+
+#### **Solution: Use Asynchronous Non-Blocking Calls**
+
+*   Instead of blocking threads, use **Spring WebFlux** or `CompletableFuture` so the thread is released while waiting for the API response.
+*   This improves scalability because the server can handle thousands of concurrent requests without exhausting threads.
+
+***
+
+#### **Example (Spring WebFlux with Reactive WebClient):**
+
+```java
+@Service
+public class AIService {
+
+    private final WebClient webClient;
+
+    public AIService(WebClient.Builder builder) {
+        this.webClient = builder.baseUrl("https://api.openai.com/v1").build();
+    }
+
+    public Mono<String> getAIResponse(String prompt) {
+        return webClient.post()
+                .uri("/chat/completions")
+                .header("Authorization", "Bearer YOUR_API_KEY")
+                .bodyValue("{\"prompt\":\"" + prompt + "\"}")
+                .retrieve()
+                .bodyToMono(String.class);
+    }
+}
+
+@RestController
+public class AIController {
+
+    private final AIService aiService;
+
+    public AIController(AIService aiService) {
+        this.aiService = aiService;
+    }
+
+    @PostMapping("/generate")
+    public Mono<String> generate(@RequestBody String prompt) {
+        return aiService.getAIResponse(prompt);
+    }
+}
+```
+
+✅ **Why this works:**
+
+*   `Mono<String>` is reactive → the thread is released while waiting for the API response.
+*   Handles high concurrency without blocking.
+
+***
+
+Here’s the **expanded version** of **Challenge 1: Latency in AI Response**, applying **issue → explanation → solution → example** for **each solution** you listed:
+
+***
+
+### ✅ **Challenge 1: Latency in AI Response**
+
+***
+
+#### **Solution 1: Caching**
+
+*   **Issue:**  
+    Repeated prompts cause multiple calls to the AI API, even when the response is the same.
+*   **Explanation:**  
+    This wastes time and resources because the system waits for the AI to generate the same answer again.
+*   **Solution:**  
+    Use **Redis** to store frequent responses and return them instantly for repeated prompts.
+*   **Example:**
+
+```java
+String cachedResponse = redisTemplate.opsForValue().get(prompt);
+if (cachedResponse != null) {
+    return cachedResponse; // Return cached result
+}
+// Call AI API if not cached
+String aiResponse = aiClient.call(prompt);
+redisTemplate.opsForValue().set(prompt, aiResponse);
+return aiResponse;
+```
+
+***
+
+#### **Solution 2: Async Processing**
+
+*   **Issue:**  
+    Blocking calls to external AI APIs tie up server threads, reducing scalability.
+*   **Explanation:**  
+    Spring MVC uses a thread-per-request model. If the AI API takes 3–5 seconds, the thread is blocked during that time.
+*   **Solution:**  
+    Use **Spring WebFlux** or `CompletableFuture` for non-blocking calls.
+*   **Example (WebFlux):**
+
+```java
+public Mono<String> getAIResponse(String prompt) {
+    return webClient.post()
+        .uri("/chat/completions")
+        .header("Authorization", "Bearer API_KEY")
+        .bodyValue("{\"prompt\":\"" + prompt + "\"}")
+        .retrieve()
+        .bodyToMono(String.class);
+}
+```
+
+✅ This frees threads while waiting for the API response.
+
+***
+
+#### **Solution 3: Streaming Responses**
+
+*   **Issue:**  
+    Users wait for the full response before seeing anything.
+*   **Explanation:**  
+    Large AI outputs take time to generate, making the user experience slow.
+*   **Solution:**  
+    Enable **Server-Sent Events (SSE)** or WebFlux streaming so users see partial output as it’s generated.
+*   **Example:**
+
+```java
+@GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+public Flux<String> streamResponse(@RequestParam String prompt) {
+    return aiService.streamAIResponse(prompt);
+}
+```
+
+***
+
+#### **Solution 4: Load Balancing**
+
+*   **Issue:**  
+    High traffic overloads a single AI endpoint.
+*   **Explanation:**  
+    If all requests hit one API instance, latency increases and failures occur.
+*   **Solution:**  
+    Distribute requests across multiple AI endpoints or use a queue-based architecture (RabbitMQ/Kafka).
+*   **Example (Spring Cloud LoadBalancer):**
+
+```java
+@Bean
+public WebClient.Builder loadBalancedWebClientBuilder() {
+    return WebClient.builder();
+}
+```
+
+Configure multiple AI endpoints in your service registry and let Spring Cloud handle load balancing.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+### **2. Challenge: Context Management for Multi-turn Conversations**
+
+*   **Why it happens:** Maintaining conversation state across multiple requests is complex, especially when chaining prompts.
+*   **Solution:**
+    *   **LangChain-like Orchestration:** Implement a context manager in Java that stores conversation history in PostgreSQL or Redis.
+    *   **Session Tokens:** Use session IDs to link user interactions.
+    *   **Truncation Strategy:** Apply token limits by summarizing older context dynamically.
+
+***
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+### **3. Challenge: Cost Optimization for AI API Usage**
+
+*   **Why it happens:** Frequent calls to GPT/Claude APIs can become expensive.
+*   **Solution:**
+    *   **Prompt Optimization:** Use dynamic templates to reduce token usage.
+    *   **Response Reuse:** Cache similar prompts and responses.
+    *   **Hybrid Models:** Use smaller open-source models for simple tasks and premium models for complex tasks.
+    *   **Analytics:** Track usage patterns in PostgreSQL and implement throttling or quotas.
+
+***
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+### **4. Challenge: Security & Compliance**
+
+*   **Why it happens:** Exposing REST endpoints for AI interaction can lead to data leaks or prompt injection attacks.
+*   **Solution:**
+    *   **Authentication & Authorization:** Use OAuth2/JWT for secure API access.
+    *   **Input Sanitization:** Validate and sanitize prompts to prevent injection attacks.
+    *   **Data Encryption:** Encrypt sensitive data at rest and in transit.
+    *   **Audit Logging:** Maintain logs for compliance and debugging.
+
+***
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+### **5. Challenge: Scalability & High Availability**
+
+*   **Why it happens:** High traffic from multiple domains (support, marketing, etc.) can overload the system.
+*   **Solution:**
+    *   **Microservices Architecture:** Scale individual services independently.
+    *   **Horizontal Scaling:** Deploy on Kubernetes or Docker Swarm for auto-scaling.
+    *   **Circuit Breaker Pattern:** Use Resilience4j to handle failures gracefully.
+    *   **Monitoring:** Implement Prometheus + Grafana for real-time metrics.
+
+***
+Here’s the **detailed breakdown** for **Challenge 5: Scalability & High Availability**, applying the format **issue → explanation → solution → example** for each solution:
+
+***
+
+### ✅ **Challenge 5: Scalability & High Availability**
+
+***
+
+#### **Solution 1: Microservices Architecture**
+
+*   **Issue:**  
+    A monolithic application handles all features in one block. When traffic spikes, scaling the entire app is inefficient and costly.
+*   **Explanation:**  
+    If customer support traffic increases, you shouldn’t need to scale marketing or analytics services. Monolith forces full scaling.
+*   **Solution:**  
+    Break the system into **microservices** (Prompt Service, AI Integration Service, Cache Service, Analytics Service). Each can scale independently.
+*   **Example (Spring Boot Microservice Setup):**
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class PromptServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(PromptServiceApplication.class, args);
+    }
+}
+```
+
+Use **Spring Cloud Netflix Eureka** or **Consul** for service discovery.
+
+***
+
+#### **Solution 2: Horizontal Scaling**
+
+*   **Issue:**  
+    Single instance cannot handle thousands of concurrent requests.
+*   **Explanation:**  
+    Vertical scaling (bigger server) has limits. Horizontal scaling (multiple instances) is better.
+*   **Solution:**  
+    Deploy microservices on **Kubernetes** or **Docker Swarm** with auto-scaling.
+*   **Example (Kubernetes Deployment YAML):**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ai-service
+  template:
+    metadata:
+      labels:
+        app: ai-service
+    spec:
+      containers:
+      - name: ai-service
+        image: ai-service:latest
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+```
+
+Add **Horizontal Pod Autoscaler (HPA)** to scale based on CPU/memory.
+
+***
+
+#### **Solution 3: Circuit Breaker Pattern**
+
+*   **Issue:**  
+    If AI API fails or slows down, all requests pile up → cascading failures.
+*   **Explanation:**  
+    Without protection, one failing service can crash the entire system.
+*   **Solution:**  
+    Use **Resilience4j Circuit Breaker** to stop calls when failure threshold is reached.
+*   **Example:**
+
+```java
+@CircuitBreaker(name = "aiService", fallbackMethod = "fallbackResponse")
+public String getAIResponse(String prompt) {
+    return aiClient.call(prompt);
+}
+
+public String fallbackResponse(String prompt, Throwable t) {
+    return "AI service is currently unavailable. Please try later.";
+}
+```
+
+***
+
+#### **Solution 4: Monitoring**
+
+*   **Issue:**  
+    Without monitoring, you can’t detect overload or failures early.
+*   **Explanation:**  
+    You need real-time metrics for CPU, memory, request latency, and error rates.
+*   **Solution:**  
+    Use **Prometheus** for metrics and **Grafana** for dashboards.
+*   **Example (Prometheus Config in Spring Boot):**
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+```
+
+Access metrics at `/actuator/prometheus` and visualize in Grafana.
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                  
