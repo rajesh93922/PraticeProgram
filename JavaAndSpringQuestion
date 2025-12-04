@@ -1,25 +1,16 @@
                                                                                       Spring Boot with   Splunk  Tutorial 
 Flare Dress , A line dress , girls printed dress ,Girls Round Neck Dress
 
-
 Splunk allows you to monitor , search and analysis  data and logs through a web interface
-
 Realtime Example :   Lets example we have three micro services  and the services name order , inventory , payment service . If any one  of service was failure the firstly we are checking the logs right but the problem is all services combined one folder , so its very difficult to find out the issue in logs … to resolve this Splunk comes into application . We will create each service separate  slunk index and we will easily find out each service logs . To connect splunk our application  we need to add log4j .xml file Url ,Host ,token , index ,source
 
-
 Dynatrace : add env variables in spring boot applications	, once added in spring boot we could see all service in Dynatrace. We could see all services response time in dynatrace .for all services seed code executions , waiting , network and also any db config activity, its monitoring each service response and cpu analysis the query 
-
 Dynatrace is a software platform and its completely monitoring applications , squirts , auto machine will provide, using dynatrace to improve the application performance  
 
-
-
-APIGateWay
- 
+APIGateWay 
 First we create a enruka server project and required fields to add in pom.xml like eureka server dependency , @enableEnrukaserver , some properties in application properties file
 Second we create multiple service and config enruka server , we add both services  required  enruka discory client dependency , @enableEnrukaclient annotations , in yml file we need add enruka server config ,  in that services
-
 Now , we create APIGateWay service add dependency enrukadiscoryclient ,gateway .pom xml file. Once done we configure the above both services in apigate applications
-
 
 
 JWT Concept
@@ -56,17 +47,14 @@ byte[] keybytes = Decoders. BASE64. decode (secretkey)l;
 return Keys.hmacShaKeyFor(secretKex);
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                  
 
-
-Feature	stream()	parallelStream()
-Execution	Single thread	Multiple threads (ForkJoinPool)
-Order	Preserved	Not guaranteed
-Performance	Good for small tasks	Good for large CPU-heavy tasks
-Safety	Safe if stateless	Must avoid shared mutable state
-Splitting	No splitting	Splits data source into chunks
-
+Feature	    stream()	                    parallelStream()
+Execution	Single thread	                Multiple threads (ForkJoinPool)
+Order	    Preserved	                    Not guaranteed
+Performance	Good for small tasks	        Good for large CPU-heavy tasks
+Safety	    Safe if stateless	            Must avoid shared mutable state
+Splitting	No splitting	                Splits data source into chunks
 
 2. Equals & HashCode Contract and variations with HashMap
 What is the Contract??
@@ -103,9 +91,6 @@ public int hashCode() {
 I/ return roll num
 As per the contract...... s1.hashCode() == s2.hashCode() <= Must
 }
-
-
-
 
 Explain Collection vs Stream
 1) Nature
@@ -210,8 +195,6 @@ Use Case	Convert strings → lengths	Combine lists of phone numbers
 Checked vs Unchecked Exception
 * Checked: Must handle (IOException, SQLException, ClassNotFoundException).
 * Unchecked: No handling required (NullPointerException, ArithmeticException).
-
-
 
 ////////////////////////////////////////////////////////////////////                                /////////////////////////////////////////////////////
 
@@ -682,9 +665,7 @@ public class PersonalLoanStrategy implements InterestStrategy {
 *   Show **code snippet** if asked.
 
 
-
 ////////////////////////////////////                    ///////////////////////////////////////////////////
-
 
 Is it possible to execute a program without a catch block? If so, how would you use try and finally together?
 Yes, we can use try with finally without a catch block to ensure cleanup occurs even if we allow the exception to propagate up.
@@ -692,10 +673,8 @@ Yes, we can use try with finally without a catch block to ensure cleanup occurs 
 How does exception handling with try-catch-finally affect the performance of a Java application?
 Using try-catch-finally can affect performance slightly due to overhead of managing exceptions but is generally minimal unless exceptions are thrown frequently.
 
-
 Can you tell me a condition where the finally block will not be executed?
 The finally block will not execute if the JVM exits via System.exit() during try or catch execution.
-
 
 Can we write multiple finally blocks in Java?
 No, each try can only have one finally block. Multiple finally blocks are not allowed within a single try-catch-finally structure.
@@ -706,13 +685,11 @@ Use a single catch block for multiple exceptions by separating them with a pipe 
 Is java a 100% object-oriented programming language?
 No, Java is not considered 100% object-oriented because it uses primitive types (like int, char, etc.) that are not objects. In a fully object-oriented language, everything is treated as an object.
 
-
 Explain public static void main(string args[])?
 In Java, public static void main(Stringl] args) is the entry point of any standalone Java application.
 public makes this method accessible from anywhere, static means I don't need to create an object to call this method, void means it doesn't return any value, and main is the name of this method.
 The String] args part is an array that holds any command-line arguments passed to the program.
 So, when I run a Java program, this is the first method that gets called
-
 
 Why we use wrapper class in collections
 Because ArrayList, HashMap, and others in the Java Collections Framework, can only hold objects and not primitive types. Wrapper classes allow primitive values to be treated as objects, enabling them to be stored and managed within these collections.
