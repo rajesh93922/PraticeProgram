@@ -191,3 +191,8 @@ List<Employee> employeeList = Arrays.asList(
                 .collect(Collectors.toMap(Employee::getId, emp -> emp));
         //filteredEmployees.forEach((id , emp) -> System.out.println(id + " " + emp));
 
+list.stream()
+   .sorted(Comparator.comparing(Employee::getName).reversed()
+   .thenComparing(Employee::getSalary))
+   .forEach(System.out::println);
+
