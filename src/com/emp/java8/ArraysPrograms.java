@@ -14,7 +14,6 @@ public class ArraysPrograms {
         int deleteIndex = 2;
         arrayDeleteOperOnIndex(deleteArray , deleteIndex);
 
-
         //Input: {20, 30, 40}, insert 10
         //Output: {10, 20, 30, 40}
         int[] insertRandom = {20, 30, 40};
