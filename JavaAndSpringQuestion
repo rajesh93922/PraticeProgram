@@ -1,0 +1,2529 @@
+                                                                                      Spring Boot with   Splunk  Tutorial 
+Flare Dress , A line dress , girls printed dress ,Girls Round Neck Dress
+
+Splunk allows you to monitor , search and analysis  data and logs through a web interface
+Realtime Example :   Lets example we have three micro services  and the services name order , inventory , payment service . If any one  of service was failure the firstly we are checking the logs right but the problem is all services combined one folder , so its very difficult to find out the issue in logs … to resolve this Splunk comes into application . We will create each service separate  slunk index and we will easily find out each service logs . To connect splunk our application  we need to add log4j .xml file Url ,Host ,token , index ,source
+
+Dynatrace : add env variables in spring boot applications	, once added in spring boot we could see all service in Dynatrace. We could see all services response time in dynatrace .for all services seed code executions , waiting , network and also any db config activity, its monitoring each service response and cpu analysis the query 
+Dynatrace is a software platform and its completely monitoring applications , squirts , auto machine will provide, using dynatrace to improve the application performance  
+
+APIGateWay 
+First we create a enruka server project and required fields to add in pom.xml like eureka server dependency , @enableEnrukaserver , some properties in application properties file
+Second we create multiple service and config enruka server , we add both services  required  enruka discory client dependency , @enableEnrukaclient annotations , in yml file we need add enruka server config ,  in that services
+Now , we create APIGateWay service add dependency enrukadiscoryclient ,gateway .pom xml file. Once done we configure the above both services in apigate applications
+
+
+JWT Concept
+
+private String
+secretkey
+= "''•
+public JWService() {
+try {
+KeyGenerator keyGen * KeyGenerator. getInstance ( algorithm: "HmacSHA256");
+SecretKey sk = keyGen. generateKeyC);
+secretKey = Base64. getEncoder(). encodeToString(sk.getEncoded());
+}
+catch (NoSuchAlgorithmException throw new RuntimeException(e);
+}
+}
+
+
+public String generateToken(String username) {
+m
+Map<String, Object> claims = new HashMap<>();
+return Jwts.builder() JwtBuilder
+*   claims () BuilderClaims
+*  add(claims)
+*   subject(username)
+*  issuedAt(new Date(System.currentTimeMillis()))
+*  expiration(new Date(System.currentTimeMillis() + 60 * 60 *
+*   and () JwtBuilder
+*   signWith(g@tKey())
+*   compactO;
+
+private Key getKeyO) {
+byte[] keybytes = Decoders. BASE64. decode (secretkey)l;
+return Keys.hmacShaKeyFor(secretKex);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                  
+
+Feature	    stream()	                    parallelStream()
+Execution	Single thread	                Multiple threads (ForkJoinPool)
+Order	    Preserved	                    Not guaranteed
+Performance	Good for small tasks	        Good for large CPU-heavy tasks
+Safety	    Safe if stateless	            Must avoid shared mutable state
+Splitting	No splitting	                Splits data source into chunks
+
+2. Equals & HashCode Contract and variations with HashMap
+What is the Contract??
+What is contract between equals and hashcode method?
+If you are overriding equals() method..
+Then you must override hashCode method properly..
+meaning, if two objects are equal then hashCode method must return same value..
+Student {
+private int rollNum; private String name;
+@Override
+public boolean equalsStudent s2) {
+•.....
+}
+@Override
+public int hashCode() {
+......
+}
+}
+
+2. Equals & HashCode Contract and variations with HashMap
+Student {
+Let's see that practically ??
+private int rollNum; private String name;
+Student s1 = new Student 1, "Sam");
+equal
+Student s2 = new Student 1, "Sam" );
+@Override
+public boolean equals(Student s2) {
+Il if same roll num return true
+Il otherwise return false
+As per the equals method..... s1.equals s2) => true
+@Override
+public int hashCode() {
+I/ return roll num
+As per the contract...... s1.hashCode() == s2.hashCode() <= Must
+}
+
+Explain Collection vs Stream
+1) Nature
+* Collection: A data structure that stores elements in memory (e.g., List, Set, Map). Represents data at rest.
+* Stream: A data processing pipeline that operates on elements from a source (like a collection). Represents data in motion.
+2) Storage
+* Collection: Physically stores elements; you can add, remove, or update data.
+* Stream: Does not store elements; only processes them.
+3) Mutability
+* Collection: Mutable — elements can be added, removed, or updated.
+* Stream: Immutable — operations produce new streams, source remains unchanged.
+4) Operations
+* Collection: CRUD operations (Create, Read, Update, Delete).
+* Stream: Functional operations — map, filter, reduce, collect.
+
+Functional Interfaces (Real-life Usage)
+Predicate
+Predicate<User> isActive = user -> user.isActive();
+
+List<User> activeUsers = users.stream()
+    .filter(isActive)
+    .collect(Collectors.toList());
+Consumer
+Consumer<User> sendNotification = user -> notificationService.send(user);
+
+users.forEach(sendNotification);
+Function
+Function<User, UserDTO> toDTO = user -> new UserDTO(user.getId(), user.getName());
+
+List<UserDTO> dtoList = users.stream()
+    .map(toDTO)
+    .collect(Collectors.toList());
+
+CopyOnWriteArrayList — What & When to Use
+Definition
+A thread-safe list using a copy-on-write strategy:
+* Every write (add/remove) → creates a new copy of the internal array.
+* Reads are fast, lock-free, and use a snapshot.
+* Iterators never throw ConcurrentModificationException.
+How It Works
+* Reads: Happen on a volatile snapshot → super fast.
+* Writes: Lock, copy array, modify, replace reference.
+* Iterators: Snapshot-based, fail-safe.
+Best Use Case
+* Read-heavy, rarely updated lists (e.g., listeners, app config lists).
+* Avoid for large lists or frequent writes.
+
+How Resize Happens in HashMap
+HashMap resizes by doubling capacity when size exceeds capacity * loadFactor.
+* Entries are redistributed.
+* Since Java 8, rehashing uses a bitwise method (low/high bucket split).
+* Maintains O(1) amortized performance.
+
+Internal Working of ConcurrentHashMap
+Key Concepts
+* Thread-safe without locking the entire map.
+* Uses CAS, bucket-level locking, and parallel resizing.
+* Reads: Lock-free
+* Writes: Lock only the bucket
+* Much more scalable than Hashtable or synchronizedMap.
+
+Java 17 Features (Implemented)
+* Sealed Classes → Controlled inheritance
+* Records → Immutable DTOs
+* Pattern Matching for instanceof
+* Switch Expressions
+* Text Blocks → Clean JSON/SQL
+
+ClassNotFoundException vs NoClassDefFoundError
+ClassNotFoundException
+* Checked exception
+* Occurs when: Class is dynamically loaded (Class.forName, ClassLoader.loadClass) but not found at runtime.
+Real Example: JDBC driver missing from classpath → Class.forName("com.mysql.Driver") fails.
+NoClassDefFoundError
+* Unchecked error
+* Occurs when: Class was present at compile time but missing/corrupted at runtime.
+Real Example: Deployed JAR missing a dependency → application crashes immediately.
+
+Why synchronized Doesn’t Scale
+* Works only inside a single JVM.
+* Causes blocking & lock contention.
+* Not suitable for distributed systems or high concurrency.
+* Use distributed locks or concurrent utilities instead.
+
+How to Improve JVM Performance
+* Tune GC
+* Optimize heap regions
+* Reduce object creation
+* Use JIT optimizations
+* Minimize lock contention
+* Use profilers (JFR, VisualVM, YourKit)
+* Reduce allocations and synchronized blocks
+
+What Does Immutable Mean?
+An object whose state cannot change after creation. Example: String — stored in String Pool, safe for caching, thread-safe.
+
+map() vs flatMap()
+Feature	map()	flatMap()
+Transformation	One-to-one	One-to-many
+Output	Same size as input	Flattened stream
+Use Case	Convert strings → lengths	Combine lists of phone numbers
+Checked vs Unchecked Exception
+* Checked: Must handle (IOException, SQLException, ClassNotFoundException).
+* Unchecked: No handling required (NullPointerException, ArithmeticException).
+
+////////////////////////////////////////////////////////////////////                                /////////////////////////////////////////////////////
+
+Perfect — these are classic mid-to-senior Java interview questions that test both conceptual clarity and real-world application. Below are concise, structured, and confident explanations suitable for a 6+ year experienced Java developer.
+
+🔹 Core Java & OOPs Concepts
+
+1. Why do we have the static keyword in Java?
+* Purpose: Belongs to the class, not an instance.
+* When used: Common utilities or constants shared across all objects.
+* Example: class MathUtil {
+*     static double PI = 3.14;
+*     static int add(int a, int b) { return a + b; }
+* }
+*  You can call MathUtil.add(3,4) without creating an object.
+Benefits:
+* Saves memory — single copy per class.
+* Useful for utility/helper methods.
+* Accessed directly via class name.
+
+2. Why create static methods?
+* They perform operations independent of instance variables.
+* Often used for factory methods, utility functions, or logging.
+* Example: Collections.sort(list) or Logger.getLogger().
+Benefits:
+* No need for object creation.
+* Slightly faster due to no object context.
+* Thread-safe if method logic is stateless.
+
+3. Can we have try with multiple catch blocks?
+✅ Yes — Java allows multiple catch blocks to handle different exceptions separately.
+try {
+    int a = 10 / 0;
+    String s = null;
+    s.length();
+} catch (ArithmeticException e) {
+    System.out.println("Divide by zero");
+} catch (NullPointerException e) {
+    System.out.println("Null value");
+} catch (Exception e) {
+    System.out.println("General Exception");
+}
+How exception handling works:
+* Code in try executes.
+* When an exception occurs → control jumps to the matching catch.
+* Optional finally block always executes (cleanup).
+
+4. How does HashMap identify if an Object is unique?
+* Uses hashCode() and equals() methods of the key:
+    1. hashCode() → Determines bucket index.
+    2. If same hash bucket exists → checks with equals().
+* If both are equal → replace value (not unique), else add new entry.
+Example:
+@Override
+public int hashCode() { return id; }
+
+@Override
+public boolean equals(Object obj) {
+   return this.id == ((Employee)obj).id;
+}
+
+5. How to create a synchronized ArrayList in Java
+✅ Use Collections.synchronizedList()
+List<String> list = Collections.synchronizedList(new ArrayList<>());
+Alternate: Use CopyOnWriteArrayList for concurrent read-heavy environments.
+
+6. Why interfaces exist & types of interfaces
+* Purpose: Define contracts (methods) that classes must implement.
+* Enable abstraction, multiple inheritance, and loose coupling.
+Types:
+1. Normal interface – multiple abstract methods.
+2. Functional interface – single abstract method (Runnable, Comparator).
+3. Marker interface – no methods (e.g., Serializable, Cloneable).
+
+7. Difference: Runnable vs Callable
+Feature	Runnable	Callable
+Return Type	void	Returns a value
+Exception Handling	Cannot throw checked exceptions	Can throw exceptions
+Package	java.lang	java.util.concurrent
+Example:
+Callable<Integer> task = () -> 5 + 5;
+
+8. What is the use of yield() method?
+* Suggests to Thread Scheduler that the current thread is willing to pause.
+* Not a guarantee — scheduler may ignore it.
+Thread.yield();
+Use: Testing or simulation scenarios, not production-critical.
+
+9. How to read a file from a directory
+Path path = Paths.get("C:/data/file.txt");
+Files.lines(path).forEach(System.out::println);
+Or using BufferedReader:
+BufferedReader br = new BufferedReader(new FileReader("C:/data/file.txt"));
+
+10. What is ConcurrentHashMap & how does it work?
+* Thread-safe, high-performance alternative to HashMap.
+* Divides data into segments (buckets).
+* Uses CAS (Compare-And-Swap) and synchronized blocks on specific bins.
+* No global lock → multiple threads can operate concurrently.
+
+11. Internal Working of HashMap
+* Uses array of buckets (Node<K,V>[]).
+* Each bucket stores key-value pairs.
+* hashCode() → bucket index.
+* Collisions handled by linked list → balanced tree after Java 8.
+* Resizes (doubles capacity) when load factor > 0.75.
+
+12. Creating Immutable Object / Class
+* Declare class final.
+* Make all fields private final.
+* No setters.
+* Initialize fields via constructor.
+* Don’t expose mutable objects directly.
+final class Employee {
+  private final String name;
+  Employee(String name) { this.name = name; }
+  public String getName() { return name; }
+}
+
+13. How to create a final class
+public final class UtilityClass {
+   // cannot be subclassed
+}
+
+14. Object class methods (internal overview)
+Method	Purpose
+toString()	Returns string representation
+equals()	Logical comparison
+hashCode()	Used in hashing (HashMap)
+clone()	Creates object copy
+finalize()	Cleanup before GC
+getClass()	Runtime class info
+15. OOPs vs Functional Programming
+Feature	OOPs	Functional
+Focus	Objects, state	Functions, immutability
+Data	Mutable	Immutable
+Example	Java, C++	Java (via Lambdas), Scala
+Modern Java combines both (OOP + FP via Streams/Lambdas).
+
+16. JVM Overview
+* JVM (Java Virtual Machine): Executes Java bytecode.
+* Converts .class files to machine code (JIT Compilation).
+* Components:
+    * Class Loader
+    * Memory Areas (Heap, Stack, Method)
+    * Execution Engine
+    * Garbage Collector
+
+17. Inheritance, Association, Composition
+Concept	Description	Example
+Inheritance	IS-A relationship	class SavingsAccount extends Account
+Association	Uses relationship	Customer has BankAccount
+Composition	Strong ownership	Car has Engine (Engine can’t exist without Car)
+18. Aggregation
+* Weaker form of composition.
+* Child can exist independently of parent. Example: Department has Employees → employees can exist without department.
+
+19. Abstract Class
+* Contains abstract + concrete methods.
+* Cannot be instantiated.
+* Used for common base behavior.
+abstract class Bank {
+  abstract void interestRate();
+  void welcome() { System.out.println("Welcome to Bank!"); }
+}
+Call methods via subclass:
+Bank bank = new HDFCBank();
+bank.interestRate();
+
+20. Difference: Abstract Class vs Interface
+Feature	Abstract Class	Interface
+Methods	Can have abstract + concrete	Only abstract (default/static allowed)
+Variables	Instance + static	Public static final only
+Inheritance	Single	Multiple
+21. Why String is Immutable
+* Stored in String Pool → memory-efficient.
+* Thread-safe, no data corruption.
+* Helps in security (e.g., credentials in String).
+
+22. Difference: String vs StringBuilder vs StringBuffer
+Type	Mutable	Thread-Safe	Use Case
+String	No	Yes	Constant values
+StringBuilder	Yes	No	Single-thread operations
+StringBuffer	Yes	Yes	Multi-threaded envs
+23. Difference: final, finally, finalize
+Keyword	Purpose
+final	Used with variable/class/method (constant/immutable)
+finally	Block executed after try-catch
+finalize()	Called by GC before object destruction
+24. Java Collection Framework
+* Set of interfaces (List, Set, Map) and implementations (ArrayList, HashSet, HashMap).
+* Unified architecture for storing/manipulating data.
+* Supports iteration, sorting, synchronization, concurrency.
+
+25. HashMap vs ConcurrentHashMap
+Feature	HashMap	ConcurrentHashMap
+Thread-safe	❌	✅
+Null Keys	Allowed	Not allowed
+Locking	Entire map (manual)	Per bucket (internal)
+Fail-fast	Yes	No
+26. TreeSet Internal Working
+* Based on TreeMap.
+* Elements stored in sorted order (natural or custom comparator).
+* No duplicates, O(log n) operations.
+
+27. Comparator Interface Example
+Comparator<Employee> byName = (e1, e2) -> e1.getName().compareTo(e2.getName());
+Collections.sort(empList, byName);
+
+28. HashMap remove() method
+* Removes entry if key exists.
+map.remove("ID123");
+* Internally checks bucket via hashCode and equals() → removes node if match found.
+
+29. synchronized vs concurrent Collections
+Type	Example	Behavior
+Synchronized	Collections.synchronizedList()	Locks entire collection
+Concurrent	ConcurrentHashMap, CopyOnWriteArrayList	Partial locking, better performance
+30. Remove duplicates from ArrayList
+List<String> unique = list.stream().distinct().collect(Collectors.toList());
+
+31. Convert List to Array
+String[] arr = list.toArray(new String[0]);
+
+32. Threads Overview
+Thread creation:
+class MyThread extends Thread {
+   public void run() { System.out.println("Running"); }
+}
+new MyThread().start();
+or
+Runnable r = () -> System.out.println("Running");
+new Thread(r).start();
+Thread States: New → Runnable → Running → Waiting → Terminated
+Synchronization: Prevents concurrent access to shared resources. Deadlock: Two threads wait for each other’s lock. Volatile: Ensures variable visibility across threads. Thread Dump: Captures all thread states (jstack <pid>).
+
+33. Thread-Safe Singleton Pattern
+public class Singleton {
+  private static volatile Singleton instance;
+  private Singleton() {}
+  public static Singleton getInstance() {
+    if (instance == null) {
+      synchronized (Singleton.class) {
+        if (instance == null) instance = new Singleton();
+      }
+    }
+    return instance;
+  }
+}
+
+34. Thread Pool & Executor Framework
+* ExecutorService manages thread creation & lifecycle.
+* ThreadPoolExecutor → Custom pool (core size, max size, queue).
+* Callable + Future → Asynchronous result retrieval.
+* ScheduledThreadPoolExecutor → Run tasks with delay.
+* ThreadLocal → Thread-specific data (e.g., per-request context).
+
+35. notify vs notifyAll
+Method	Effect
+notify()	Wakes one waiting thread
+notifyAll()	Wakes all waiting threads
+36. start() vs run()
+Method	Behavior
+start()	Starts a new thread → calls run() internally
+run()	Runs in the same thread (no multithreading)
+37. HashMap Updates in Java 8
+* Buckets switch from LinkedList to balanced Tree (for large collisions).
+* Improved hash distribution → reduces O(n) lookups to O(log n).
+
+38. Synchronize a Collection
+List<String> syncList = Collections.synchronizedList(new ArrayList<>());
+Set<Integer> syncSet = Collections.synchronizedSet(new HashSet<>());
+
+39. Common Design Patterns Used
+* Singleton → Config classes
+* Factory → Object creation (PaymentFactory)
+* Builder → Complex object creation (LoanBuilder)
+* Proxy → Logging, access control
+* Observer → Notification/event-driven systems
+* Strategy → Pluggable algorithms (InterestCalculationStrategy)
+Here’s a **detailed explanation of each design pattern you listed**, tailored for interview clarity:
+
+***
+
+## ✅ **1. Singleton Pattern**
+
+**Definition**: Ensures **only one instance** of a class exists in the application and provides a global access point to it.
+
+**Use Case in Spring**:
+
+*   Spring Beans are **Singleton by default**.
+*   Common for **configuration classes**, **logging**, **cache managers**.
+
+**Example**:
+
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public DataSource dataSource() {
+        return new HikariDataSource();
+    }
+}
+```
+
+Spring ensures only **one DataSource bean** exists.
+
+**Key Points**:
+
+*   Controls object creation.
+*   Saves memory.
+*   Thread-safe implementation is critical.
+
+***
+
+## ✅ **2. Factory Pattern**
+
+**Definition**: Provides an interface for creating objects without exposing the creation logic to the client.
+
+**Use Case**:
+
+*   When object creation is **complex** or depends on **runtime conditions**.
+*   Example: `PaymentFactory` creates different payment processors (CreditCard, UPI, PayPal).
+
+**Example**:
+
+```java
+public class PaymentFactory {
+    public static PaymentProcessor getProcessor(String type) {
+        return switch (type) {
+            case "UPI" -> new UpiProcessor();
+            case "CARD" -> new CardProcessor();
+            default -> throw new IllegalArgumentException("Unknown type");
+        };
+    }
+}
+```
+
+**Key Points**:
+
+*   Decouples object creation from usage.
+*   Improves maintainability.
+
+***
+
+## ✅ **3. Builder Pattern**
+
+**Definition**: Helps create **complex objects step-by-step** without needing a telescoping constructor.
+
+**Use Case**:
+
+*   When an object has **many optional parameters**.
+*   Example: `LoanBuilder` for creating Loan objects with multiple attributes.
+
+**Example**:
+
+```java
+Loan loan = new LoanBuilder()
+                .withAmount(500000)
+                .withInterestRate(7.5)
+                .withTenure(60)
+                .build();
+```
+
+**Key Points**:
+
+*   Improves readability.
+*   Avoids constructor overloads.
+
+***
+
+## ✅ **4. Proxy Pattern**
+
+**Definition**: Provides a **surrogate or placeholder** for another object to control access to it.
+
+**Use Case**:
+
+*   Logging, security checks, caching.
+*   Example: Spring AOP uses proxies for **transaction management** and **method interception**.
+
+**Example**:
+
+```java
+public class LoggingProxy implements Service {
+    private final Service target;
+    public LoggingProxy(Service target) { this.target = target; }
+
+    @Override
+    public void execute() {
+        System.out.println("Before execution");
+        target.execute();
+        System.out.println("After execution");
+    }
+}
+```
+
+**Key Points**:
+
+*   Adds functionality without modifying original code.
+*   Common in **Spring AOP**.
+
+***
+
+## ✅ **5. Observer Pattern**
+
+**Definition**: Defines a **one-to-many dependency** so that when one object changes state, all dependents are notified.
+
+**Use Case**:
+
+*   Event-driven systems, notifications.
+*   Example: Spring’s **ApplicationEventPublisher**.
+
+**Example**:
+
+```java
+@Component
+public class OrderEventListener {
+    @EventListener
+    public void handleOrderCreated(OrderCreatedEvent event) {
+        System.out.println("Order created: " + event.getOrderId());
+    }
+}
+```
+
+**Key Points**:
+
+*   Loose coupling.
+*   Used in **pub-sub systems**.
+
+***
+
+## ✅ **6. Strategy Pattern**
+
+**Definition**: Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+
+**Use Case**:
+
+*   When you need **pluggable algorithms**.
+*   Example: `InterestCalculationStrategy` for different loan types.
+
+**Example**:
+
+```java
+public interface InterestStrategy {
+    double calculate(double amount);
+}
+
+public class HomeLoanStrategy implements InterestStrategy {
+    public double calculate(double amount) { return amount * 0.07; }
+}
+
+public class PersonalLoanStrategy implements InterestStrategy {
+    public double calculate(double amount) { return amount * 0.12; }
+}
+```
+
+**Key Points**:
+
+*   Promotes **Open/Closed Principle**.
+*   Avoids `if-else` chains.
+
+***
+
+### ✅ Interview Tips:
+
+*   Always mention **why** the pattern is used and **real-world examples**.
+*   Highlight **Spring usage** (Singleton beans, AOP proxies, Event listeners).
+*   Show **code snippet** if asked.
+
+
+////////////////////////////////////                    ///////////////////////////////////////////////////
+
+Is it possible to execute a program without a catch block? If so, how would you use try and finally together?
+Yes, we can use try with finally without a catch block to ensure cleanup occurs even if we allow the exception to propagate up.
+
+How does exception handling with try-catch-finally affect the performance of a Java application?
+Using try-catch-finally can affect performance slightly due to overhead of managing exceptions but is generally minimal unless exceptions are thrown frequently.
+
+Can you tell me a condition where the finally block will not be executed?
+The finally block will not execute if the JVM exits via System.exit() during try or catch execution.
+
+Can we write multiple finally blocks in Java?
+No, each try can only have one finally block. Multiple finally blocks are not allowed within a single try-catch-finally structure.
+
+How would you handle multiple exceptions in a single catch block
+Use a single catch block for multiple exceptions by separating them with a pipe (l), e.g., catch (IOException | SQLException e), to handle both exceptions with the same logic.
+
+Is java a 100% object-oriented programming language?
+No, Java is not considered 100% object-oriented because it uses primitive types (like int, char, etc.) that are not objects. In a fully object-oriented language, everything is treated as an object.
+
+Explain public static void main(string args[])?
+In Java, public static void main(Stringl] args) is the entry point of any standalone Java application.
+public makes this method accessible from anywhere, static means I don't need to create an object to call this method, void means it doesn't return any value, and main is the name of this method.
+The String] args part is an array that holds any command-line arguments passed to the program.
+So, when I run a Java program, this is the first method that gets called
+
+Why we use wrapper class in collections
+Because ArrayList, HashMap, and others in the Java Collections Framework, can only hold objects and not primitive types. Wrapper classes allow primitive values to be treated as objects, enabling them to be stored and managed within these collections.
+Examples of wrapper classes are Integer, Boolean, Double etc
+
+
+What is the purpose of "join" method?
+The join method will make sure that calling thread waits for the completion of another thread.
+*   Suppose there is ThreadA that calls the join () method on ThreadB
+*   Then ThreadA will have to wait until ThreadB completes its
+* execution When ThreadB finishes, ThreadA will continue it's execution
+
+out Join
+w Thread; w Thread);
+With Join
+Thread t1=new Thread();
+Thread t2=new Thread);
+t1. start);
+try {
+t1. join);
+} catch (InterruptedException e) {
+e. printStackTrace();
+}
+t2. start);
+
+Explain the concept of Virtual Threads vs Normal Threads?
+Virtual threads are lightweight threads managed by a runtime environment or a virtual machine.
+Introduced in Java 19 and finalized in Java 21
+Tradition Threads → One to One Mapping with Native Threads Virtual Threads → Many to One Mapping with Native Threads
+
+
+What are the advantages of Executor Service?
+*   Thread Pool Management
+*   Task Queuing
+*   Simplified Thread Management
+*   Schedule Future Task Execution
+*   Decoupling Task Submission from Execution
+
+
+✅ ArrayList vs LinkedList (When to use)
+1. ArrayList
+* Backed by dynamic array.
+* Fast for search/get → O(1) for index-based access.
+* Slow for insert/delete in the middle (shifting needed).
+* Best when:
+    * You need random access (get element by index).
+    * Mostly doing read/search operations.
+    * Example: E-commerce product catalog → where you frequently display/search items but rarely insert/delete.
+
+2. LinkedList
+* Backed by doubly linked list.
+* Fast for insert/delete at beginning/middle → O(1) if you already have reference.
+* Slow for search/get by index → O(n).
+* Best when:
+    * You frequently add/remove elements in middle/start.
+    * Order matters and random access is not required.
+    * Example: Music playlist/Queue system → where songs are frequently added/removed.
+
+🔹 Simple Interview Punchline:
+* Use ArrayList when reads/searches are more common.
+* Use LinkedList when insertions/deletions are more frequent.
+
+Feature	HashMap	LinkedHashMap	TreeMap
+Ordering	No order (random)	Maintains insertion order	Maintains sorted order (by key – natural order or Comparator)
+Performance	O(1) for put/get	O(1) for put/get	O(log n) for put/get (because it’s based on Red-Black Tree)
+Nulls	1 null key, multiple null values	1 null key, multiple null values	❌ Null key not allowed (NullPointerException)
+Use Case	Fast lookups where order doesn’t matter	When you want predictable insertion order	When you want sorted keys automatically
+
+Great question 👍 — interviewers often check if you can differentiate PriorityQueue from a normal Queue. Let’s keep it simple + real-time.
+
+✅ What is PriorityQueue in Java?
+* PriorityQueue is a special type of Queue that stores elements in a way that the highest (or lowest) priority element is always at the head.
+* It does not maintain insertion order like a normal queue.
+* Instead, it orders elements based on natural ordering (Comparable) or a custom Comparator.
+
+🔹 Key Points
+1. Ordering → Elements are ordered by priority (not FIFO).
+2. Nulls → Null elements are not allowed.
+3. Duplicates → Allowed.
+4. Not Thread-Safe → For thread-safe, use PriorityBlockingQueue.
+5. Underlying Structure → Implemented using a Heap (binary heap).
+
+🔹 Real-Time Example
+1. Hospital Emergency System 🏥
+    * Patients with higher severity should be treated first.
+    * Example: Critical > Serious > Normal (not based on arrival time).
+2. Task Scheduler ⏳
+    * OS schedules tasks based on priority, not order of arrival.
+
+🔹 Simple Java Example
+import java.util.PriorityQueue;
+
+public class PriorityQueueExample {
+    public static void main(String[] args) {
+        // By default - min heap (smallest element has highest priority)
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.add(30);
+        pq.add(10);
+        pq.add(20);
+
+        System.out.println("PriorityQueue: " + pq);
+
+        // Remove elements (always smallest first)
+        while (!pq.isEmpty()) {
+            System.out.println("Processing: " + pq.poll());
+        }
+    }
+}
+✅ Output
+PriorityQueue: [10, 30, 20]
+Processing: 10
+Processing: 20
+Processing: 30
+
+🔑 Interview Punchline:
+* Queue → FIFO (first in, first out).
+* PriorityQueue → Priority based (heap-based), highest priority comes first.
+
+👉 Do you also want me to show a custom priority example (like patients by severity) so you can use it directly in interviews?
+
+How to remove duplicates from ArrayList?
+*   There are two ways to remove duplicates from the Array List.
+*   Using HashSet: By using HashSet we can remove the duplicate element from the ArrayList, but it will not then preserve the insertion order:
+*   Using LinkedHashSet: We can also maintain the insertion order by using LinkedHashSet instead of HashSet.
+The Process to remove duplicate elements from ArrayList using the LinkedHashSet:
+*   Copy all the elements of ArrayList to LinkedHashSet.
+*   Empty the ArrayList using clear method, which will remove all the elements from the list.
+*   Now copy all the elements of LinkedHashset to ArrayList.
+
+How is WeakHashMap differs from other HashMap?
+*   WeakHashMap is a HashMap, with keys that are of a WeakReference type.
+*   An entry in a WeakHashMap will automatically be removed when its key is no longer in ordinary use, meaning that there is no single Reference that point to that key. When the garbage collection (GC) process discards a key, its entry is effectively removed from the map, even though it is associated with WeakHashMap. i.e Garbage Collector dominates over WeakHashMap.
+*   In HashMap, even if key is not having any reference which points to that key (is eligible for GC) is In reality not eligible for garbage collection because its associated with the entry object added in a bucket of hashMap. This means that the HashMap has dominance over the garbage collector.
+
+What are best practices related to Java Collections Framework
+*   Choosing the right type of collection based on the need, for example if size is fixed, we might want to use Array over ArrayList. If we have to iterate over the Map in order of insertion, we need to use Linked HashMap. If we don't want duplicates, we should use Set.
+*   Some collection classes allows to specify the initial capacity, so if we have an estimate of number of elements we will store, we can use it to avoid rehashing or resizing.
+*   Write program in terms of interfaces not implementations, it allows us to change the implementation easily at later point of time.
+*   Always use Generics for type-safety and avoid ClassCastException at runtime.
+*   Use immutable classes provided by JDK as key in Map to avoid implementation of hashCode and equals for our custom class.
+
+Java tricky questions
+2. What is the output of the below code ?
+Answer :
+public int test() {
+try {
+return 1;
+}
+finally {
+return 2;
+}
+}
+It returns 2.
+The finally block overrides the trv block's r
+
+3. What happens if a 'finally' block modifies a value returned by the 'try' block?
+public int test() {
+int x = 0;
+try {
+return x;
+// Returns 0
+• finally {
+x = 2; // Does this change the return value?
+Answer :
+No. The 'return' in 'try' captures the value of x' (0) before 'finally' executes.
+The final return value remains (
+'x' is ch
+
+4. Can you declare a 'try' block inside another 'try' block?
+•
+•
+try {
+try 1
+int result = 10 / 0;<div style="font-size:16px;">
+I've identified and corrected the spelling mistakes in the provided text:
+
+
+These corrections improve the accuracy and readability of your content.</div>
+
+} catch (ArithmeticException e) {
+System. out. println("Inner catch: " + e);
+}
+}
+catch (Exception e) {
+System.out.println("Outer catch: " + e);
+}
+Answer :
+Yes, this is called nested try catch blocks.
+It allows handling different exceptions at different levels of granularitv
+
+5. When finally block will not be executed ?
+Answer :
+If try or catch block contains System.exit() then only finally will not be executed.
+
+9. Can you override a 'private method in a subclass ?
+•
+class Parent {
+private void print() (}
+}
+class Child extends Parent {
+public void print() {}
+Answer :
+No, you cannot override a private method in Java.
+Private methods are not accessible outside the class in which they are declared, so they cannot ho
+overridde
+
+
+Creational → Object creation (Singleton, Factory, Builder).
+Structural → Object composition (Adapter, Decorator, Proxy).
+Behavioral → Communication (Observer, Strategy, Command).
+
+
+How does garbage collection work in Java?
+Garbage collection in Java automatically frees memory by removing objects that are no longer used. It frees the memory by unused objects, making space for new objects.
+
+Whats the role of finalized) method in garbage collection?
+The finalize) method is called by the garbage collector on an object when it determines that there are no more references to the object.
+It's meant to give the object a chance to clean up resources before it's collected, such as closing file streams or releasing network connections.
+Can you tell me what algorithm JVM uses for garbage collection?
+JVM uses multiple garbage collection algorithms such as Mark-Sweep, Mark-Compact, and Generational Copying, depending on the collector chosen
+
+How can memory leaks occur in Java even we have automatic garbage collection?
+•Memory leaks in Java occur when objects are no longer needed but still referenced from other reachable objects, and hence preventing the garbage collector from reclaiming their memory.
+
+
+Can you explain the role of each try, catch, and finally block in exception handling?
+-try block conatins code that might throw exceptions. catch handles those exceptions. finally executes code after try/catch, regardless of an exception, typically for cleanup.
+What happens if a return statement is executed inside the try
+> or catch block? Does the finally block still execute?
+The finally block executes even if a return statement is used in the try or catch block, ensuring cleanup runs.
+Is it possible to execute a program without a catch block? If so, how would you use try and finally together?
+Yes, we can use try with finally without a catch block to ensure cleanup occurs even if we allow the exception to propagate up.
+How does exception handling with try-catch-finally affect the performance of a Java application?
+•Using try-catch-finally can affect performance slightly due to overhead of managing exceptions but is generally minimal unless exceptions are thrown frequently.
+
+•Using try-catch-finally can affect performance slightly due to overhead of managing exceptions but is generally minimal unless exceptions are thrown frequentiy.
+Can you tell me a condition where the finally block will not be executed?
+The finally block will not execute if the VM exits via System.exit() during try or catch execution.
+Can we write multiple finally blocks in Java?
+*  No, each try can only have one finally block. Multiple finally blocks are not allowed within a single try-catch-finally structure. What is the exception and the differences between checked and unchecked exceptions, Exception is the unwanted even that occurs during the execution of
+*  program and disrupts the flow. Checked exceptions must be declared or handled (I0Exception);
+unchecked do not need to be declared or caught (NullPointerException).
+How would you handle multiple exceptions in a single catch block
+•Use a single catch block for multiple exceptions by separating them with a pipe (|), e.g., catch (I0Exception | SQLException e), to handle both exceptions with the same logic.
+
+
+What is string pool?
+A Java String Pool is a place in heap memory where all the strings defined in the program are stored. Whenever we create a new string object, JVM checks for the presence of the object in the String pool, If String is available in the pool, the same object reference is shared with the variable, else a new object is created.
+Are there any scenarios where using the string pool might not be beneficial?
+It will not be beneficial when there are a lot of uique string because it will be complex situate to check each string.
+Can you please tell me about String and string buffer?
+'String; in Java is immutable, meaning once created, its value cannot be changed.
+'StringBuffer' is mutable, allowing for modification of its contents and is thread-safe, making it suitable for use in multithreaded environments where strings need to be altered.
+
+What are access modifies in java?
+-ava uses public, protected, default (no modifier), and private to control access to classes, methods, and fields, ensuring appropriate visibility and encapsulation.
+
+
+Can you provide examples of when to use each type of access modifier?
+*   Public: Used when members should be accessible from any other class.
+*   Protected: Ideal for members that should be accessible to subclasses and classes within the same package.
+*   Default: Use when members should be accessible only within the same package.
+*   Private: Best for members intended only for use within their own class.
+Why do we use getters setter when we can make fields publick and setting getting directly?
+Using getters and setters instead of public variables allows us to control how values are set and accessed, add validation, and keep the ability to change how data is stored without affecting other parts of your program.
+
+
+
+What is the static keyword in java?
+The static keyword in Java is used to indicate that a particular member (variable or method) belongs to the class, rather than any instance of the class. This means that the static member can be accessed without creating an instance of the class.
+
+Can a static block throw an exception?
+→ Yes, a static block can throw an exception, but if it does, the exception must be handled within the block itself or declared using a throws clause in the class.
+
+Can we override static methods in Java?
+No, static methods cannot be overridden in Java because method overriding is based on dynamic binding at runtime and static methods are bound at compile time.
+
+Is it possible to access non-static members from within a static method?
+Des, it's possible to access non-static members from within a static method by creating an instance of the class containing those members.
+
+What is static block?
+To initialize static variables, the statements inside static block are executed only once, when the class is loaded in the memory.
+Can we print something on console without main method in java?
+Prior to Java 8, yes we can print something without main method buts its not possible from java 8 onwards
+
+
+
+What Is final Key word I Java.
+the 'final' keyword is used to declare constants, making variables unchangeable once assigned, or to prevent method overriding or class inheritance
+What are some common use cases for using final variables in
+Java programming?
+•Common use cases for using final variables in Java programming include defining constants, parameters passed to methods, and local variables in lambdas or anonymous inner classes.
+
+How does the "final" keyword contribute to immutability and thread safety in Java?
+The "final" keyword contributes to immutability and thread safety in Java by ensuring that the value of a variable cannot be changed once assigned, preventing unintended modifications and potential concurrency issues.
+Can you describe any performance considerations related to using final?
+The final keyword imporves the performance by reducing call overhead?
+
+
+Can you tell me some new features that were introduced in Java 8?
+Lambda Expressions, Stream API, Method References, Default Methods, Optional Class, New Date-Time APl are the new features that were introduced in
+Java 8
+Why optional class, lambda expressions and stream API were introduced in javv 8?
+Optional class was introduced in Java 8 as a way to address the problem of null references
+→ Lambda expressions were introduced in java & to make it easier to write code for interfaces that have only one method, using a simpler and more direct style.
+The Stream API was introduced in Java 8 to help developers process collections of data in a more straightforward and efficient way, especially for bulk operations like filtering or sorting.
+Difference between filter and map function of stream API? filter) eliminates elements of collection where the condition is not satisfied whereas map() is used to perform operation on all elements hence, it returns all elements of collection
+
+
+
+///////////////////////////////                    ///////////////////////////////////////////////////////////////
+
+
+
+Here is a cleaned-up, structured, interview-ready version of your content — no numbering, no grammar issues, and formatted clearly.
+
+✅ Difference Between Spring and Spring Boot
+Spring Framework
+* A comprehensive framework for building enterprise-level Java applications.
+* Requires manual configuration:
+    * Configure external servers (Tomcat, Jetty)
+    * Add dependencies manually
+    * Handle version conflicts
+* Does not provide an embedded server.
+* More setup time and boilerplate code.
+Spring Boot
+* A project built on top of Spring to simplify development.
+* Provides:
+    * Auto-configuration
+    * Starter dependencies
+    * Embedded servers (Tomcat, Jetty, Netty)
+* Eliminates most manual configuration.
+* Reduces development time; developers focus on business logic, not setup.
+
+✅ What is Dependency Injection (DI)?
+Dependency Injection is a design pattern where an object receives its dependencies from an external source instead of creating them itself.
+Benefits
+* Loose coupling
+* Easy testing
+* Better maintainability
+Types of DI
+* Constructor Injection (recommended)
+* Field Injection
+* Setter Injection
+
+✅ What is Inversion of Control (IoC)?
+IoC is a principle where the control of object creation is handed over to the framework, not the application code.
+Relation to DI
+* IoC is the principle
+* Dependency Injection is the technique that implements IoC
+
+✅ What Happens When a Spring Boot Application Starts?
+* The main method calls SpringApplication.run().
+* Spring Boot:
+    * Performs auto-configuration
+    * Scans for components
+    * Creates and initializes the Spring ApplicationContext
+    * Instantiates all beans
+    * Starts the embedded server (Tomcat/Jetty/Netty)
+    * Application becomes ready to accept requests
+
+✅ What is a Bean? Explain Bean Lifecycle
+A Bean is an object created and managed by the Spring IoC Container.
+Bean Lifecycle
+1. Bean definition loaded (using annotations or XML)
+2. Bean instantiation (via constructor)
+3. Dependency Injection
+4. BeanPostProcessor hooks (before & after initialization)
+5. Bean ready for use
+6. Destruction when context shuts down
+Types of Bean Scopes
+* Singleton (default, one instance)
+* Prototype (new instance every time)
+* Request (per HTTP request)
+* Session (per session)
+* Global Session (portlet applications)
+
+✅ How to Change Port in Spring Boot?
+In application.properties:
+server.port=8081
+
+✅ Which Server Does Spring Boot Use? How To Change It?
+* Default server → Tomcat
+* Supported: Jetty, Netty, Undertow
+To change server:
+* Exclude Tomcat from the Web starter
+* Add the desired server dependency (e.g., Jetty)
+* Spring Boot will automatically use it
+
+✅ How to Implement Paging and Sorting in Spring Boot?
+* Use JpaRepository or PagingAndSortingRepository
+* Create a Pageable object:
+Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+* Pass it to repository:
+userRepository.findAll(pageable);
+
+✅ What is @SpringBootApplication?
+A meta-annotation combining:
+* @Configuration
+* @ComponentScan
+* @EnableAutoConfiguration
+This makes the class the entry point of a Spring Boot application.
+
+✅ Important Spring Annotations
+@Service
+Marks service-layer classes.
+@Controller
+Used for MVC controllers that return views.
+@RestController
+Combination of @Controller + @ResponseBody. Used for returning JSON responses.
+@Entity
+Represents a table in the DB.
+@Component
+Marks a general Spring bean.
+@Repository
+DAO layer; provides exception translation.
+@Autowired
+Injects a dependency into a class.
+@Required
+Marks dependency as mandatory.
+@Primary
+Used when multiple beans of same type exist.
+@Async
+Executes a method asynchronously (non-blocking).
+@Transient
+Prevents a field from being persisted in DB.
+@ComponentScan
+Used to specify packages to scan for components.
+
+✅ Difference Between @Controller and @RestController
+* @Controller: Returns views (JSP/HTML).
+* @RestController: Returns REST responses (JSON/XML), no need for @ResponseBody.
+
+✅ What is @Configuration?
+Marks a class as a configuration class where beans are defined using @Bean.
+
+✅ What is Autowiring? Types of Autowiring
+Process where Spring automatically injects dependencies.
+Types:
+* Constructor Injection
+* Setter Injection
+* Field Injection
+
+✅ What is ApplicationContext?
+The central container in Spring that:
+* Creates and stores all beans
+* Manages dependency injection
+* Handles lifecycle management
+
+✅ Difference Between @Bean and @Component
+* @Bean: Used on a method that returns an object.
+* @Component: Used on a class to mark it as a Spring bean.
+
+✅ What is @Qualifier?
+Used when multiple beans of the same type exist to specify which bean to inject.
+
+✅ Filters and ControllerAdvice
+ControllerAdvice
+* Handles global exceptions
+* Centralized exception handling
+Filters
+* Pre/post-processing on every request (like authentication, logging)
+
+✅ HTTP Methods Explained
+* GET: Retrieve data
+* POST: Create a new resource
+* PUT: Create or full update
+* PATCH: Partial update
+* DELETE: Delete resource
+
+✅ What is Idempotency?
+An operation whose result remains the same no matter how many times it is called.
+Idempotent Methods:
+* GET
+* PUT
+* PATCH
+* DELETE (mostly)
+Non-idempotent:
+* POST (creates new resource every call)
+
+✅ What is @Transactional?
+Enables atomicity:
+* All steps succeed → commit
+* Any error → rollback
+Used for DB operations that should execute as a single unit.
+
+✅ What is Actuator?
+Spring Boot Actuator provides production-ready features like:
+* /health → Application health
+* /info → Environment info
+* /beans → Bean list
+* /env → Environment properties
+* /metrics → Metrics
+
+✅ What is Profiling in Spring Boot?
+Spring Profiles allow using different configurations for different environments:
+* dev
+* test
+* prod
+Example:
+spring.profiles.active=dev
+
+✅ CrudRepository vs JpaRepository
+CrudRepository
+* Basic CRUD operations
+* Lightweight
+JpaRepository
+* Extends CrudRepository
+* Adds pagination, sorting, batch operations
+* More powerful and feature-rich
+
+✅ Spring Boot Starter Dependencies
+Spring Boot provides starter POMs that bundle required dependencies.
+Example:
+* spring-boot-starter-web
+* spring-boot-starter-data-jpa
+* spring-boot-starter-security
+* spring-boot-starter-test
+These reduce manual dependency configuration.
+
+✅ How to Connect Multiple Databases in Spring Boot
+* Define multiple DataSource beans
+* Use @Primary to mark default datasource
+* Use @EnableJpaRepositories with different base packages for each DB
+Spring Boot supports multiple databases by manually configuring each datasource.
+We create two DataSource beans, two EntityManagerFactory beans, and two TransactionManager beans.
+Then, using @EnableJpaRepositories, we map each repository package to the correct database.
+Primary beans are marked with @Primary.
+This allows one service to interact with MySQL and PostgreSQL independently.
+
+✅ How to Disable a Configuration Class
+Ways:
+* Use @EnableAutoConfiguration(exclude = ...)
+* Use @ConditionalOnProperty to load config only if a property is set
+
+✅ Difference Between @RequestParam and @PathVariable
+@RequestParam
+Used to extract query parameters:
+/users?id=10
+@PathVariable
+Used to extract values from the URL path:
+/users/10
+
+✅ Global Error Handling — @ControllerAdvice + @ExceptionHandler
+* @ControllerAdvice: Defines global exception handlers.
+* @ExceptionHandler: Specifies which exception to handle.
+Example:
+@ExceptionHandler(Exception.class)
+public ResponseEntity<?> handleException(Exception ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+}
+
+If you want, I can convert this entire section into: ✔ Interview cheat sheet ✔ One-page notes ✔ PDF optimized for interviews
+
+
+
+Query Performance Optimization
+* Select only required columns
+* Use proper indexes
+* Rewrite complex joins/subqueries
+* Use DB connection pooling (HikariCP)
+* Add Redis/Ehcache caching
+* Use composite indexes
+* Use JOINs/fetch joins in JPA to avoid N+1 queries
+* Batch inserts/updates
+* Apply pagination (LIMIT, OFFSET)
+
+Spring Boot Performance Optimization
+* Use DTO projections or native queries
+* Add indexes
+* Use Redis/Ehcache caching
+* Enable Spring Cache annotations
+* Use Actuator + monitoring
+* Disable unnecessary auto configs
+* Use async processing (@Async, WebFlux)
+
+Spring Annotations
+@Component
+Marks a class as a Spring bean.
+@Service
+A specialized @Component, used for business logic.
+@Bean
+Used inside @Configuration to manually define a bean.
+
+Spring Batch — Simple Definition
+A framework for processing large volumes of data, supporting:
+* Chunk-based processing
+* Job/Step architecture
+* Retry/Skip
+* Scheduling
+
+Mockito Annotations
+* @Mock — Creates mock instance
+* @InjectMocks — Injects mocks into tested class
+* @ExtendWith(MockitoExtension.class) — JUnit 5 initializer
+Key methods:
+* mock()
+* when().thenReturn()
+* verify()
+* doReturn()
+* doThrow()
+
+CrudRepository vs JpaRepository
+CrudRepository
+* Basic CRUD
+* Simple apps
+* Lightweight
+JpaRepository
+* Adds pagination, sorting, batch operations
+* For full JPA features
+
+Dependency Injection in Spring
+Framework provides dependencies instead of classes creating them.
+Benefits:
+* Loose coupling
+* High testability
+* Modular & maintainable design
+
+IoC Container
+Responsible for:
+* Creating beans
+* Managing lifecycle
+* Injecting dependencies
+* Reading configuration metadata
+
+Service Layer in Spring Boot
+* Contains business logic
+* Bridges Controller ↔ Repository
+* Promotes clean architecture & reusability
+
+Spring Boot Auto-Configuration
+Triggered by @SpringBootApplication.
+Works via:
+* @EnableAutoConfiguration
+* ImportSelector
+* META-INF/spring.factories
+
+* Spring Boot Auto-Configuration works by detecting what’s in the classpath and automatically configuring beans you would normally write manually.
+* It is enabled by @EnableAutoConfiguration through @SpringBootApplication.
+* Boot loads a list of auto-config classes from the AutoConfiguration.imports file.
+* Each class is applied only when its conditions match — such as @ConditionalOnClass, @ConditionalOnMissingBean, or @ConditionalOnProperty.
+* Auto-config always runs AFTER component scanning, so developer-defined beans take priority.
+* This mechanism eliminates boilerplate and provides ready-to-use configurations for DataSource, JPA, Web MVC, Security, and more.
+
+Why Spring Boot is Preferred for Microservices
+* Auto-configuration
+* Embedded servers
+* Production-ready metrics
+* Integration with Spring Cloud
+* Lightweight, fast
+* Large community & ecosystem
+
+If you want, I can also convert this into an interview-ready PDF, or split the topics into flashcards.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                  
+
+Question:
+What is Spring Boot and what are the advantages of it?
+
+✅ Bullet Points for Quick Recall
+
+Spring Boot is a framework built on top of Spring that simplifies application development by providing defaults and auto-configuration.
+Eliminates boilerplate configuration required in Spring.
+Provides embedded servers (Tomcat, Jetty) → no need for external deployment.
+Supports production-ready features like health checks, metrics via Actuator.
+Convention over configuration → reduces complexity.
+Starter dependencies → easy integration of common libraries.
+Microservices-friendly → lightweight and fast to start.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question:
+Why is Spring Boot preferred for Microservices?
+
+✅ Bullet Points for Quick Recall
+
+Lightweight & Standalone: Each microservice runs independently with its own embedded server.
+Auto-Configuration: Reduces boilerplate and speeds up development.
+Starter Dependencies: Simplifies integration of common features like JPA, Security, Messaging.
+Production-Ready Features: Actuator for health checks, metrics, monitoring.
+Cloud & Container Friendly: Easy to deploy in Docker/Kubernetes environments.
+Rapid Development: Faster prototyping and minimal configuration.
+Easy Integration: Works well with Spring Cloud for service discovery, load balancing, and distributed configuration.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question:
+How do you design a database and what are the best practices?
+
+✅ Bullet Points for Quick Recall
+
+Understand Requirements → Gather business and data requirements first.
+Identify Entities & Relationships → Use ER diagrams to model data.
+Normalize Data → Apply normalization (up to 3NF) to reduce redundancy.
+Choose Right Data Types → Optimize for storage and performance.
+Primary & Foreign Keys → Ensure proper constraints for integrity.
+Indexing → Add indexes for frequently queried columns.
+Partitioning & Sharding → For large-scale systems.
+Security → Implement encryption, access control, and roles.
+Backup & Recovery Strategy → Plan for disaster recovery.
+Scalability → Design for future growth (horizontal/vertical scaling).
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+1.what is circular dependency and how to avoid it.
+
+✅ Bullet Points
+
+Definition: Circular dependency occurs when two or more beans depend on each other, creating a cycle.
+Example: Class A depends on Class B, and Class B depends on Class A.
+Problems:
+
+Causes BeanCurrentlyInCreationException in Spring.
+Hard to maintain and test.
+
+How to Avoid:
+Refactor Design: Break the cycle by introducing a third class or interface.
+Use @Lazy: Delays bean initialization to break the cycle.
+Constructor Injection → Field Injection: Use setter injection instead of constructor injection.
+Event-driven approach: Decouple dependencies using events.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+3. What is API Security and How to Implement It?
+✅ Bullet Points
+
+Definition: Protecting APIs from unauthorized access, data breaches, and attacks.
+Key Principles:
+
+Authentication: Verify identity (OAuth2, JWT).
+Authorization: Role-based access control.
+Data Protection: HTTPS/TLS encryption.
+Rate Limiting: Prevent DoS attacks.
+Input Validation: Avoid injection attacks.
+
+
+Implementation:
+Use Spring Security for authentication & authorization.
+Implement OAuth2/JWT for token-based security.
+Enable HTTPS for secure communication.
+Add API Gateway for centralized security and throttling.
+Use CORS policies for cross-origin requests.
+
+✅ Explanation
+API security ensures only authorized users can access resources. In my projects, I implemented OAuth2 with JWT tokens for authentication and authorization, enforced HTTPS, and used Spring Security for role-based access. We also added rate limiting at the API Gateway level and validated all inputs to prevent injection attacks.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+3. Java 17 Features Implemented
+✅ Bullet Points
+
+Sealed Classes → Restricted inheritance for better control.
+Pattern Matching for instanceof → Cleaner type checks.
+Switch Expressions → More concise and readable.
+Text Blocks → Simplified multi-line strings.
+Enhanced Pseudo-Random Number Generators.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+4. What all Spring modules have you worked on?
+✅ Bullet Points
+
+Spring Core → Dependency Injection.
+Spring MVC → REST API development.
+Spring Boot → Auto-configuration and starters.
+Spring Data JPA → Database operations.
+Spring Security → Authentication & Authorization.
+Spring Cloud → Service discovery, config server, circuit breaker.
+Spring Batch → For batch processing.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+7. Internal workings of ConcurrentHashMap
+✅ Bullet Points
+
+Thread-safe alternative to HashMap.
+Uses segment-based locking (Java 7) or CAS + synchronized blocks (Java 8).
+No global lock → better concurrency.
+Buckets use Node + TreeBin for collisions.
+Read operations are mostly lock-free; writes use fine-grained locking.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ Predicate<Integer> isEven = num -> num % 2 == 0;
+        System.out.println(isEven.test(10)); // true
+        System.out.println(isEven.test(7));  // false
+
+
+Consumer<String> printUpperCase = str -> System.out.println(str.toUpperCase());
+        printUpperCase.accept("hello"); // HELLO
+
+
+Supplier<Double> randomNumber = () -> Math.random();
+        System.out.println(randomNumber.get()); // e.g., 0.4567
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+✅ Difference Between Extending Thread Class and Implementing Runnable Interface
+
+1. Extending Thread Class
+
+You create a class that extends Thread and override the run() method.
+
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread running...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();
+    }
+}
+
+2. Implementing Runnable Interface
+
+You create a class that implements Runnable and pass it to a Thread object.
+
+class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Runnable running...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread t = new Thread(new MyRunnable());
+        t.start();
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+2. CopyOnWriteArrayList & CopyOnWriteArraySet
+
+Reason:
+
+These collections create a new copy of the underlying array on every modification.
+Allowing null could cause:
+
+NullPointerException during iteration or comparison.
+Issues in sorting or searching because null cannot be compared naturally.
+
+They are designed for safe iteration in concurrent environments, and null introduces complexity.
+
+
+Conclusion: Disallowing null ensures predictable behavior and avoids exceptions during concurrent reads/writes.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+✅ 1. @SpringBootTest
+Purpose: Used for integration testing in Spring Boot.
+
+Internally:
+Uses SpringApplication to start the application context.
+Can load properties from application.yml or custom test configs.
+
+ 2. @EnableScheduling
+Purpose: Enables Spring’s scheduled tasks.
+
+3. @EnableAsync
+Purpose: Enables asynchronous method execution.
+
+4. @ModelAttribute
+Purpose: Used in Spring MVC to bind request parameters to model objects.
+
+@SpringBootTest loads the full Spring context for integration tests. @EnableScheduling activates scheduled tasks, while @EnableAsync enables asynchronous execution using @Async. @ModelAttribute binds request parameters to model objects in Spring MVC. Internally, these annotations register bean post-processors and proxies to enable their respective features.”
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+What are the ways to call jwt security ?
+
+✅ 1. At API Gateway Level
+Purpose: Validate JWT before routing requests to microservices.
+
+“JWT can be validated at the API Gateway level using a custom filter or at each microservice using Spring Security. For enterprise setups, we often integrate OAuth2 Resource Server or Keycloak for centralized authentication. The goal is to ensure every request is authenticated and authorized before accessing resources.”
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+✅ What is Auto-Configuration?
+Spring Boot’s auto-configuration automatically configures beans based on:
+
+Classpath contents (e.g., if spring-web is present → configure DispatcherServlet).
+Existing beans in the context.
+Properties defined in application.properties or application.yml.
+Internal Working
+
+How to Explain to Interviewer
+
+“Spring Boot auto-configuration works by scanning the classpath and loading configuration classes listed in spring.factories. These classes use conditional annotations to decide whether to create beans. For example, if spring.datasource.url is present, DataSourceAutoConfiguration creates a DataSource bean. This mechanism is triggered by @EnableAutoConfiguration inside @SpringBootApplication.”
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Here’s an **overview of a sample Spring Boot microservices setup** with **API Gateway**, **Eureka Server**, and two services (Service A and Service B). I’ll give you the **main code snippets** and then explain the architecture.
+
+***
+
+## ✅ **Architecture**
+
+*   **Eureka Server** → Service registry for discovery.
+*   **API Gateway** → Routes requests to Service A and Service B.
+*   **Service A & Service B** → Simple REST services registered with Eureka.
+
+***
+
+### **1. Eureka Server**
+
+**pom.xml**:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+```
+
+**Main Class**:
+
+```java
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+```
+
+**application.yml**:
+
+```yaml
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+```
+
+***
+
+### **2. API Gateway**
+
+**pom.xml**:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+**Main Class**:
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public, args);
+    }
+}
+```
+
+**application.yml**:
+
+``````yaml
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: serviceA
+          uri: lb://SERVICE-A
+          predicates:
+            - Path=/serviceA/**
+        - id: serviceB
+          uri: lb://SERVICE-B
+          predicates:
+            - Path=/serviceB/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+`````xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+``````
+
+**Main Class**:
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ServiceAApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceAApplication.class, args);
+    }
+}
+```
+
+**Controller**:
+
+```java
+@RestController
+@RequestMapping("/serviceA")
+public class ServiceAController {
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from Service A";
+    }
+}
+```
+
+**application.yml**:
+
+```yaml
+server:
+  port: 8081
+spring:
+  application:
+    name: SERVICE-A
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+***
+
+### **4. Service B**
+
+Similar to Service A:
+
+```java
+@RestController
+@RequestMapping("/serviceB")
+public class ServiceBController {
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from Service B";
+    }
+}
+```
+
+**application.yml**:
+
+```yaml
+server:
+  port: 8082
+spring:
+  application:
+    name: SERVICE-B
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+***
+
+## ✅ **How It Works**
+
+*   **Eureka Server** runs on `8761` → acts as service registry.
+*   **Service A** and **Service B** register themselves with Eureka.
+*   **API Gateway** uses **Spring Cloud Gateway** and Eureka for **load-balanced routing**.
+*   When you hit:
+    *   `http://localhost:8080/serviceA/hello` → Gateway routes to Service A.
+    *   `http://localhost:8080/serviceB/hello` → Gateway routes to Service B.
+
+***
+
+### ✅ **Key Points to Explain**
+
+*   **Service Discovery**: Eureka allows dynamic IP resolution.
+*   **Gateway Routing**: API Gateway routes based on path predicates.
+*   **Load Balancing**: `lb://SERVICE-A` uses Ribbon internally for client-side load balancing.
+*   **Scalability**: You can run multiple instances of Service A/B, Gateway will distribute traffic.
+
+***
+
+👉 Do you want me to **also include security (JWT) at API Gateway level** or **add Resilience4j for circuit breaker in this setup**? Or should I **prepare a diagram showing the full architecture flow**?
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+how you will manage secrets, like  Hashi crop vault, etc.
+ Implementation in Project
+
+Integrated Spring Boot with HashiCorp Vault using spring-cloud-starter-vault-config.
+Configured Vault to store DB credentials and API keys.
+Application retrieves secrets at runtime using Vault’s KV engine.
+Enabled token-based authentication for microservices.
+Added audit logging for secret access.
+
+“We used HashiCorp Vault for centralized secret management. Secrets were never hardcoded; instead, they were fetched securely at runtime using Spring Cloud Vault integration. Vault provided dynamic credentials, access control policies, and automated rotation, which improved security and compliance.”
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+(issue → explanation → solution → example) 
+
+Here are the **Top 5 Challenges** for your GenAI backend platform and their **solutions**:
+
+***
+
+### **1. Challenge: Latency in AI Response**
+
+*   **Why it happens:** Generative AI models (like GPT or Claude) can take time to process prompts, especially for complex or multi-turn conversations. Network calls to external APIs add additional delay.
+*   **Solution:**
+    *   **Caching:** Use Redis to cache frequent prompt responses.
+    *   **Async Processing:** Implement asynchronous calls using `CompletableFuture` or Spring’s `@Async` to avoid blocking threads.
+    *   **Streaming Responses:** Enable partial response streaming from LLM APIs for faster perceived response times.
+    *   **Load Balancing:** Distribute requests across multiple AI endpoints or use a queue-based architecture (e.g., RabbitMQ/Kafka).
+
+***
+
+Here’s the **improved format** for your example challenge using **issue → explanation → solution → example**:
+
+***
+
+### ✅ **Challenge 1: Latency in AI Response**
+
+***
+
+#### **Issue: Network Latency**
+
+*   **Explanation:**  
+    When your backend calls external AI APIs (like OpenAI or Claude), the request travels over the network. If the API is slow or far away, the thread waits until the response comes back. In traditional Spring MVC (blocking), this ties up server threads, reducing scalability and increasing response time.
+
+***
+
+#### **Solution: Use Asynchronous Non-Blocking Calls**
+
+*   Instead of blocking threads, use **Spring WebFlux** or `CompletableFuture` so the thread is released while waiting for the API response.
+*   This improves scalability because the server can handle thousands of concurrent requests without exhausting threads.
+
+***
+
+#### **Example (Spring WebFlux with Reactive WebClient):**
+
+```java
+@Service
+public class AIService {
+
+    private final WebClient webClient;
+
+    public AIService(WebClient.Builder builder) {
+        this.webClient = builder.baseUrl("https://api.openai.com/v1").build();
+    }
+
+    public Mono<String> getAIResponse(String prompt) {
+        return webClient.post()
+                .uri("/chat/completions")
+                .header("Authorization", "Bearer YOUR_API_KEY")
+                .bodyValue("{\"prompt\":\"" + prompt + "\"}")
+                .retrieve()
+                .bodyToMono(String.class);
+    }
+}
+
+@RestController
+public class AIController {
+
+    private final AIService aiService;
+
+    public AIController(AIService aiService) {
+        this.aiService = aiService;
+    }
+
+    @PostMapping("/generate")
+    public Mono<String> generate(@RequestBody String prompt) {
+        return aiService.getAIResponse(prompt);
+    }
+}
+```
+
+✅ **Why this works:**
+
+*   `Mono<String>` is reactive → the thread is released while waiting for the API response.
+*   Handles high concurrency without blocking.
+
+***
+
+Here’s the **expanded version** of **Challenge 1: Latency in AI Response**, applying **issue → explanation → solution → example** for **each solution** you listed:
+
+***
+
+### ✅ **Challenge 1: Latency in AI Response**
+
+***
+
+#### **Solution 1: Caching**
+
+*   **Issue:**  
+    Repeated prompts cause multiple calls to the AI API, even when the response is the same.
+*   **Explanation:**  
+    This wastes time and resources because the system waits for the AI to generate the same answer again.
+*   **Solution:**  
+    Use **Redis** to store frequent responses and return them instantly for repeated prompts.
+*   **Example:**
+
+```java
+String cachedResponse = redisTemplate.opsForValue().get(prompt);
+if (cachedResponse != null) {
+    return cachedResponse; // Return cached result
+}
+// Call AI API if not cached
+String aiResponse = aiClient.call(prompt);
+redisTemplate.opsForValue().set(prompt, aiResponse);
+return aiResponse;
+```
+
+***
+
+#### **Solution 2: Async Processing**
+
+*   **Issue:**  
+    Blocking calls to external AI APIs tie up server threads, reducing scalability.
+*   **Explanation:**  
+    Spring MVC uses a thread-per-request model. If the AI API takes 3–5 seconds, the thread is blocked during that time.
+*   **Solution:**  
+    Use **Spring WebFlux** or `CompletableFuture` for non-blocking calls.
+*   **Example (WebFlux):**
+
+```java
+public Mono<String> getAIResponse(String prompt) {
+    return webClient.post()
+        .uri("/chat/completions")
+        .header("Authorization", "Bearer API_KEY")
+        .bodyValue("{\"prompt\":\"" + prompt + "\"}")
+        .retrieve()
+        .bodyToMono(String.class);
+}
+```
+
+✅ This frees threads while waiting for the API response.
+
+***
+
+#### **Solution 3: Streaming Responses**
+
+*   **Issue:**  
+    Users wait for the full response before seeing anything.
+*   **Explanation:**  
+    Large AI outputs take time to generate, making the user experience slow.
+*   **Solution:**  
+    Enable **Server-Sent Events (SSE)** or WebFlux streaming so users see partial output as it’s generated.
+*   **Example:**
+
+```java
+@GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+public Flux<String> streamResponse(@RequestParam String prompt) {
+    return aiService.streamAIResponse(prompt);
+}
+```
+
+***
+
+#### **Solution 4: Load Balancing**
+
+*   **Issue:**  
+    High traffic overloads a single AI endpoint.
+*   **Explanation:**  
+    If all requests hit one API instance, latency increases and failures occur.
+*   **Solution:**  
+    Distribute requests across multiple AI endpoints or use a queue-based architecture (RabbitMQ/Kafka).
+*   **Example (Spring Cloud LoadBalancer):**
+
+```java
+@Bean
+public WebClient.Builder loadBalancedWebClientBuilder() {
+    return WebClient.builder();
+}
+```
+
+Configure multiple AI endpoints in your service registry and let Spring Cloud handle load balancing.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+### **2. Challenge: Context Management for Multi-turn Conversations**
+
+*   **Why it happens:** Maintaining conversation state across multiple requests is complex, especially when chaining prompts.
+*   **Solution:**
+    *   **LangChain-like Orchestration:** Implement a context manager in Java that stores conversation history in PostgreSQL or Redis.
+    *   **Session Tokens:** Use session IDs to link user interactions.
+    *   **Truncation Strategy:** Apply token limits by summarizing older context dynamically.
+
+***
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+### **3. Challenge: Cost Optimization for AI API Usage**
+
+*   **Why it happens:** Frequent calls to GPT/Claude APIs can become expensive.
+*   **Solution:**
+    *   **Prompt Optimization:** Use dynamic templates to reduce token usage.
+    *   **Response Reuse:** Cache similar prompts and responses.
+    *   **Hybrid Models:** Use smaller open-source models for simple tasks and premium models for complex tasks.
+    *   **Analytics:** Track usage patterns in PostgreSQL and implement throttling or quotas.
+
+***
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+### **4. Challenge: Security & Compliance**
+
+*   **Why it happens:** Exposing REST endpoints for AI interaction can lead to data leaks or prompt injection attacks.
+*   **Solution:**
+    *   **Authentication & Authorization:** Use OAuth2/JWT for secure API access.
+    *   **Input Sanitization:** Validate and sanitize prompts to prevent injection attacks.
+    *   **Data Encryption:** Encrypt sensitive data at rest and in transit.
+    *   **Audit Logging:** Maintain logs for compliance and debugging.
+
+***
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+### **5. Challenge: Scalability & High Availability**
+
+*   **Why it happens:** High traffic from multiple domains (support, marketing, etc.) can overload the system.
+*   **Solution:**
+    *   **Microservices Architecture:** Scale individual services independently.
+    *   **Horizontal Scaling:** Deploy on Kubernetes or Docker Swarm for auto-scaling.
+    *   **Circuit Breaker Pattern:** Use Resilience4j to handle failures gracefully.
+    *   **Monitoring:** Implement Prometheus + Grafana for real-time metrics.
+
+***
+Here’s the **detailed breakdown** for **Challenge 5: Scalability & High Availability**, applying the format **issue → explanation → solution → example** for each solution:
+
+***
+
+### ✅ **Challenge 5: Scalability & High Availability**
+
+***
+
+#### **Solution 1: Microservices Architecture**
+
+*   **Issue:**  
+    A monolithic application handles all features in one block. When traffic spikes, scaling the entire app is inefficient and costly.
+*   **Explanation:**  
+    If customer support traffic increases, you shouldn’t need to scale marketing or analytics services. Monolith forces full scaling.
+*   **Solution:**  
+    Break the system into **microservices** (Prompt Service, AI Integration Service, Cache Service, Analytics Service). Each can scale independently.
+*   **Example (Spring Boot Microservice Setup):**
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class PromptServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(PromptServiceApplication.class, args);
+    }
+}
+```
+
+Use **Spring Cloud Netflix Eureka** or **Consul** for service discovery.
+
+***
+
+#### **Solution 2: Horizontal Scaling**
+
+*   **Issue:**  
+    Single instance cannot handle thousands of concurrent requests.
+*   **Explanation:**  
+    Vertical scaling (bigger server) has limits. Horizontal scaling (multiple instances) is better.
+*   **Solution:**  
+    Deploy microservices on **Kubernetes** or **Docker Swarm** with auto-scaling.
+*   **Example (Kubernetes Deployment YAML):**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ai-service
+  template:
+    metadata:
+      labels:
+        app: ai-service
+    spec:
+      containers:
+      - name: ai-service
+        image: ai-service:latest
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+```
+
+Add **Horizontal Pod Autoscaler (HPA)** to scale based on CPU/memory.
+
+***
+
+#### **Solution 3: Circuit Breaker Pattern**
+
+*   **Issue:**  
+    If AI API fails or slows down, all requests pile up → cascading failures.
+*   **Explanation:**  
+    Without protection, one failing service can crash the entire system.
+*   **Solution:**  
+    Use **Resilience4j Circuit Breaker** to stop calls when failure threshold is reached.
+*   **Example:**
+
+```java
+@CircuitBreaker(name = "aiService", fallbackMethod = "fallbackResponse")
+public String getAIResponse(String prompt) {
+    return aiClient.call(prompt);
+}
+
+public String fallbackResponse(String prompt, Throwable t) {
+    return "AI service is currently unavailable. Please try later.";
+}
+```
+
+***
+
+#### **Solution 4: Monitoring**
+
+*   **Issue:**  
+    Without monitoring, you can’t detect overload or failures early.
+*   **Explanation:**  
+    You need real-time metrics for CPU, memory, request latency, and error rates.
+*   **Solution:**  
+    Use **Prometheus** for metrics and **Grafana** for dashboards.
+*   **Example (Prometheus Config in Spring Boot):**
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+```
+
+Access metrics at `/actuator/prometheus` and visualize in Grafana.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                  
+
+1.What is pillars of oops concept ?
+2.where did you use the above concepts ?
+3.parent child override in java ?
+4.can you override static and private method ?
+6.what is diff between b/w java 7 and java 8  ?
+7.final and finally , finalize ?
+8.what is equals and hashcode method and its contract ?
+9.what is exception and its hierarchy ?
+10.how to write custom exception ?
+11.Throw and throws keyword
+12.Try , catch , finally 
+13.How many we can create String Object ?
+14.String Object creation scenario
+15.What is scp and how its work ?
+16.Why is String is immutable ?A. Immutable means unchangeable
+17.How to write our custom immutable class 
+18.Which one is good store password in java string & char   and why ?
+19.What is marker interface ? Can you create our own marker interface in java
+20.How to use mutable calss and what is diff b/w String Buffer and String builder
+21.Singleton design pattern ?
+22.what is marker interface ?
+23. What is a concurrent modification exception in Java?
+24.How will you convert string in to array and make it use
+
+can you provide each questions related to details explanation answers ; we are looking for looks good structure and easy to study and more real-world examples, code snippets, interview-focused answers
+
+
+////////////////////////////////////////////////////{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}/////////////////////
+
+
+
+1.what is multithreading in java ?
+2. Synchronized Block and Synchronized Method ?
+3.How many you can create a thread in java ?
+4.How many types of threads are there in java ?
+5.What is the purpose of join method in java ?
+6.What is synchronization ?
+7.Different b/w wait and sleep ?
+8.Diff b/w start and run ?
+9.what is deadlock ?
+10. What is ThreadPoolExecutor?
+11. What is thread priority?
+12. What is synchronization?
+13. notify() vs notifyAll()?
+14. What is volatile and transient keyword ?
+15. What is ExecutorService?
+16.What is false sharing?
+17.Why use immutability?
+18.How to handle thread interruption?
+19.Difference between yield and sleep?
+20.How to implement thread-safe singleton?
+21.What is CompletableFuture and future in java?
+22.When to use volatile over synchronized?
+
+can you provide each questions related to details explanation answers ; we are looking for looks good structure and easy to study and more real-world examples, code snippets, interview-focused answers
+
+
+////////////////////////////////////////////////////{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}/////////////////////
+
+
+1.What all collection are your used in project ?
+2.What is diff b/w list and set ?
+3.How can I write custom array list where I don’t want to allow duplicate ?
+4.Why set doesn’t allow duplicate elements ?
+5.what is diff between b/w comparable and comparator ?
+6.what is diff between fail fast and fail safe iterator ?
+7.what is need of concurrent Hash map and how it is diff form hash map ?
+8.Hash map  and hashset internally flow ?
+9. diff b/w hashmap and treemap in java ?
+
+10.Can we extends functional interface from another functional interface ?
+11.What are all functional interface introduced in java 8 ?
+12.When to use map and flat map ?
+13.Stream vs parallel stream ?
+14.What is the difference between lazy and eager in java8?
+15.What is a weak hash map
+16.explain Design pattern in microservices
+17.Any exposure on using Lambda function
+18.What is an optional class in Java?
+
+
+can you provide each questions related to details explanation answers ; we are looking for looks good structure and easy to study and more real-world examples, code snippets, interview-focused answers
+
+
+1.Type bean scope in spring ?
+2. explain @autowired , @inject, 3.@componect and @bean ?
+3. explain @Primary ,@Qualifier
+4.Types of ioc containers
+5.what is stereotype annotations in spring 
+6.Spring mvc workflow
+7.what is spring bean and java bean ?
+8. diff b/w CrudRepository and JpaRepository
+9.SOLID Principles in Programming
+
+Single Responsibility Principle (SRP): A class should have only one reason to change, meaning it should have only one responsibility.
+Open/Closed Principle (OCP): Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+Liskov Substitution Principle (LSP): Subtypes should be substitutable for their base types without altering the correctness of the program.
+Interface Segregation Principle (ISP): Clients should not be forced to depend on interfaces they do not use.
+Dependency Inversion Principle (DIP): Depend upon abstractions, not concretions
+
+
+Current project details
+What is the difference between execution in executor framework?
+What is blocking queue?
+How do we know thread pool is exhausted or has empty thread?
+Different design patterns?
+What if we initialize Date class object in singleton class, will the date object be singleton too?
+What design pattern is used with async data update between different clients?
+Different design patterns.
+What is the return type of different List interface methods
+What is the role of zookeepers?
+How to handle failure retry in Kafka
+Spring boot annotations
+Write controller class
+stream api v/s parallel streams api
+Pagination Vs JPA Repository
+Different – different design patterns
+database related questions, Cursor, Normalization, query
+Spring security – Login process / how to implement the login and which springboot application you use
+Annotations
+Database connections
+which version of java you worked on
+multithreading
+Which framework of java is used for multithreading
+Which executor services have you used
+What is the type of Executor service and for what you have used executor service
+What are thread pools? Have u used cache thread pool
+New Fixed thread pool and new Fixed Executor
+What are different types of queue in java, synchronous queue
+Which version of spring boot you worked on
+How do you claim that you have worked on microservice?
+wallet service in java spring boot
+If 25 connections are required, then how will you set it up in microservices
+What is dialect
+Return type of Void method
+Java 8 or Java 17
+Difference in java 8 and java 21
+Explain pagination concept and types of pagination with working example
+Explain Kubernetes config
+project related question
+You have call system A. how to call system B using service line
+What is the purpose of Lombok
+What is the purpose of records in Java? Have you used Java records earlier?
+Rest end point
+
+
+{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+
+/* JAVA:
+
+    * 1. Why serialVersionUID required in Serialization and what the diff btw manually serialVersionUID declared and without manually?
+
+    * 2. How to create Trippleton class in spring?
+
+    * 3. Will it work two api URI methods same and except method name in spring boot?
+
+    * 4. How to handle millions of records using coding (without any cloud) in spring boot?
+
+    * 5. How to handle multiple databases in one spring boot application?
+
+    * 6. What is diff btw Integer.parseInt and Integer.valueOf in java?
+
+    * 7. How to cover a test case for static method which is in injected mock class in current class in spring boot?
+
+    * 8. What is diff btw (a==1) & (b==2) and (a==1) && (b==2) ?
+
+    * 9. Why wait and notify methods are in Object class?
+
+    * 10. If the list having student objecting by name is 'abc', then you need to add a new student object with id 4 and name 'def'.
+
+          Write a logic using java8 features.
+
+    * 11. What is constructor called in java
+
+    * 12. What special symbols allowed for identifiers in java?
+
+    * 13. Java SOLID Principles
+
+    * 14. How Concurrent HashMap differentiate with HashMap in java?
+
+    * 15. Interface allows static and default methods, but still abstract class is there, and why?
+
+    * 16. Why does abstract class still there since already have interfaces and what's the diff btw?
+
+    * 17. What is functional interface?
+
+    * 18. What is diff btw functional and normal interfaces?
+
+    * 19. What are aggregation and composition?
+
+    * 20. What are short circuit operations in java 8 streams?
+
+    * 21. What are the business scenarios for abstract class and interface?
+
+    * 22. HashSet internal flow?
+
+    * 23. Create notifications using an Observer Pattern and like event subscribes, and if a user subscribes they will get only subscribed event in java
+
+    * 24. Execute parallel tasks using parallel streams in java
+
+    *
+
+    * */
+
+   /*
+
+   * Spring boot:
+
+   * 1. How to handle 1000 multiple requests in spring boot code level
+
+   * 2. We have 100 microservices, one of it got down. The root cause is it will take 24H to resolve it.
+
+   *    But we need to provide immediate resolution ? how can we achieve it?
+
+   * 3. How does Maven application become a spring application not spring boot app, and it expects one lib to become spring app (i.e : spring-context)?
+
+   *    What is it?
+
+   * 4. How white label error display when we give the wrong url ? what is that default handler code in spring boot (i.e.: BasicErrorController)?
+
+   * 5. How does Transactional annotation work and what are the params in it in spring boot?
+
+   * 6. What is the response if two api methods have the same URI and params except method name in spring boot?
+
+   * 7. Spring security with JWT
+
+   * 8. How does Caching work in spring boot and implementation?
+
+   * 9. How to create triple ton class in spring boot?
+
+   * 10. How to lock table in a database and manage in spring boot?
+
+   * 11. How to use two diff database schemas in spring boot?
+
+   * 12. How to config two diff databases in spring boot?
+
+   * 13. How to load bean based on a property file or by giving class name? (i.e.: @ConditionalOnProperty annotation)
+
+   * 14. How many ways spring boot applications communicate?
+
+   * 15. How health check done for databases in spring boot?
+
+   * 16. What are the spring cloud dependencies and Spring boot starter/parent?
+
+   * 17. What is n+1 problem in spring data jpa?
+
+   * 18. Explain about Many-to-Many association in hibernate/jpa ()
+
+   * 19. What is optimistic and pessimistic locks in JPA and how to achieve it?
+     20 .Spring boot annotations
+     21 .Write controller class
+     22 .Pagination Vs JPA Repository
+     23. Spring security – Login process / how to implement the login and which springboot application you use
+     24. Annotations
+     25. Database connections
+     26. Which version of spring boot you worked on
+     27 .wallet service in java spring boot
+     28 .If 25 connections are required, then how will you set it up in microservices
+     29 .Write controller and create Get API  to fetch employee record and Post API to  create employee record
+     30 .Explain pagination concept and types of pagination with working example
+     31 .database related questions, Cursor, Normalization, query
+
+   * */
+
+    /*
+
+    * SQL:
+
+    * 1. Can you please write down an SQL query to get a 'nth' the highest salary from an Employee table and using a sub query also?
+
+    * 2. Write a query for JOINS
+
+    * 3. Write a query for UNION and UNION ALL
+
+    * 4. What are ACID properties and how transaction integrity works
+
+    * 5. What are the new DDL features?
+
+    * 6. What is config server?
+
+    * 7. Print list of Departments whose employees have more than 10
+
+    * 8. Print each employee belongs department
+
+    *
+
+     * */
+
+    /*
+
+    * Microservices:
+
+    * 1. Microservices high level architecture
+
+    * 2. What API gateway and how it works
+
+    * 3. What Service Discovery server like Eureka server and how it can work and how to integrate with spring boot?
+
+    * 4. What are the ways to communicate btw each spring boot microservice?
+
+    * 5. What are design patterns and explain each?
+
+    * 6. To implement microservices, what are the things to do follow?
+	  7. What is the role of zookeepers?
+      8. How to handle failure retry in Kafka
+      9. How do you claim that you have worked on microservice?
+      10 .Different design patterns?
+      11 .What if we initialize Date class object in singleton class, will the date object be singleton too?
+      12.What design pattern is used with async data update between different clients?
+      13.Different design patterns.
+
+    *
+
+    *
+
+    * */
+   
+   
+   }}[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[               }}}}}}}}}}]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+   
+   ////////////////////////////    Java ////////////////////////////////////
+What is the difference between execution in executor framework?
+What is blocking queue?
+How do we know thread pool is exhausted or has empty thread?
+What is the return type of different List interface methods
+stream api v/s parallel streams api
+which version of java you worked on
+multithreading
+Which framework of java is used for multithreading
+Which executor services have you used
+What is the type of Executor service and for what you have used executor service
+What are thread pools? Have u used cache thread pool
+New Fixed thread pool and new Fixed Executor
+What are different types of queue in java, synchronous queue
+What is dialect
+Return type of Void method
+Java 8 or Java 17
+Difference in java 8 and java 21
+What is the purpose of Lombok
+What is the purpose of records in Java? Have you used Java records earlier?
+
+
+
+ 
+Programming questions
+ 
+User input: abc-123+xyz_897^a12
+Output: [abc,xyz]
+[123,897]
+[a12]
+User input: abc-123+xyz_897^a12  fgh
+Output: [abc,xyz]
+[123,897]
+[a12]
+ 
+{
+ "inputs": [
+   {
+     "input": ["abc", "lmn", "ijk"]
+   },
+   {
+     "input": ["hg", "ieo"]
+   },
+   {
+     "input": ["df"]
+   }
+ ]
+}
+ 
+{"output":["lmn","hg","df"]}
+ 
+Create database connection.
+Explain H2 database with example
+Write third party api mappings 
+ 

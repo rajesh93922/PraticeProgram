@@ -1,0 +1,3463 @@
+                                                        OOPS Topic
+
+Java Interview questions and answers
+1. What are the Pillars of OOP (Object-Oriented Programming)?
+The 4 Pillars of OOP:
+Encapsulation is  to the bundling of data and methods that operate on that data within a single unit, which is called a class in Java. Java Encapsulation is a way of hiding the implementation details of a class from outside access and only exposing a public interface that can be used to interact with the class.
+ 
+inheritance we use to reuse all the property of parent in our child you can go with class and interface in the same type if it is a class class or interface interface you can go with extends if the type is different you can go with implements the next polymorphism
+ 
+poly means single with multiple implementation okay which is nothing our overloading and overriding 
+Method Overloading is a Compile time polymorphism. In method overloading, more than one method shares the same method name with a different signature in the class. In method overloading, the return type can or can not be the same, but we have to change the parameter because, in java, we can not achieve method overloading by changing only the return type of the method. 
+ 
+Method Overriding is a type of runtime polymorphism. In method overriding, Method overriding is used to grant the specific implementation of the method which is already provided by its parent class or superclass.
+ 
+// Overloading
+void greet() {}
+void greet(String name) {}
+ 
+// Overriding
+class Animal {
+    void sound() {}
+}
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+ 
+ 
+Abstraction is means hiding implementation  and showing functionality
+Real-world Example (Encapsulation):
+public class BankAccount {
+    private double balance; // Encapsulated field
+ 
+    public void deposit(double amount) {
+        balance += amount;
+    }
+ 
+    public double getBalance() {
+        return balance;
+    }
+}
+
+
+
+2. Difference Between Abstract Class and Interface
+Abstract class
+Interface
+1) Abstract class can have abstract and non-abstract methods.
+Interface can have only abstract methods. Since Java 8, it can have default and static methods also.
+ 
+2) Abstract class doesn't support multiple inheritance.
+Interface supports multiple inheritance.
+ 
+3) Abstract class can have final, non-final, static and non-static variables.
+Interface has only static and final variables.
+ 
+4) Abstract class can provide the implementation of interface.
+Interface can't provide the implementation of abstract class.
+ 
+5) The abstract keyword is used to declare abstract class.
+The interface keyword is used to declare interface.
+ 
+6) An abstract class can extend another Java class and implement multiple Java interfaces.
+An interface can extend another Java interface only.
+ 
+7) An abstract class can be extended using keyword "extends".
+An interface can be implemented using keyword "implements".
+ 
+Example:
+abstract class Animal {
+    abstract void sound();
+    void sleep() {
+        System.out.println("Sleeping...");
+    }
+}
+ 
+interface Flyable {
+    void fly();
+}
+
+
+
+| **Modifier**              | **Class (same class)** | **Package (same package non-subclass)** | **Subclass (different package)** | **World (anywhere)** | **Explanation**                                                                                                                              |
+| ------------------------- | ---------------------- | --------------------------------------- | -------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **public**                | ✔                      | ✔                                       | ✔                                | ✔                    | Accessible from **anywhere** (same class, same package, subclasses, and even outside the package).                                           |
+| **protected**             | ✔                      | ✔                                       | ✔                                | ✖                    | Accessible within the same class, same package, and subclasses in other packages, but **not from non-subclass classes outside the package**. |
+| **default** (no modifier) | ✔                      | ✔                                       | ✖                                | ✖                    | Also called **package-private**. Accessible within the same class and same package only. **Not accessible outside the package.**             |
+| **private**               | ✔                      | ✖                                       | ✖                                | ✖                    | Accessible **only within the same class**. Not visible in package, subclass, or world.                                                       |
+
+
+
+3. Exception Handling:
+ try-catch-finally
+ The try block is used to specify a block of code that may throw an exception. The catch block is used to handle the exception if it is thrown. The finally block is used to execute the code after the try and catch blocks have been executed.
+ 
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero!");
+} finally {
+    System.out.println("This block always runs.");
+}
+· 
+try: Contains risky code.
+
+catch: Handles exceptions.
+
+finally: Executes regardless of exception.
+
+
+5. Method Overloading vs Overriding
+Feature	Overloading	Overriding
+Class Relation	Same class	Parent-child classes
+Method Signature	Must differ in parameters	Must be the same
+Polymorphism Type	Compile-time	Run-time
+Example:
+// Overloading
+void greet() {}
+void greet(String name) {}
+ 
+// Overriding
+class Animal {
+    void sound() {}
+}
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+
+
+6. Multithreading in Java
+Real-world analogy: Ordering food in a restaurant (main thread) while cooking (another thread).
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+ 
+public class Test {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+
+
+
+7. Polymorphism in Java
+· 
+Compile-time Polymorphism (Overloading)
+· 
+· 
+Run-time Polymorphism (Overriding)
+· 
+Example:
+class Shape {
+    void draw() {
+        System.out.println("Drawing Shape");
+    }
+}
+class Circle extends Shape {
+    void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+
+
+8. Purpose of static Keyword
+Use Case	Explanation
+Static variable	Shared among all objects
+Static method	Can be called without an object
+Static block	Runs once during class loading
+Example:
+class Counter {
+    static int count = 0;
+    Counter() {
+        count++;
+        System.out.println(count);
+    }
+}
+
+
+
+9. How to handle Memory Management & Garbage Collector
+
+JVM manages memory using heap and stack.
+· 
+· 
+Unreachable objects are cleaned by Garbage Collector (GC).
+· 
+MyObject obj = new MyObject();
+obj = null; // Eligible for GC
+System.gc(); // Suggest GC (not guaranteed)
+
+
+
+11. Parent-Child Method Override in Java
+class Vehicle {
+    void start() {
+        System.out.println("Vehicle starts");
+    }
+}
+ 
+class Car extends Vehicle {
+    @Override
+    void start() {
+        System.out.println("Car starts");
+    }
+}
+· 
+Overrides parent method using @Override.
+· 
+· 
+Enables polymorphic behavior.
+· 
+
+
+
+12. Where Did You Use OOPs Concepts in Real Time?
+Answer for interviews:
+"In my real-time Spring Boot project for an e-commerce system:
+· 
+I used Encapsulation in DTOs and service layers.
+· 
+· 
+Applied Inheritance for common response structures.
+· 
+· 
+Used Abstraction via interfaces for service layers.
+· 
+· 
+Implemented Polymorphism in payment handling where each payment mode had a different logic with a common method signature."
+· 
+
+
+
+13. Can You Override Static and Private Methods?
+· 
+Static methods: Cannot be overridden (they are class-level).
+· 
+· 
+Private methods: Not accessible in subclass; cannot override.
+· 
+class A {
+    private void show() {}
+    static void greet() {}
+}
+class B extends A {
+    // Not overriding, this is a new method
+    private void show() {}
+    static void greet() {}
+}
+
+
+Interview-Style Short Answer
+If parent method throws a checked exception, child can throw the same or narrower checked exception.
+If parent does not throw, child cannot newly add a checked exception.
+Runtime exceptions are always allowed.
+
+
+· 
+
+�� 1. Heap Memory
+Used for: Objects and instance variables
+· 
+· 
+Allocated at runtime using new keyword.
+· 
+· 
+Managed by Garbage Collector (frees memory automatically).
+· 
+Student s = new Student(); // Stored in heap
+✅ Big memory area, shared among all threads.
+
+
+�� 2. Stack Memory
+· 
+Used for: Method calls, local variables
+· 
+· 
+Follows LIFO (Last-In-First-Out).
+· 
+· 
+Each thread has its own stack.
+· 
+void greet() {
+    int x = 10; // x is stored in stack
+}
+✅ Fast but limited in size.
+
+
+
+�� 3. Method Area (MetaSpace in Java 8+)
+· 
+Stores: Class-level data, like:
+· 
+o 
+Class definitions
+o 
+o 
+Static variables
+o 
+o 
+Method code (bytecode)
+o 
+✅ Shared among all classes.
+
+
+
+�� 4. Program Counter (PC) Register
+· 
+Each thread has its own PC register.
+· 
+· 
+Keeps track of the current instruction being executed.
+· 
+✅ Small memory block, used internally by JVM.
+
+
+
+�� 5. Native Method Stack
+· 
+Used when Java code calls native (C/C++) code using JNI (Java Native Interface).
+· 
+· 
+Stores native method information.
+· 
+
+
+
+✅ Summary Table:
+Memory Type	Stores	Scope
+Heap	Objects, instance variables	Shared
+Stack	Local variables, method calls	Per thread
+Method Area	Class info, static variables, bytecode	Shared
+PC Register	Current executing instruction	Per thread
+Native Method Stack	Native code info	Per thread
+
+
+Let me know if you want a diagram or interview-focused Q&A on this topic!
+
+
+
+✅ 1. Single Inheritance
+· 
+One class inherits from another.
+· 
+· 
+Only one parent and one child.
+· 
+class Animal {
+    void sound() { System.out.println("Animal sound"); }
+}
+ 
+class Dog extends Animal {
+    void bark() { System.out.println("Dog barks"); }
+}
+✅ Dog gets properties of Animal.
+
+
+
+✅ 2. Multilevel Inheritance
+· 
+A class inherits from a class which itself inherits another class.
+· 
+class Animal {
+    void eat() { System.out.println("Animal eats"); }
+}
+ 
+class Dog extends Animal {
+    void bark() { System.out.println("Dog barks"); }
+}
+ 
+class Puppy extends Dog {
+    void weep() { System.out.println("Puppy weeps"); }
+}
+✅ Puppy → inherits from Dog → inherits from Animal.
+
+
+
+✅ 3. Hierarchical Inheritance
+· 
+Multiple classes inherit from one base class.
+· 
+class Animal {
+    void eat() { System.out.println("Animal eats"); }
+}
+ 
+class Dog extends Animal {
+    void bark() { System.out.println("Dog barks"); }
+}
+ 
+class Cat extends Animal {
+    void meow() { System.out.println("Cat meows"); }
+}
+✅ Both Dog and Cat inherit from Animal.
+
+
+
+�� 4. Multiple Inheritance (Not supported with classes)
+· 
+Java does not allow a class to inherit from more than one class (to avoid confusion called "Diamond Problem").
+· 
+// ❌ This will cause error
+class A { }
+class B { }
+class C extends A, B { } // Not allowed
+
+
+
+✅ 5. Multiple Inheritance with Interfaces (Supported)
+· 
+Java allows multiple inheritance through interfaces.
+· 
+interface A {
+    void show();
+}
+ 
+interface B {
+    void display();
+}
+ 
+class C implements A, B {
+    public void show() { System.out.println("A's method"); }
+    public void display() { System.out.println("B's method"); }
+}
+✅ Class C implements both A and B interfaces.
+
+
+
+✅ Summary Table:
+Type	Supported?	Example
+Single Inheritance	✅ Yes	One class → another
+Multilevel Inheritance	✅ Yes	A → B → C
+Hierarchical	✅ Yes	A → B and A → C
+Multiple (classes)	❌ No	A, B → C (Not allowed)
+Multiple (interfaces)	✅ Yes	Interface A, B → Class C implements
+
+
+
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[        String Topic          {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+ 
+
+�� Java String Interview Questions & Answers
+
+
+
+14. How Many Ways Can We Create a String Object?
+
+✅ Two Ways to Create Strings in Java
+1️⃣ Using String Literals
+* Stored in String Constant Pool (SCP)
+String str1 = "Hello";
+🔹 This is memory-efficient because identical literals point to the same SCP reference.
+
+2️⃣ Using the new Keyword
+* Stored in Heap Memory
+* If interned, also stored in SCP
+String str2 = new String("Hello");
+🔹 This always creates a new object in the heap, even if the string value already exists in the SCP.
+
+💡 Interview Tip:  String literals save memory by using the String Constant Pool, where identical strings share the same reference.
+
+Let me know if you'd like this formatted as a flashcard or expanded with examples involving .equals(), ==, or intern()—those make great follow-ups!
+
+
+15. String Object Creation Scenarios
+String s1 = "Java";               // Literal – SCP
+String s2 = new String("Java");   // Object in heap + literal in SCP
+String s3 = s1.intern();          // Returns reference from SCP
+�� Memory Usage:
+· 
+s1 == s3 → true
+· 
+· 
+s1 == s2 → false
+· 
+
+16. Why Is String Immutable in Java?
+Strings in Java are immutable, meaning that once a String object is created, its content cannot be changed. Any operation that appears to modify a String actually results in the creation of a new String object with the altered content. This design choice offers several significant advantages: 
+�� Reasons:
+· 
+Security: Used in ClassLoader, URL, etc.
+· 
+· 
+Thread-safety: Can be shared across threads without sync.
+· 
+· 
+HashCode caching: Ideal for keys in HashMap.
+· 
+· 
+ClassLoader behavior: Prevents hacking via reflection.
+· 
+String s = "Hello";
+s.concat("World");  // Original string not modified
+System.out.println(s);  // Outputs: Hello
+
+
+
+17. == vs .equals() in String
+Comparison	Purpose	Compares
+==	Reference check	Memory address
+.equals()	Value/content check	Actual string value
+
+String str1 = "hello";
+String str2 = "hello";
+String str3 = new String("hello");
+
+// Using == to compare references
+boolean result1 = str1 == str2;  // true, because they refer to the same instance in the string pool
+boolean result2 = str1 == str3;  // false, because str3 is a new object with a different memory address
+
+String str1 = "hello";
+String str2 = "hello";
+String str3 = new String("hello");
+
+// Using .equals() to compare content of strings
+boolean result1 = str1.equals(str2);  // true, because their contents are the same
+boolean result2 = str1.equals(str3);  // true, even though str3 is a different object
+
+
+
+18. How to Write a Custom Immutable Class
+final class Employee {
+    private final String name;
+    private final int id;
+ 
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+ 
+    public String getName() { return name; }
+    public int getId() { return id; }
+}
+✔️ Rules:
+· 
+Class must be final
+· 
+· 
+Fields must be private & final
+· 
+· 
+No setters
+
+19. Which Is Better for Storing Passwords: String or char[]?
+�� Answer: char[] is better
+Why?
+· 
+Strings are immutable → Cannot be wiped from memory
+· 
+· 
+char[] can be cleared manually
+· 
+char[] password = {'p', 'a', 's', 's'};
+Arrays.fill(password, '0');  // Clear sensitive data
+
+
+
+20. What Is a Marker Interface? Can You Create One?
+�� Marker Interface = No methods, just a “marker”
+Example: Serializable, Cloneable
+public interface MyMarker {}
+�� JVM or frameworks check the presence of this marker using instanceof.
+
+✅ What is a Marker Interface in Java?
+A marker interface is an empty interface — it has no methods or fields.
+Its purpose is to mark a class so that the JVM or libraries can detect it and apply special behavior.
+
+Serialization in Java is the process of converting an object's state into a byte stream. This byte stream can then be stored in a file, transmitted over a network, or saved in a database, allowing for object persistence and transfer across different platforms. 
+
+Deserialization is the reverse process of converting a byte stream back into an object in memory, effectively reconstructing the original object.
+
+
+✅ Examples in Java:
+Marker Interface	Purpose
+Serializable	Tells JVM that a class can be serialized (converted to a byte stream)
+Cloneable	Indicates that Object.clone() is allowed
+Remote	Used in RMI (Remote Method Invocation)
+✅ Why Use a Marker Interface?
+* To signal or tag a class for a specific capability.
+* Used internally by frameworks or the JVM for type checking at runtime using instanceof.
+
+✅ How to Create a Marker Interface
+// Marker Interface
+interface Important { }
+
+// Class using marker
+class MyClass implements Important {
+    void display() {
+        System.out.println("I am marked as Important!");
+    }
+}
+You can now check it like:
+public class Test {
+    public static void main(String[] args) {
+        MyClass obj = new MyClass();
+        
+        if (obj instanceof Important) {
+            System.out.println("This object is marked as Important.");
+        }
+    }
+}
+
+✅ Key Points
+* Marker interfaces are empty.
+* Used for type-checking and behavior tagging.
+* Can be replaced in modern Java by annotations, but still useful in some cases.
+
+Let me know if you'd like an example with Serializable or a real-world use case of marker interfaces.
+
+
+21. How to Use Mutable Classes? Difference Between String ,  StringBuffer and StringBuilder
+
+Here’s a simple and clear comparison between String, StringBuffer, and StringBuilder in Java:
+
+✅ 1. String
+* Immutable (cannot be changed after creation)
+* Every time you modify it, a new object is created.
+String str = "Java";
+str += " World";  // Creates a new String object
+* Thread-safe? ❌ No
+* Performance: ❌ Slower if doing lots of changes
+
+✅ 2. StringBuffer
+* Mutable (can be changed)
+* Thread-safe: ✅ Synchronized methods (good for multi-threaded environments)
+StringBuffer sb = new StringBuffer("Java");
+sb.append(" World");  // Same object modified
+* Thread-safe? ✅ Yes
+* Performance: ⚠️ Slower than StringBuilder due to synchronization
+
+✅ 3. StringBuilder
+* Mutable
+* Not thread-safe: ❌ No synchronization
+* Faster than StringBuffer in single-threaded programs
+StringBuilder sb = new StringBuilder("Java");
+sb.append(" World");  // Same object modified
+* Thread-safe? ❌ No
+* Performance: ✅ Fastest (best for single-threaded code)
+
+✅ Summary Table:
+Feature	String	StringBuffer	StringBuilder
+Mutable	❌ No	✅ Yes	✅ Yes
+Thread-safe	❌ No	✅ Yes (Synchronized)	❌ No
+Performance	❌ Slowest	⚠️ Moderate	✅ Fastest
+Use Case	Fixed text	Multi-threaded edits	Single-threaded edits
+🔔 When to Use?
+* ✅ Use **String** → When data won’t change (e.g., constants, messages).
+* ✅ Use **StringBuffer** → When multiple threads modify string.
+* ✅ Use **StringBuilder** → When one thread modifies string a lot.
+
+Let me know if you'd like a memory diagram or a performance test example!
+
+Feature	StringBuffer	StringBuilder
+Thread-safe	Yes	No
+Performance	Slower (sync overhead)	Faster (no sync)
+Use case	Multi-threaded apps	Single-threaded apps
+StringBuilder sb = new StringBuilder("Java");
+sb.append(" World");
+System.out.println(sb);  // Java World
+
+
+
+22. Singleton Design Pattern
+�� Ensures only one instance exists.
+public class Singleton {
+    private static Singleton instance;
+ 
+    private Singleton() {} // private constructor
+ 
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+✅ Used in: Logging, DB connection pools, Configuration.
+
+
+
+23. What Is a Marker Interface? (Recap)
+Same as Q20 — marker interface is an interface with no methods, used to tag or mark a class with a metadata signal for the JVM or frameworks.
+
+
+
+24. How to Convert String to Array and Use It
+✅ How to Convert a String to an Array in Java — with Simple Examples
+There are 3 common types of conversions:
+
+🔹 1. String to Character Array (char[])
+String str = "Java";
+char[] charArray = str.toCharArray();
+
+for (char ch : charArray) {
+    System.out.println(ch);
+}
+🔸 Use when: You want to work on each character separately.
+
+🔹 2. String to String Array using .split()
+String str = "Java is awesome";
+String[] words = str.split(" ");  // Split by space
+
+for (String word : words) {
+    System.out.println(word);
+}
+🔸 Use when: You want to break the string by words, comma, or any delimiter.
+String csv = "apple,banana,grape";
+String[] fruits = csv.split(",");
+
+🔹 3. Convert String of Numbers to Integer Array
+String str = "1,2,3,4,5";
+String[] parts = str.split(",");
+int[] numbers = new int[parts.length];
+
+for (int i = 0; i < parts.length; i++) {
+    numbers[i] = Integer.parseInt(parts[i]);
+}
+🔸 Use when: You want to process numbers stored as a string.
+
+🧠 Bonus: Convert Character Array Back to String
+char[] arr = {'J', 'a', 'v', 'a'};
+String str = new String(arr);
+System.out.println(str);  // Output: Java
+
+✅ Summary Table
+Task	Code Example
+String → char[]	str.toCharArray()
+String → String[] (words)	str.split(" ")
+CSV → int[]	Integer.parseInt(str.split(","))
+char[] → String	new String(charArray)
+Let me know if you'd like a diagram or a real-world use case (e.g., CSV parsing)!
+
+
+
+
+25. What is SCP and How Does It Work?
+�� SCP = String Constant Pool
+· 
+Special memory area inside Method Area (before Java 8) or Heap (Java 8+)
+· 
+Avoids creating duplicate strings
+· 
+Uses intern() to reuse strings
+· 
+String a = "Java";
+String b = "Java";
+System.out.println(a == b); // true (same reference)
+
+
+
+26. Which one is good to store password in Java: String or char[], and why?
+✅ Answer: char[]
+Reason: String is immutable – stays in memory and cannot be wiped. char[] can be cleared after use, offering better security.
+
+
+
+27. How to Use Mutable Class? Difference Between StringBuffer and StringBuilder
+Already covered in Q21.
+
+
+
+✅ Summary Table for Quick Revision:
+Question	Core Idea	Use in Interviews
+String creation	SCP vs Heap	Memory optimization
+Immutability	Thread safety, hash caching	Design justification
+Mutable usage	StringBuilder for performance	Real-world coding
+== vs .equals()	Reference vs value	Bug avoidance
+char[] over String	Security in password mgmt	Best practices
+Marker interface	No methods, just metadata	Advanced OOP
+Singleton	Controlled instantiation	Design pattern question
+
+
+Would you like this compiled into a visual PDF, PowerPoint-style slides, or a cheat-sheet format for interviews?
+ 
+ 
+Here is a well-structured, interview-focused guide for your Java Exception Handling questions. It includes clear explanations, real-world examples, and code snippets, designed to be easy to study and perfect for interviews.
+
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[            Exception Topic      {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+⚠️ Java Exception Handling Interview Questions & Answers
+
+
+
+1. What Is an Exception and Its Hierarchy?
+�� Exception: An unwanted or unexpected event that disrupts the normal flow of a program.
+�� Exception Hierarchy:
+Object  
+ └── Throwable  
+      ├── Error            (e.g., OutOfMemoryError)
+      └── Exception  
+           ├── RuntimeException (unchecked)  
+           └── IOException, SQLException, etc. (checked)
+Type	Description
+Checked Exception	Known at compile-time (e.g., IOException)
+Unchecked Exception	Known at runtime (e.g., NullPointerException)
+Error	Serious issues like OutOfMemoryError
+
+￼
+�� Interview Tip: Unchecked = RuntimeException & its subclasses.
+
+
+
+2. How to Write a Custom Exception?
+✅ Use when built-in exceptions aren't enough.
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+ 
+public class Test {
+    public static void checkAge(int age) throws InvalidAgeException {
+        if (age < 18)
+            throw new InvalidAgeException("Age must be 18 or above.");
+    }
+ 
+    public static void main(String[] args) {
+        try {
+            checkAge(16);
+        } catch (InvalidAgeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+
+3. throw vs throws Keyword
+Feature	throw	throws
+Purpose	To explicitly throw an exception	To declare an exception
+Usage	Inside a method	In method signature
+Syntax	throw new Exception();	void method() throws Exception
+Count	Only one exception at a time	Can declare multiple exceptions
+Example:
+void validate(int age) throws InvalidAgeException {
+    if (age < 18)
+        throw new InvalidAgeException("Not valid age");
+}
+
+
+
+4. try, catch, finally
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Division by zero not allowed");
+} finally {
+    System.out.println("Cleanup done");
+}
+Block	Purpose
+try	Code that might throw exception
+catch	Handles exception
+finally	Runs always (cleanup, resource closing)
+
+
+5. final, finally, and finalize() – What’s the Difference?
+Keyword	Type	Purpose
+final	Modifier	Makes variable constant, method un-overridable, class un-inheritable
+finally	Block	Executes always after try-catch
+finalize()	Method	Called by GC before object destruction (deprecated in Java 9+)
+Example:
+final int x = 10;
+ 
+try {
+    // risky code
+} finally {
+    System.out.println("Always runs");
+}
+ 
+@Override
+protected void finalize() {
+    System.out.println("Cleanup before GC");
+}
+
+
+
+6. How Does Exception Handling Work in Java? Explain try-catch-finally Block.
+�� Java uses a try-catch-finally mechanism for error handling.
+Flow:
+1. 
+Code in try runs
+2. 
+3. 
+If exception occurs → control goes to matching catch
+4. 
+5. 
+finally block runs regardless
+6. 
+Real-World Example: File Reader
+public void readFile(String path) {
+    BufferedReader reader = null;
+    try {
+        reader = new BufferedReader(new FileReader(path));
+        System.out.println(reader.readLine());
+    } catch (IOException e) {
+        System.out.println("Error reading file: " + e.getMessage());
+    } finally {
+        try {
+            if (reader != null)
+                reader.close();
+        } catch (IOException e) {
+            System.out.println("Error closing file.");
+        }
+    }
+}
+�� Interview Tips:
+· 
+finally is mostly used to release resources.
+· 
+· 
+Only one catch block is executed even if multiple exist.
+· 
+
+
+
+✅ Summary Table for Quick Revision
+Question	Focus	Example
+Exception Hierarchy	Checked vs Unchecked	IOException, NullPointerException
+Custom Exception	User-defined error handling	InvalidAgeException
+throw vs throws	Code vs declaration	throw new, throws IOException
+try-catch-finally	Safe execution flow	Resource cleanup
+final, finally, finalize	Different meanings	Const, cleanup, GC
+Exception Handling Flow	Real use cases	File I/O, DB, etc.
+
+
+�� Java Multithreading Interview Questions & Answers
+
+
+
+1. What is Multithreading in Java?
+�� Multithreading is the concurrent execution of two or more threads to maximize CPU utilization.
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running in thread: " + Thread.currentThread().getName());
+    }
+}
+✅ Benefits:
+· 
+Better resource utilization
+· 
+· 
+Improves app responsiveness
+· 
+· 
+Used in games, servers, UI apps
+· 
+
+
+
+2. Synchronized Block vs Synchronized Method
+Here’s a simple and clear comparison of Synchronized Block vs Synchronized Method in Java:
+
+Synchronized Method:
+* Scope: The entire method is synchronized. This means that only one thread can execute this method at a time for a given object instance (or for the class in the case of a static synchronized method). 
+* Locking:
+    * For instance methods, the lock is acquired on the this object (the instance of the class containing the method).
+    * For static methods, the lock is acquired on the Class object representing the class itself. 
+* Usage: Suitable when the entire method's logic needs to be protected from concurrent access. 
+* Synchronized Block:
+* Scope: Only a specific section of code within a method is synchronized.
+* Locking: The lock is acquired on the object specified within the parentheses after the synchronized keyword. This can be any object, including this, a specific instance variable, or a dedicated lock object.
+* Usage:
+    * When only a part of a method requires synchronization, allowing other parts of the method to be executed concurrently.
+    * When you need to synchronize on an object other than this (or the class object for static methods). This offers more fine-grained control over locking.
+*   
+
+
+✅ Synchronized Method
+* You lock the entire method.
+* Once one thread enters the method, others must wait until it finishes.
+* The lock is on the object (for instance methods) or class (for static methods).
+🧠 Good for: When the whole method’s logic needs to be thread-safe.
+Example Real-Life Analogy:
+Imagine a bathroom with a "Do Not Disturb" sign on the whole room — only one person can enter and use all facilities.
+
+✅ Synchronized Block
+* You lock only a specific block of code inside a method.
+* Offers better performance, as only the critical section is locked.
+* You can lock on this or a specific object.
+🧠 Good for: When only part of the method needs to be synchronized.
+Example Real-Life Analogy:
+Inside the bathroom, only the mirror is reserved for one person at a time, but others can still use the rest.
+
+🔸 Comparison Table:
+Feature	Synchronized Method	Synchronized Block
+Lock Scope	Entire method	Specific part of method
+Flexibility	Less flexible	More flexible
+Performance	May block unnecessarily	More efficient (minimal locking)
+Lock Target	this or class (implicitly)	this or any given object (explicit)
+Let me know if you'd like to see when to choose one over the other or a visual diagram!
+
+// Synchronized method
+public synchronized void print() { ... }
+ 
+// Synchronized block
+public void print() {
+    synchronized(this) {
+        // critical section
+    }
+}
+
+In Java, there are 3 main ways to create a thread, and optionally a 4th advanced way using thread pools. Here's a simple and interview-friendly explanation:
+
+✅ 1. By Extending Thread Class
+* Override the run() method.
+* Use when you don’t need to extend another class (since Java allows only one superclass).
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running via Thread class");
+    }
+}
+
+new MyThread().start();
+
+✅ 2. By Implementing Runnable Interface
+* Recommended when your class needs to extend another class.
+* You pass the Runnable to a Thread object.
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Thread running via Runnable interface");
+    }
+}
+
+new Thread(new MyRunnable()).start();
+
+✅ 3. Using Callable and Future (with ExecutorService)
+* When you want a thread to return a result or throw an exception.
+* Used with ExecutorService.
+Callable<String> task = () -> "Callable thread result";
+ExecutorService executor = Executors.newSingleThreadExecutor();
+Future<String> future = executor.submit(task);
+System.out.println(future.get());  // Output: Callable thread result
+executor.shutdown();
+
+✅ 4. Using ExecutorService / Thread Pools
+* Recommended in real-world apps for managing many threads efficiently.
+ExecutorService executor = Executors.newFixedThreadPool(2);
+executor.submit(() -> System.out.println("Thread via ExecutorService"));
+executor.shutdown();
+
+🧠 Summary for Interviews:
+Method	Return Value	Supports Exceptions	When to Use
+Thread (extends Thread)	No	No	Simple, but not flexible
+Runnable (implements Runnable)	No	No	Preferred for basic threads
+Callable + Future	Yes	Yes	When result or exception is needed
+ExecutorService	Optional	Yes	Best for large-scale thread management
+Let me know if you want visual diagrams or real-time use case examples for any of these!
+
+
+
+4. Types of Threads in Java
+Type	Description
+User Thread	Keeps JVM alive
+Daemon Thread	Background service (e.g., GC)
+Thread t = new Thread();
+t.setDaemon(true);
+
+✅ 1-line interview answer:
+“A daemon thread in Java is a background service thread that runs until all user threads finish, after which the JVM terminates it automatically.”
+
+
+5. Purpose of join() Method
+�� Waits for a thread to finish before continuing execution.
+t1.join(); // waits until t1 completes
+✅ Use case: Load screen waits for data to finish loading.
+
+
+
+6. What is Synchronization?
+�� A mechanism to control thread access to shared resources.
+synchronized(obj) {
+    // only one thread can execute at a time
+}
+✅ Prevents race conditions, ensures data consistency.
+
+
+
+7. Difference Between wait() and sleep()
+Feature	wait()	sleep()
+From class	Object	Thread
+Releases lock	Yes	No
+Use case	Coordination	Pause execution
+obj.wait(); // Must be inside synchronized block
+Thread.sleep(1000); // Pause for 1 second
+
+
+
+8. Difference Between start() and run()
+Method	Description
+start()	Creates a new thread & calls run()
+run()	Executes in the current thread
+thread.start(); // New thread
+thread.run();   // Executes in main thread
+
+
+
+9. What is Deadlock?
+�� Deadlock occurs when two threads hold a lock and wait for each other's lock.
+// Thread A locks obj1, waits for obj2
+// Thread B locks obj2, waits for obj1
+�� Avoid using nested locks and always acquire locks in the same order.
+
+
+
+10. What is ThreadPoolExecutor?
+�� Used to manage a pool of threads efficiently (from java.util.concurrent).
+ExecutorService pool = Executors.newFixedThreadPool(5);
+pool.execute(() -> System.out.println("Task"));
+✅ Better than creating threads manually – efficient resource usage.
+
+
+
+11. What is Thread Priority?
+�� Controls the order of execution preference.
+thread.setPriority(Thread.MAX_PRIORITY); // 10
+�� Note: It doesn't guarantee execution order – depends on OS.
+
+
+
+12. What is volatile and transient keyword?
+Keyword	Purpose
+volatile	Ensures visibility across threads
+transient	Prevents field from serialization
+volatile boolean flag = true;
+transient String password;
+
+
+
+13. What is ExecutorService?
+�� A framework to manage thread execution.
+ExecutorService executor = Executors.newSingleThreadExecutor();
+executor.submit(() -> System.out.println("Run task"));
+executor.shutdown();
+✅ Simplifies task submission & thread lifecycle.
+
+
+
+14. What is False Sharing?
+�� Performance issue in multithreading where threads modify variables that reside on the same cache line, causing cache invalidation.
+�� Rare in Java but important in high-performance systems.
+
+Error : 
+In Java, an Error is a serious problem that occurs in the JVM (Java Virtual Machine) and is usually not recoverable by the program.
+Examples:
+OutOfMemoryError
+StackOverflowError
+VirtualMachineError
+⚡ Difference from Exception:
+
+Error → problem with JVM/system (cannot be handled normally).
+
+
+
+
+16. How to Handle Thread Interruption?
+public void run() {
+    while (!Thread.currentThread().isInterrupted()) {
+        // do work
+    }
+}
+➡️ Use Thread.interrupt() to request stop
+thread.interrupt();
+
+
+
+17. Difference Between yield() and sleep()
+Here’s a clear and simple difference between yield() and sleep() in Java:
+
+✅ 1. yield()
+* Purpose: Suggests to the Thread Scheduler that the current thread is willing to pause to let other threads of the same priority run.
+* Does NOT block the thread — just a hint, not guaranteed.
+* The thread can be rescheduled immediately.
+🧠 Real-Life Analogy: You’re at a coffee machine and say, "Anyone want to go first?" If no one does, you continue.
+
+✅ 2. sleep()
+* Purpose: Forces the thread to pause execution for a specific time (in milliseconds or nanoseconds).
+* The thread definitely stops and enters the TIMED_WAITING state.
+* The thread won’t run again until the sleep time is over, even if the CPU is free.
+🧠 Real-Life Analogy: You take a nap for 5 minutes. You’re not getting up before the alarm.
+
+🔸 Comparison Table
+Feature	yield()	sleep()
+Purpose	Suggest to pause voluntarily	Forcefully pause for fixed time
+Time Control	No — resumes immediately if chosen	Yes — pauses for specified time
+Guarantees Pause?	No — only a hint	Yes — always pauses
+Thread State	Ready-to-run	TIMED_WAITING
+InterruptedException	Not thrown	Can throw InterruptedException
+
+
+18. How to Implement Thread-Safe Singleton?
+public class Singleton {
+    private static volatile Singleton instance;
+ 
+    private Singleton() {}
+ 
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized(Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+✅ Uses Double-Checked Locking + volatile for thread-safety.
+
+
+
+19. When to Use volatile Over synchronized?
+Keyword	Use When
+volatile	Just need visibility across threads
+synchronized	Need atomicity & visibility
+✅ Use volatile for status flags, stop signals
+
+
+
+✅ Summary Table (Quick Recap)
+Concept	Key Insight
+synchronized	Controls thread access to resources
+join()	Waits for another thread
+wait() vs sleep()	Releases lock vs pause
+start() vs run()	New thread vs current thread
+ExecutorService	Manages thread lifecycle
+volatile	Ensures visibility (lightweight)
+Deadlock	Avoid nested locking
+Thread pool	Efficient resource usage
+Singleton	Double-checked locking pattern
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[         Expection  Topic         {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+Is it possible to execute a program without a catch block? If so, how would you use try and finally together?
+Yes, we can use try with finally without a catch block to ensure cleanup occurs even if we allow the exception to propagate up.
+
+How does exception handling with try-catch-finally affect the performance of a Java application?
+Using try-catch-finally can affect performance slightly due to overhead of managing exceptions but is generally minimal unless exceptions are thrown frequently.
+
+
+Can you tell me a condition where the finally block will not be executed?
+The finally block will not execute if the JVM exits via System.exit() during try or catch execution.
+
+
+Can we write multiple finally blocks in Java?
+No, each try can only have one finally block. Multiple finally blocks are not allowed within a single try-catch-finally structure.
+
+How would you handle multiple exceptions in a single catch block
+Use a single catch block for multiple exceptions by separating them with a pipe (l), e.g., catch (IOException | SQLException e), to handle both exceptions with the same logic.
+
+Is java a 100% object-oriented programming language?
+No, Java is not considered 100% object-oriented because it uses primitive types (like int, char, etc.) that are not objects. In a fully object-oriented language, everything is treated as an object.
+
+
+Explain public static void main(string args[])?
+In Java, public static void main(Stringl] args) is the entry point of any standalone Java application.
+public makes this method accessible from anywhere, static means I don't need to create an object to call this method, void means it doesn't return any value, and main is the name of this method.
+The String] args part is an array that holds any command-line arguments passed to the program.
+So, when I run a Java program, this is the first method that gets called
+
+
+Why we use wrapper class in collections
+Because ArrayList, HashMap, and others in the Java Collections Framework, can only hold objects and not primitive types. Wrapper classes allow primitive values to be treated as objects, enabling them to be stored and managed within these collections.
+Examples of wrapper classes are Integer, Boolean, Double etc
+
+
+What is the purpose of "join" method?
+The join method will make sure that calling thread waits for the completion of another thread.
+*   Suppose there is ThreadA that calls the join () method on ThreadB
+*   Then ThreadA will have to wait until ThreadB completes its
+* execution When ThreadB finishes, ThreadA will continue it's execution
+
+out Join
+w Thread; w Thread);
+With Join
+Thread t1=new Thread();
+Thread t2=new Thread);
+t1. start);
+try {
+t1. join);
+} catch (InterruptedException e) {
+e. printStackTrace();
+}
+t2. start);
+
+Explain the concept of Virtual Threads vs Normal Threads?
+Virtual threads are lightweight threads managed by a runtime environment or a virtual machine.
+Introduced in Java 19 and finalized in Java 21
+Tradition Threads → One to One Mapping with Native Threads Virtual Threads → Many to One Mapping with Native Threads
+
+
+What are the advantages of Executor Service?
+*   Thread Pool Management
+*   Task Queuing
+*   Simplified Thread Management
+*   Schedule Future Task Execution
+*   Decoupling Task Submission from Execution
+
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[         JAVA8 Topic         {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+    
+
+✅ What is volatile?
+The volatile keyword in Java is used to ensure visibility of changes to variables across threads.
+
+🔹 Simple Explanation:
+* When one thread changes the value of a volatile variable, other threads immediately see the updated value.
+* Without volatile, threads might read a cached (old) value instead of the updated one.
+
+🧠 Real-Life Analogy:
+Imagine two coworkers (threads) looking at a whiteboard (shared variable).
+* If it's volatile, every time one writes a new value, the other sees it instantly.
+* Without volatile, one might keep looking at a sticky note (cache) instead of the whiteboard.
+
+🔹 Real-World Use Case:
+Let’s say you have a background thread running:
+volatile boolean running = true;
+* If the main thread sets running = false, the background thread immediately sees the change and can stop safely.
+
+Here's a simple and interview-friendly explanation of the transient keyword in Java:
+
+✅ What is transient?
+The transient keyword is used to exclude a variable from serialization.
+
+🔹 Easy Explanation:
+* When you serialize an object (convert it into a byte stream to save or send), all its fields are saved.
+* If a variable is marked as transient, it won’t be saved during serialization.
+* When deserialized, that variable gets a default value (e.g., null, 0, false).
+
+🧠 Real-Life Analogy:
+Imagine you’re photocopying (serializing) a form — If a field is marked "Do not copy" (transient), that section will be left blank on the copy.
+
+🔹 Why Use It?
+* To protect sensitive data (like passwords, credit card numbers).
+* To skip temporary fields that don’t need to be stored or transferred (like logs, cache).
+* To avoid serializing non-serializable objects.
+✅ Interview-Friendly Example (Spoken):
+"If I have a User class and I don't want the user's password to be saved when I serialize the object, I mark the password field as transient. That way, when the object is written to a file or sent over the network, the password is not included."
+
+Let me know if you'd like to pair this with a real coding example or a typical interview trap question!
+
+
+
+
+☕ Java 8 Interview Questions & Answers (With Code & Real-World Examples)
+
+
+
+1. New Features in Java 8
+�� Java 8 brought functional programming into Java!
+Feature	Description
+Lambda Expressions	Anonymous functions
+Stream API	Process collections functionally
+Functional Interfaces	Interface with one abstract method
+Default & Static methods	Inside interfaces
+Optional	Avoid NullPointerException
+New Date/Time API	java.time package
+Nashorn JS Engine	Run JS in JVM
+CompletableFuture	Async programming
+
+
+2. Lambda Expressions
+�� Anonymous function → (args) -> expression
+List<String> names = Arrays.asList("Roy", "John", "Doe");
+names.forEach(name -> System.out.println(name));
+✅ Syntax:
+(parameter) -> expression
+Real-world usage: Runnable, event handling, collections.
+
+
+
+3. What is the Stream API in Java 8?
+➡️ Stream API is used to process collections in a declarative (functional) style.
+List<String> names = Arrays.asList("A", "B", "C");
+names.stream().filter(n -> !"B".equals(n)).forEach(System.out::println);
+✅ Benefits:
+· 
+Reduces boilerplate
+· 
+Easy parallel processing
+· 
+Lazy & optimized
+
+· 
+4. Optional Class in Java 8
+✅ Used to avoid NullPointerException.
+Optional<String> name = Optional.ofNullable(null);
+System.out.println(name.orElse("Default"));
+✔️ Why use?
+· 
+Safe null handling
+·  
+Encourages clean API
+
+5. Java 8: default and static Methods in Interfaces
+
+🔹 1. Default Method
+🧩 What is it?
+A method in an interface with a default implementation.
+
+✅ Why Use It?
+To add new methods to interfaces without breaking existing implementations.
+👇 Example:
+interface Vehicle {
+    void start();  // abstract method
+
+    default void fuelType() {
+        System.out.println("Default fuel type is Petrol.");
+    }
+}
+
+class Car implements Vehicle {
+    public void start() {
+        System.out.println("Car is starting...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.start();           // Output: Car is starting...
+        c.fuelType();        // Output: Default fuel type is Petrol.
+    }
+}
+
+🔹 2. Static Method
+🧩 What is it?
+A static method defined in an interface.
+
+✅ Why Use It?
+To define utility/helper methods related to the interface, without needing an object.
+👇 Example:
+interface VehicleUtils {
+    static int getMaxSpeed() {
+        return 180;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int speed = VehicleUtils.getMaxSpeed();  // Call using interface name
+        System.out.println("Max Speed: " + speed);  // Output: Max Speed: 180
+    }
+}
+
+🧠 Interview-Friendly Summary:
+"Java 8 allows us to write default methods in interfaces to provide a common implementation, and static methods to define utility methods. This helps keep code backward-compatible and more organized."
+
+
+
+6. New Date and Time API
+�� java.time (Inspired by Joda-Time)
+LocalDate today = LocalDate.now();
+LocalTime time = LocalTime.now();
+LocalDateTime dateTime = LocalDateTime.now();
+✅ Benefits:
+Immutable
+· 
+Thread-safe
+· 
+ISO 8601 standard
+
+7. Method References
+➡️ Shorthand for lambda when calling existing methods.
+list.forEach(System.out::println); // instead of: s -> System.out.println(s)
+✅ Types:
+· 
+Class::staticMethod
+· 
+· 
+obj::instanceMethod
+· 
+· 
+Class::new (constructor ref)
+· 
+
+
+
+8. What is a Functional Interface?
+A Functional Interface in Java is an interface that has only one abstract method.
+➡️ It can have default or static methods, but only one abstract method.
+
+🔹 Why Are They Important?
+They are used to implement lambda expressions and method references, introduced in Java 8.
+💡 Java provides many built-in functional interfaces in java.util.function package like Predicate, Function, Consumer, etc.
+
+🧠 Real-Life Analogy:
+Think of a functional interface like a contract with one responsibility — like a remote with only one button that does one specific thing.
+
+✅ How to Create a Functional Interface?
+Use the @FunctionalInterface annotation (optional but recommended for compile-time checking).
+
+👇 Code Example:
+@FunctionalInterface
+interface Greet {
+    void sayHello(String name);
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Using Lambda Expression
+        Greet greeting = (name) -> System.out.println("Hello, " + name);
+        greeting.sayHello("Roy");  // Output: Hello, Roy
+    }
+}
+
+🧠 Key Points for Interview:
+Feature	Details
+Only One Abstract Method	Must (required for lambda support)
+Can Have Default Methods	✅ Yes
+Can Have Static Methods	✅ Yes
+Used With	Lambda expressions, method references
+Annotation (@FunctionalInterface)	Optional, but helps avoid errors
+
+🗣 Interview Summary Line:
+“A functional interface has exactly one abstract method, making it ideal for lambda expressions. It's a key part of functional programming in Java 8.”
+
+· 
+
+
+
+9. Java Stream Operations: filter, map, reduce
+These are core stream operations used for processing collections in a functional way.
+
+🔹 1. filter()
+Used to select elements that match a condition.
+🔸 Think: "Keep only those elements that pass a test."
+✅ Example:
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+// Filter even numbers
+List<Integer> evens = numbers.stream()
+                             .filter(n -> n % 2 == 0)
+                             .collect(Collectors.toList());
+
+System.out.println(evens);  // Output: [2, 4, 6]
+
+🔹 2. map()
+Used to transform elements.
+🔸 Think: "Convert each element into something else."
+✅ Example:
+List<String> names = Arrays.asList("Roy", "Robert", "Java");
+
+// Convert each name to uppercase
+List<String> upperNames = names.stream()
+                               .map(String::toUpperCase)
+                               .collect(Collectors.toList());
+
+System.out.println(upperNames);  // Output: [ROY, ROBERT, JAVA]
+
+🔹 3. reduce()
+Used to combine all elements into a single result.
+🔸 Think: "Reduce a list into one value (sum, product, etc.)."
+✅ Example:
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+
+// Sum of all numbers
+int sum = numbers.stream()
+                 .reduce(0, (a, b) -> a + b);
+
+System.out.println(sum);  // Output: 10
+
+🧠 Interview Summary:
+"filter() selects elements, map() transforms them, and reduce() combines them into one result. These are powerful tools for processing collections using Java Streams."
+
+🔄 Visual Flow:
+Original List -> [1, 2, 3, 4, 5, 6]
+
+filter(n -> n % 2 == 0)  → [2, 4, 6]
+map(n -> n * 10)         → [20, 40, 60]
+reduce(0, sum)           → 120
+
+
+
+10. Difference Between Java 7 and Java 8
+Feature	Java 7	Java 8
+Functional	No	Yes (Lambda, Streams)
+Interface	Abstract methods only	Default/Static methods allowed
+Date API	Mutable, error-prone	Immutable, thread-safe
+Optional	Not available	Available
+
+
+11. Future vs CompletableFuture in Java
+Both are used for asynchronous programming — running tasks in the background and getting results later.
+
+🔹 1. What is Future?
+* Introduced in Java 5.
+* Represents a result of an asynchronous computation.
+* You submit a task and then block using .get() to retrieve the result.
+✅ Example:
+ExecutorService executor = Executors.newSingleThreadExecutor();
+
+Future<String> future = executor.submit(() -> {
+    Thread.sleep(1000);
+    return "Hello from Future!";
+});
+
+System.out.println(future.get());  // Blocks until result is ready
+executor.shutdown();
+
+🔹 2. What is CompletableFuture?
+* Introduced in Java 8.
+* Supports non-blocking, chained, and callback-based programming.
+* You can combine multiple async tasks, handle errors, and use lambda syntax.
+✅ Features:
+* thenApply(), thenAccept(), thenCombine(), exceptionally()
+* Truly async and composable
+✅ Example:
+CompletableFuture<String> completable = CompletableFuture.supplyAsync(() -> {
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {}
+    return "Hello from CompletableFuture!";
+});
+
+completable.thenAccept(result -> System.out.println(result));  // Non-blocking
+
+🧠 Key Differences (Interview Table):
+
+| **Feature**                  | **Future** (Java 5)                        | **CompletableFuture** (Java 8)                          |
+|------------------------------|--------------------------------------------|----------------------------------------------------------|
+| **Introduced In**            | Java 5                                     | Java 8                                                   |
+| **Blocking**                 | ✅ Yes (`get()` blocks)                    | ✅ Optional (supports non-blocking async operations)      |
+| **Chaining Tasks**           | ❌ Not supported                           | ✅ Supported (`thenApply`, `thenAccept`, etc.)            |
+| **Combining Multiple Tasks** | ❌ Difficult                               | ✅ Easy (`thenCombine`, `allOf`, `anyOf`, etc.)           |
+| **Exception Handling**       | ❌ Manual (`try-catch`)                   | ✅ Built-in (`exceptionally`, `handle`, `whenComplete`)   |
+| **Reactive Programming**     | ❌ Not supported                           | ✅ Supported (can be used in reactive pipelines)          |
+
+### Summary:
+- Use **`Future`** for simple, blocking asynchronous tasks.
+- Use **`CompletableFuture`** for complex, non-blocking, and reactive workflows.
+🗣 Interview Summary:
+"Future is basic and blocking; CompletableFuture is modern, flexible, and supports true async programming with task chaining, callbacks, and better error handling."
+Let me know if you’d like real-time use cases or combined examples!
+
+
+
+
+12. Can a Functional Interface Extend Another?
+Yes, a functional interface can extend another functional interface, as long as it does not declare more than one abstract method (total).
+
+🧠 Easy Rule:
+To remain a functional interface, the child interface must still have only one abstract method — including any it inherits.
+
+🔹 Real-Life Analogy:
+Imagine:
+* One base interface called Work with doTask().
+* A new interface RemoteWork that inherits doTask() and doesn't add any other abstract method — ✅ it’s still a functional interface.
+
+✅ Example:
+@FunctionalInterface
+interface Work {
+    void doTask();
+}
+
+@FunctionalInterface
+interface RemoteWork extends Work {
+    // No new abstract method added — still functional
+}
+➡️ You can use it with a lambda:
+public class Main {
+    public static void main(String[] args) {
+        RemoteWork job = () -> System.out.println("Working remotely!");
+        job.doTask();  // Output: Working remotely!
+    }
+}
+
+❌ Not Allowed Example:
+@FunctionalInterface
+interface A {
+    void methodA();
+}
+
+@FunctionalInterface
+interface B extends A {
+    void methodB();  // ❌ Now B has 2 abstract methods: methodA + methodB
+}
+🔴 This will cause a compile-time error if you still annotate B with @FunctionalInterface.
+
+🗣 Interview Summary:
+“Yes, a functional interface can extend another as long as it doesn’t introduce more abstract methods. The total must still be one abstract method to stay functional.”
+
+Let me know if you want a diagram or real-time use case!
+
+
+
+13. Functional Interfaces in Java 8
+Interface	Purpose
+Predicate<T>	Takes T, returns boolean
+Function<T,R>	Takes T, returns R
+Supplier<T>	Returns T, takes nothing
+Consumer<T>	Consumes T, returns nothing
+
+
+14.  map() vs flatMap() in Java Streams
+Both are used to transform data in a Stream, but they work differently when it comes to nested structures like lists of lists.
+
+🔹 1. What is map()?
+Used to transform each element of a stream into something else.
+📌 Input → Output: 1-to-1 mapping.
+
+✅ Example:
+Convert list of names to uppercase:
+List<String> names = Arrays.asList("Roy", "Robert");
+
+List<String> upperNames = names.stream()
+                               .map(String::toUpperCase)
+                               .collect(Collectors.toList());
+
+System.out.println(upperNames);  // Output: [ROY, ROBERT]
+
+🔹 2. What is flatMap()?
+Used to flatten nested streams (e.g., a list of lists) into a single stream.
+📌 Input → Output: 1-to-many mapping, then flattened into a single stream.
+
+✅ Example:
+Flatten a list of list of numbers:
+List<List<Integer>> numbers = Arrays.asList(
+    Arrays.asList(1, 2),
+    Arrays.asList(3, 4)
+);
+
+// Flatten to a single list
+List<Integer> flatList = numbers.stream()
+                                .flatMap(list -> list.stream())
+                                .collect(Collectors.toList());
+
+System.out.println(flatList);  // Output: [1, 2, 3, 4]
+
+🧠 Interview Summary Table:
+Feature	map()	flatMap()
+Use Case	Transform data	Flatten nested structures
+Return Type	Stream<T>	Stream<T> (from Stream<Stream<T>>)
+Mapping	1-to-1	1-to-many + flatten
+Example Input	List	List<List>
+🗣 Interview Summary:
+“Use map() when you want to transform each element. Use flatMap() when each element is itself a stream or collection and you want to flatten the result into a single stream.”
+
+Let me know if you want a diagram or real-world analogy to remember this better!
+
+
+
+15. Stream vs Parallel Stream
+| **Feature**       | **Stream (Sequential)**                          | **ParallelStream**                                  |
+|-------------------|--------------------------------------------------|-----------------------------------------------------|
+| **Execution**     | Single thread (usually the main thread)          | Multiple threads (uses ForkJoinPool)                |
+| **Performance**   | Slower for large datasets                        | Faster for CPU-intensive tasks on large datasets    |
+| **Use Case**      | Small collections, simple operations             | Large collections, CPU-bound operations             |
+| **Thread Safety** | Not inherently thread-safe                       | Requires careful handling to avoid concurrency issues |
+| **Order**         | Maintains encounter order                        | May not maintain order unless explicitly handled    |
+| **Debugging**     | Easier to debug                                  | Harder due to concurrent execution                  |
+| **Overhead**      | Minimal                                           | Higher due to thread management                     |
+
+### When to Use Which?
+- ✅ Use **`Stream`** when:
+  - You need predictable order.
+  - You're working with small or medium-sized data.
+  - Simplicity and readability are priorities.
+
+- 🚀 Use **`ParallelStream`** when:
+  - You're processing large datasets.
+  - Tasks are CPU-intensive and independent.
+  - You want to leverage multi-core processors.
+
+Would you like a code example to illustrate the difference in usage or performance?
+🔹 1. Stream (Sequential)
+Processes elements one-by-one using a single thread.
+✅ Example:
+List<String> names = Arrays.asList("Roy", "Robert", "John");
+
+names.stream()
+     .forEach(name -> System.out.println(name + " - " + Thread.currentThread().getName()));
+🟢 Output (single thread):
+Roy - main
+Robert - main
+John - main
+
+🔹 2. Parallel Stream
+Splits the data and processes it using multiple threads from the ForkJoinPool.
+✅ Example:
+List<String> names = Arrays.asList("Roy", "Robert", "John");
+
+names.parallelStream()
+     .forEach(name -> System.out.println(name + " - " + Thread.currentThread().getName()));
+🔄 Output (multi-threaded):
+Roy - ForkJoinPool.commonPool-worker-1
+Robert - main
+John - ForkJoinPool.commonPool-worker-3
+
+🗣 Interview Summary:
+“Stream works sequentially with one thread, while parallelStream() splits the data and processes using multiple threads — offering faster performance for large, CPU-heavy tasks. But use it only when thread-safety and task nature allow.”
+
+16. Intermediate vs Terminal Operations
+🔹 Intermediate Operations
+* These are operations that transform a stream into another stream.
+* They are lazy, meaning they don’t process data immediately.
+* Instead, they build up a pipeline of operations to be executed later.
+* You can chain multiple intermediate operations.
+* Examples include: filter(), map(), sorted(), distinct() ,skip , limit ,peek
+Think of intermediate operations as setting up a recipe but not cooking yet.
+
+
+🔹 Terminal Operations
+* These are operations that trigger the processing of the stream pipeline.
+* Terminal operations produce a result or side effect like a value, collection, or printing.
+* Once a terminal operation is called, the stream is considered consumed and can’t be reused.
+* Examples include: forEach(), collect(), reduce(), count(), anymatch , all match , non match , min , max
+Think of terminal operations as actually cooking the recipe and serving the food.
+
+Type	Description	Example
+Intermediate	Lazy operations, return stream	filter(), map(), flatmap, distinct , sorted, skip , limit
+Terminal	Trigger execution, return result	forEach(), collect(), reduce , count
+
+Predicate is used when you want to check a condition and return true/false.
+Consumer is used when you want to process input without returning anything (like printing or saving). 
+Supplier is used when you want to generate/return a value without taking any input.
+
+17. Exposure to Lambda Functions
+✅ Used in:
+· 
+Threads: new Thread(() -> {})
+
+Collections: stream().map()
+
+Events: button.setOnClickListener(() -> {})
+· 
+Example:
+Comparator<String> comp = (a, b) -> a.length() - b.length();
+
+
+
+18. How Do You Use the New Date and Time API?
+LocalDate today = LocalDate.now();
+LocalDate dob = LocalDate.of(1995, Month.JUNE, 25);
+Period age = Period.between(dob, today);
+ 
+System.out.println("Age: " + age.getYears());
+
+
+
+19. Purpose of forEach in Java 8
+Used to iterate collections in a functional way.
+List<String> list = Arrays.asList("A", "B", "C");
+list.forEach(System.out::println);
+
+
+
+19. Method References (Revisited)
+Lambda vs Method Ref:
+list.forEach(s -> System.out.println(s));     // Lambda
+list.forEach(System.out::println);            // Method ref
+�� Use method ref when lambda calls a method directly.
+
+
+
+20. Advantages of Functional Interfaces
+✅ Why use?
+· 
+Lambda compatible
+
+Better readability
+
+Simplified boilerplate code
+
+Improved API design
+· 
+Interview Short Answer
+Enable Lambda Expressions
+Before Java 8, anonymous inner classes were bulky.
+Java 8 introduced lambdas for clean, concise functional programming.
+
+Purpose of Functional Interfaces
+Simplify Code
+Reduce boilerplate of anonymous inner classes.
+Example: Runnable, Comparator, Callable.
+
+Support Functional Programming
+Brings Java closer to functional style programming.
+Can pass behavior (functions) as arguments.
+
+Enable Built-in Java 8 Features
+Java 8 provides many predefined functional interfaces in java.util.function package:
+Consumer<T> → accepts input, returns nothing.
+Supplier<T> → no input, returns result.
+Function<T, R> → transforms input to output.
+Predicate<T> → returns boolean.
+
+A lambda needs exactly one abstract method to target → hence Functional Interface.
+Introduced in Java 8 to support Lambda Expressions and functional programming.
+A functional interface has exactly one abstract method and allows us to pass behavior as data.
+It improves code readability, reusability, and conciseness.
+
+
+✅ Summary Table (Quick Revision)
+Topic	Key Insight
+Lambda	Concise functions
+Stream API	Functional collection processing
+Optional	Null safety
+Default Methods	Interface flexibility
+Date API	Thread-safe, immutable
+CompletableFuture	Async + chaining
+Functional Interfaces	Reusability and expressiveness
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[          Collections Topic        {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{                    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]                     ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+The Java Collections Framework provides the following benefits:
+Reduces programming effort
+Increases program speed and quality
+Allows interoperability among unrelated APIs
+Reduces effort to learn and to use new APIs
+Reduces effort to design new APIs
+Fosters software reuse
+
+2. List
+Lists represents an ordered collection of elements. Using lists, we can access elements by their integer index (position in the list), and search for elements in the list. index start with 0, just like an array.
+Some useful classes which implement List interface are – ArrayList, CopyOnWriteArrayList, LinkedList, Stack and Vector.
+
+3. Set
+Sets represents a collection of sorted elements. Sets do not allow the duplicate elements. Set interface does not provides no guarantee to return the elements in any predictable order; though some Set implementations store elements in their natural ordering and guarantee this order.
+Some useful classes which implement Set interface are – ConcurrentSkipListSet, CopyOnWriteArraySet, EnumSet, HashSet, LinkedHashSet and TreeSet.
+
+4. Map
+The Map interface enable us to store data in key-value pairs (keys should be immutable). A map cannot contain duplicate keys; each key can map to at most one value.
+The Map interface provides three collection views, which allow a map’s contents to be viewed as a set of keys, collection of values, or set of key-value mappings. Some map implementations, like the TreeMap class, make specific guarantees as to their order; others, like the HashMap class, do not.
+Some useful classes which implement Map interface are – ConcurrentHashMap, ConcurrentSkipListMap, EnumMap, HashMap, Hashtable, IdentityHashMap, LinkedHashMap, Properties, TreeMap and WeakHashMap.
+
+5. Stack
+The Java Stack interface represents a classical stack data structure, where elements can be pushed to last-in-first-out (LIFO) stack of objects. In Stack we push an element to the top of the stack, and popped off from the top of the stack again later.
+
+6. Queue
+A queue data structure is intended to hold the elements (put by producer threads) prior to processing by consumer thread(s). Besides basic Collection operations, queues provide additional insertion, extraction, and inspection operations.
+Some useful classes which implement Map interface are – ArrayBlockingQueue, ArrayDeque, ConcurrentLinkedDeque, ConcurrentLinkedQueue, DelayQueue, LinkedBlockingDeque, LinkedBlockingQueue, LinkedList, LinkedTransferQueue, PriorityBlockingQueue, PriorityQueue and SynchronousQueue.
+
+7. Deque
+A double ended queue (pronounced “deck“) that supports element insertion and removal at both ends. When a deque is used as a queue, FIFO (First-In-First-Out) behavior results. When a deque is used as a stack, LIFO (Last-In-First-Out) behavior results.
+Some common known classes implementing this interface are ArrayDeque, ConcurrentLinkedDeque, LinkedBlockingDeque and LinkedList.
+
+🔹 List vs Set (Simple Difference)
+List → Allows duplicates, maintains insertion order, can access elements by index.
+Set → No duplicates, order not guaranteed (except LinkedHashSet / TreeSet), no index access.
+
+11. ArrayList vs LinkedList
+Here's a clear and simple comparison of ArrayList vs LinkedList in Java — perfect for interviews or practical use:
+
+✅ Here’s a clean **side-by-side comparison table** of `ArrayList` vs `LinkedList` that you can use in interviews or study notes:
+
+| **Feature**               | **ArrayList**                                               | **LinkedList**                                               |
+|---------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
+| **Underlying Data Structure** | Dynamic Array                                              | Doubly Linked List                                           |
+| **Access Time (`get`)**   | ✅ Fast (**O(1)**) — index-based                             | ❌ Slow (**O(n)**) — must traverse from head/tail            |
+| **Insertion at End**      | ✅ Fast (amortized **O(1)**)                                 | ✅ Fast (**O(1)**)                                            |
+| **Insertion in Middle**   | ❌ Slow (**O(n)**) — needs shifting elements                 | ✅ Fast (**O(1)** if position is known)                      |
+| **Deletion**              | ❌ Slow — needs shifting                                     | ✅ Fast — just change links                                  |
+| **Memory Usage**          | 🟢 Lower — stores only data                                 | 🔴 Higher — stores data + two pointers per node              |
+| **Search by Index**       | ✅ Very fast                                                 | ❌ Slower                                                    |
+| **Better For**            | Random access, less insert/delete                           | Frequent add/remove, sequential access                      |
+| **Thread-safe?**          | ❌ No                                                        | ❌ No                                                        |
+
+🔹 Simple Interview Punchline:
+* Use ArrayList when reads/searches are more common.
+* Use LinkedList when insertions/deletions are more frequent.
+
+
+# ✅ Which Collection is Best for Operations?
+
+👉 **No single collection is best for ALL operations**. Each one is optimized for a specific use case.
+Think of it like **choosing the right tool for the job**.
+
+---
+
+## 🔹 **List Implementations**
+
+1. **ArrayList**
+
+   * ✅ Best for **searching / random access** (O(1)).
+   * ❌ Slow in **insert/delete in the middle** (O(n)).
+   * 👉 **Use when:** You mostly read/search and rarely modify in middle.
+     **Example:** Storing students list, product catalog.
+
+2. **LinkedList**
+
+   * ✅ Best for **insert/delete in middle** (O(1) if you already have the node).
+   * ❌ Slow for **searching** (O(n)).
+   * 👉 **Use when:** You frequently insert/delete, less searching.
+     **Example:** Implementing a queue, playlist, or task scheduler.
+
+---
+
+## 🔹 **Set Implementations**
+
+1. **HashSet**
+
+   * ✅ Fast lookup, add, remove (O(1)).
+   * ❌ No ordering.
+   * 👉 **Use when:** You want **unique elements** and don’t care about order.
+     **Example:** Storing employee IDs, visited URLs.
+
+2. **LinkedHashSet**
+
+   * ✅ Preserves insertion order.
+   * 👉 **Use when:** You want uniqueness + remember insertion order.
+     **Example:** Keeping unique items in order user entered them.
+
+3. **TreeSet**
+
+   * ✅ Keeps elements sorted (O(log n)).
+   * 👉 **Use when:** You need **sorted unique data**.
+     **Example:** Storing sorted names, leaderboards.
+
+---
+
+## 🔹 **Map Implementations**
+
+1. **HashMap**
+
+   * ✅ Fast lookup by key (O(1)).
+   * ❌ No ordering.
+   * 👉 **Use when:** You need key-value pairs without caring about order.
+     **Example:** Storing userId → userDetails.
+
+2. **LinkedHashMap**
+
+   * ✅ Maintains insertion order.
+   * 👉 **Use when:** Key-value with order preserved.
+     **Example:** Caching recently used items.
+
+3. **TreeMap**
+
+   * ✅ Sorted keys (O(log n)).
+   * 👉 **Use when:** You need key-value sorted by key.
+     **Example:** Dictionary (word → meaning), leaderboard scores.
+
+---
+
+## 🔹 **Queue / Deque**
+
+1. **PriorityQueue**
+
+   * ✅ Retrieves elements by priority (min or max).
+   * 👉 **Use when:** Task scheduling, Dijkstra’s shortest path.
+
+2. **ArrayDeque**
+
+   * ✅ Double-ended queue (add/remove from both ends).
+   * 👉 **Use when:** Stack/Queue implementation (better than `Stack`/`LinkedList`).
+
+---
+
+# 🔑 Final Interview Line
+
+* **ArrayList → Best for search (random access).**
+* **LinkedList → Best for frequent insert/delete.**
+* **HashSet/HashMap → Best for uniqueness + fast lookup.**
+* **TreeSet/TreeMap → Best for sorted data.**
+* **LinkedHashSet/LinkedHashMap → Best for preserving order.**
+* **PriorityQueue → Best for priority-based processing.**
+
+
+### 🧠 Interview Tip:
+> "Use `ArrayList` when you need fast random access and fewer insertions/deletions. Use `LinkedList` when your application involves frequent insertions or deletions, especially in the middle of the list."
+
+Q. What is a default capacity of ArrayList, Vector, HashMap, Hashtable and Hashset?
+Collections	Capacity
+ArrayList	10
+Vector	10
+HashSet	16
+HashMap	16
+HashTable	11
+ArrayList: Constructs an empty list with an initial capacity of 10.
+Vector: Constructs an empty vector so that its internal data array has size 10 and its standard capacity increment is zero.
+HashMap: Constructs an empty HashMap with the default initial capacity (16) and the default load factor (0.75).
+Hashtable: Constructs a new, empty hashtable with a default initial capacity (11) and load factor (0.75).
+Hashset: Constructs a new, empty set; the backing HashMap instance has default initial capacity (16) and load factor (0.75).
+
+
+1. What collections have you used in your project?
+Answer: In most of my projects, I have used:
+· 
+ArrayList, LinkedList for ordered data.
+· 
+· 
+HashSet, TreeSet for unique collections.
+· 
+· 
+HashMap, TreeMap, LinkedHashMap for key-value pairs.
+· 
+· 
+ConcurrentHashMap in multi-threaded environments.
+· 
+· 
+PriorityQueue for queue-based processing.
+· 
+
+4. Why Set doesn’t allow duplicates?
+Sets use equals() and hashCode() to check for uniqueness. If two objects return true for equals(), only one is retained.
+
+
+
+5. Here’s a clean **side-by-side comparison table** of `Comparable` vs `Comparator` that you can use in interviews or study notes:
+
+| **Feature**                          | **Comparable**                                                                 | **Comparator**                                                                 |
+|--------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| **Sorting Sequence**                 | Provides a **single sorting sequence**                                         | Provides **multiple sorting sequences**                                        |
+| **Impact on Class**                  | Affects the **original class** (must implement `Comparable`)                  | Does **not affect the original class** (external implementation)              |
+| **Method Used**                      | Uses `compareTo(Object o)` method                                             | Uses `compare(Object o1, Object o2)` method                                   |
+| **Package Location**                 | Located in `java.lang` package                                                | Located in `java.util` package                                                |
+| **Sorting Usage**                    | Used with `Collections.sort(List)`                                            | Used with `Collections.sort(List, Comparator)`                                |
+| **Flexibility**                      | Less flexible — only one way to sort                                          | More flexible — can define multiple sorting strategies                        |
+
+
+
+| Map Type              | Ordering        | Thread-Safe | Allows Null Keys | Performance                  | Use Case                      |
+| --------------------- | --------------- | ----------- | ---------------- | ---------------------------- | ----------------------------- |
+| **HashMap**           | No order        | ❌           | ✅ (1 null key)   | Very fast (O(1) avg)         | General-purpose, fast lookup  |
+| **LinkedHashMap**     | Insertion order | ❌           | ✅ (1 null key)   | Slightly slower than HashMap | Maintain insertion order      |
+| **TreeMap**           | Sorted by keys  | ❌           | ❌                | Slower (O(log n))            | Sorted data, range queries    |
+| **Hashtable**         | No order        | ✅           | ❌                | Legacy, slower               | Legacy thread-safe map        |
+| **ConcurrentHashMap** | No order        | ✅           | ❌                | High performance             | Thread-safe concurrent access |
+
+| Set Type                | Ordering                   | Allows Null | Thread-Safe | Performance                  | Use Case                                 |
+| ----------------------- | -------------------------- | ----------- | ----------- | ---------------------------- | ---------------------------------------- |
+| **HashSet**             | No order                   | ✅ (1 null)  | ❌           | Very fast (O(1) avg)         | General-purpose, fast lookup             |
+| **LinkedHashSet**       | Insertion order            | ✅ (1 null)  | ❌           | Slightly slower than HashSet | Maintain insertion order                 |
+| **TreeSet**             | Sorted (natural or custom) | ❌           | ❌           | Slower (O(log n))            | Sorted data, range queries               |
+| **CopyOnWriteArraySet** | Insertion order            | ✅ (1 null)  | ✅           | Slower writes, fast reads    | Thread-safe iteration, concurrency cases |
+
+
+| Map Type              | Ordering        | Thread-Safe | Allows Null Keys | Performance                  | Use Case                      |
+| --------------------- | --------------- | ----------- | ---------------- | ---------------------------- | ----------------------------- |
+| **HashMap**           | No order        | ❌           | ✅ (1 null key)   | Very fast (O(1) avg)         | General-purpose, fast lookup  |
+| **LinkedHashMap**     | Insertion order | ❌           | ✅ (1 null key)   | Slightly slower than HashMap | Maintain insertion order      |
+| **TreeMap**           | Sorted by keys  | ❌           | ❌                | Slower (O(log n))            | Sorted data, range queries    |
+| --------------------- | --------------- | ----------- | ---------------- | ---------------------------- | ----------------------------- |
+| **HashSet**           | No order        | ❌           | ✅ (1 null key)   | Very fast (O(1) avg)         | General-purpose, fast lookup  |
+| **LinkedHasSet**     | Insertion order | ❌           | ✅ (1 null key)   | Slightly slower than HashMap | Maintain insertion order      |
+| **TreeSet**           | Sorted by keys  | ❌           | ❌                | Slower (O(log n))            | Sorted data, range queries    |
+
+
+---
+
+### 🧠 Interview Tip:
+> "Use `Comparable` when natural ordering is needed and the class itself should define the comparison logic. Use `Comparator` when you want to sort objects in different ways without modifying the class."
+
+
+6. Fail-Fast vs Fail-Safe Iterator
+A iterator which will fail fast when we do any modifications while iterating a collection is called fail fast iterator ex: array list , hashmap, and vector (ConcurrentmodificationExcpetion)
+
+Iterator who allow us to modify in middle while iterating a collection is called non fail fast iterator ex: copyonwritearraylist , copy on write array set , concurrent hashmap
+
+Feature	Fail-Fast	Fail-Safe
+Throws Exception	Yes (ConcurrentModificationException)	No
+Examples	ArrayList, HashMap	CopyOnWriteArrayList, ConcurrentHashMap
+
+
+7. Why use ConcurrentHashMap?
+· 
+Allows concurrent reads and writes.
+
+Uses internal segmentation or lock stripping.
+
+Safer and faster than synchronizing a HashMap.
+
+
+✅ What is ConcurrentHashMap in Java?
+ConcurrentHashMap is a thread-safe variant of HashMap designed for high concurrency.
+
+🔹 Key Points:
+* Allows multiple threads to read and write without blocking each other unnecessarily.
+* Uses fine-grained locking (called lock striping) instead of locking the entire map.
+* Improves performance in multi-threaded environments compared to synchronized HashMap or Hashtable.
+* Doesn’t allow null keys or values.
+
+8. Internal Working of HashMap & HashSet
+· 
+HashMap: Uses array of buckets; keys are hashed to determine bucket index. Handles collisions using linked list or tree (Java 8+)
+HashSet: Backed by HashMap internally. Elements are stored as keys.
+
+## 🔹 **HashSet Internal Workflow**
+👉 **Backed by HashMap** internally.
+
+* When you do `HashSet.add("A")`, it actually calls `HashMap.put("A", DUMMY_OBJECT)`.
+* Only **keys** are stored, and values are a dummy constant.
+* Because `HashMap` does not allow duplicate keys → **HashSet ensures uniqueness**.
+* Hashing + bucket + equals() ensure no duplicates.
+
+✅ **Real-world example:**
+Think of a **class attendance register** → A student’s roll number can appear only once. If you try to add the same roll number again, teacher ignores it.
+
+## 🔹 **HashMap Internal Workflow**
+
+👉 Stores **key-value pairs**.
+
+1. When you call `map.put("John", 90)` →
+
+   * HashMap calculates **hashCode** of `"John"`.
+   * Finds the correct **bucket (array index)**.
+   * If bucket is empty → inserts entry.
+   * If bucket already has entries (collision):
+
+     * Uses **equals()** to check if key already exists.
+     * If yes → update value.
+     * If no → add as new node (or tree node if many collisions → **Red-Black Tree since Java 8**).
+
+✅ **Real-world example:**
+Think of a **dictionary** → Word = Key, Meaning = Value.
+
+* Word “apple” always maps to the same meaning.
+* If you write another meaning for “apple”, old meaning gets replaced.
+* Two different words with same hash index → they are kept in a list/tree inside that bucket.
+
+🔹 What is Hash Collision?
+A hash collision happens when two different keys generate the same hash code (same bucket index) in a HashMap or HashSet.
+
+---
+
+### 🔑 Quick Interview Answer:
+
+* **HashSet** → Unique collection, internally uses HashMap (only keys stored).
+* **HashMap** → Key-Value pair, hashing + equals ensure uniqueness of keys, collisions handled by LinkedList/Tree.
+
+---
+
+👉 Do you want me to also draw a **small ASCII diagram of HashMap bucket storage** (like interviewer whiteboard explanation)?
+
+🔸 Why No Duplicates in HashSet?
+Because HashMap does not allow duplicate keys — so when put() is called with an existing key, it replaces the value (no duplicate is added).
+
+✅ Here’s a clean **summary comparison table** of `HashMap<K, V>` vs `HashSet<E>` that you can use in interviews or study notes:
+
+| **Feature**           | **HashMap<K, V>**                                           | **HashSet<E>**                                      |
+|-----------------------|-------------------------------------------------------------|-----------------------------------------------------|
+| **Purpose**           | Stores **key-value pairs**                                  | Stores **unique values only**                       |
+| **Underlying DS**     | Array + LinkedList / Tree (for collision handling)          | Internally uses `HashMap<E, Object>`                |
+| **Collision Handling**| LinkedList / Tree (Java 8+ uses Red-Black Tree for buckets) | Same as `HashMap`                                   |
+| **Null Allowed**      | Allows **one null key** and **multiple null values**        | Allows **one null element**                         |
+| **Duplicate Check**   | Based on **key’s `equals()` and `hashCode()`**              | Based on **element’s `equals()` and `hashCode()`**  |
+
+---
+Q. What is the difference between Set and Map?
+Sets:-
+
+Set does not allow duplicates. Set and all of the classes which implements Set interface should have unique elements.
+Set allows single null value at most.
+Set does not maintain any order; still few of its classes sort the elements in an order such as LinkedHashSet maintains the elements in insertion order.
+Classes used in sets are Set: HashSet, Linked HashSet, TreeSet, SortedSet etc.
+Maps:-
+
+Map stored the elements as key & value pair. Map doesn’t allow duplicate keys while it allows duplicate values.
+Map can have single null key at most and any number of null values.
+Set Map also doesn’t stores the elements in an order, however few of its classes does the same.
+Classes in Maps 
+
+Q. Difference between containsKey(), keySet() and values() in HashMap.
+The keySet() method: This method returns a Set view of all the keys in the map. The set is backed by the map, so changes to the map are reflected in the set, and vice-versa.
+The containsKey() method: It returns true if this map maps one or more keys to the specified value.
+The values() methods: It returns a Collection view of the values contained in this map. The collection is backed by the map, so changes to the map are reflected in the collection, and vice-versa.
+
+### 🧠 Interview Tip:
+> "Since `HashSet` is backed by a `HashMap`, many of its behaviors like hashing, collision handling, and null handling are inherited from `HashMap`. The key difference is that `HashSet` only stores values, not key-value pairs."
+
+Would you like a **visual diagram** showing how `HashSet` wraps around `HashMap` internally?
+🔍 Real-World Analogy:
+* HashMap → A locker room with labeled lockers (keys). You can store a name tag and item inside (key + value).
+* HashSet → Just the labels on lockers (you don’t care about the item inside — dummy object).
+
+9Here’s a clean **table format** comparing `HashMap` and `Hashtable` that you can use during interviews:
+
+| Feature                          | **HashMap**                                      | **Hashtable**                                      |
+|----------------------------------|--------------------------------------------------|----------------------------------------------------|
+| **Synchronization**              | Not synchronized                                 | Key methods are synchronized                       |
+| **Thread Safety**                | Not thread-safe                                  | Thread-safe                                        |
+| **Iteration Mechanism**          | Uses **Iterator**                                | Uses **Enumerator**                                |
+| **Null Handling**                | Allows **one null key** and **multiple null values** | Does **not allow any null key or value**          |
+| **Performance**                  | Faster due to lack of synchronization            | Slower due to synchronized methods                 |
+| **Legacy Status**                | Part of Java 1.2 Collections Framework           | Legacy class from Java 1.0                         |
+| **Preferred Usage**              | Recommended for single-threaded applications     | Rarely used; replaced by `ConcurrentHashMap`       |
+
+---
+
+### 🧠 Interview Tip:
+> "In modern Java applications, `HashMap` is preferred for non-threaded environments, while `ConcurrentHashMap` is used for thread-safe operations instead of `Hashtable`, due to better scalability and performance."
+
+
+✅ Here’s a clean **side-by-side comparison table** of `HashMap` vs `TreeMap` that you can use in interviews or study notes:
+
+| **Feature**              | **HashMap**                                                                 | **TreeMap**                                                                 |
+|--------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Ordering**             | ❌ No order (random or hash-based)                                           | ✅ Sorted by keys (natural or custom order using `Comparator`)              |
+| **Underlying Structure** | Hash Table (Buckets + LinkedList/Tree for collision handling)               | Red-Black Tree (Self-balancing Binary Search Tree)                          |
+| **Performance**          | ✅ Faster — Average time complexity is **O(1)** for `get()` and `put()`      | ❌ Slower — Time complexity is **O(log n)** for `get()` and `put()`         |
+| **Allows null key?**     | ✅ Yes — Allows **one null key** and multiple null values                    | ❌ No — Throws **NullPointerException** if key is null                      |
+| **Thread-safe?**         | ❌ No — Use `Collections.synchronizedMap()` for thread safety                | ❌ No — Also needs external synchronization for thread safety               |
+| **Use Case**             | When **speed** matters and **ordering is not required**                     | When **sorted keys** are required                                           |
+| **Implements**           | `Map`, `Cloneable`, `Serializable`                                          | `NavigableMap`, `SortedMap`, `Map`                                          |
+
+---
+
+### 🧠 Interview Tip:
+> "Use `HashMap` for fast access and storage when order doesn't matter. Use `TreeMap` when you need keys to be sorted, such as for range queries or ordered traversal."
+
+Would you like a **code example** showing how both behave differently with ordering and null keys?
+🔹 Code Example: HashMap
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("Banana", 20);
+hashMap.put("Apple", 10);
+hashMap.put("Cherry", 30);
+
+System.out.println(hashMap);
+// Output may be random: {Banana=20, Cherry=30, Apple=10}
+
+🔹 Code Example: TreeMap
+Map<String, Integer> treeMap = new TreeMap<>();
+treeMap.put("Banana", 20);
+treeMap.put("Apple", 10);
+treeMap.put("Cherry", 30);
+
+System.out.println(treeMap);
+// Output sorted by key: {Apple=10, Banana=20, Cherry=30}
+
+✅ When to Use What?
+* 🟢 Use HashMap:
+    * When you need fast lookup, insertion, and deletion
+    * Key ordering doesn't matter
+* 🟢 Use TreeMap:
+    * When you need keys sorted automatically
+    * When working with range queries, like sub-maps or head/tail maps
+
+Let me know if you'd like:
+* A visual diagram
+* A performance benchmark
+* Or TreeMap with custom comparator example
+
+
+
+10. What is a WeakHashMap?
+A WeakHashMap is a special implementation of the Map interface where the keys are stored as weak references. That means:
+If a key is no longer referenced anywhere else in your program, it can be garbage collected, even if it's still in the map.
+
+
+12. equals() and hashCode() contract
+· 
+equals(): Compares object content.
+· 
+· 
+hashCode(): Returns hash value.
+· 
+Contract: If two objects are equal using equals(), they must have same hashCode().
+
+
+
+13. What is ConcurrentModificationException?
+Thrown when a collection is modified structurally while iterating.
+Use iterator.remove() or use concurrent classes like CopyOnWriteArrayList.
+
+✅ What is ConcurrentModificationException in Java?
+ConcurrentModificationException is a runtime exception thrown when a collection (like ArrayList, HashMap, etc.) is modified while it's being iterated in a way that is not allowed.
+
+🔥 Example That Causes It:
+List<String> list = new ArrayList<>();
+list.add("A");
+list.add("B");
+
+for (String item : list) {
+    if (item.equals("A")) {
+        list.remove(item);  // ❌ Modifying the list during iteration
+    }
+}
+Output:
+Exception in thread "main" java.util.ConcurrentModificationException
+
+⚙️ Why Does It Happen?
+Internally, collections like ArrayList, HashSet, HashMap use a modCount variable (modification count).
+* When you iterate, the iterator remembers the modCount.
+* If you modify the collection directly (e.g., remove() from the list) while iterating, it detects a mismatch in modCount and throws this exception.
+
+✅ How to Avoid It
+🔹 1. Use Iterator’s remove() method
+Iterator<String> it = list.iterator();
+while (it.hasNext()) {
+    String item = it.next();
+    if (item.equals("A")) {
+        it.remove();  // ✅ Safe
+    }
+}
+🔹 2. Use CopyOnWriteArrayList (for multi-threaded cases)
+List<String> list = new CopyOnWriteArrayList<>();
+* Allows safe modification during iteration
+* But has performance cost (copies the list on every write)
+🔹 3. Collect items first, remove later
+List<String> toRemove = new ArrayList<>();
+for (String item : list) {
+    if (item.equals("A")) {
+        toRemove.add(item);
+    }
+}
+list.removeAll(toRemove);  // ✅ Safe after iteration
+
+
+{{{{{{{{{{{{{{{{{{{{{{{{{{{ }}}}}}}}}}}}}}}}}}}}}}}}[[[[[[[[[[[[[[[[[[[[[[[[[[[           ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+        1. What is super class of all object in java ?
+A. Object is a all super class
+
+
+33. Return type of Void method?
+void means no return value. In generics, Void can be used as a placeholder.
+
+
+
+34. Java 8 or Java 17?
+Java 8 introduced lambdas, streams. Java 17 is LTS with records, sealed classes, pattern matching.
+
+
+
+21. Which Java version have you worked on?
+Specify: e.g., Java 8, Java 11 LTS, Java 17 LTS, Java 21.
+
+
+
+22. Which Java framework is used for multithreading?
+Java concurrency utilities: java.util.concurrent package — Executor Framework, ThreadPoolExecutor, Futures.
+
+
+
+23. Which Executor Services have you used?
+Examples: FixedThreadPool, CachedThreadPool, ScheduledThreadPool.
+
+
+
+24. Types of Executor Service & Usage
+· 
+newFixedThreadPool(int n) – fixed threads
+· 
+· 
+newCachedThreadPool() – flexible, reuses threads
+· 
+· 
+newSingleThreadExecutor() – single thread
+· 
+
+
+
+25. What are thread pools? Have you used Cached Thread Pool?
+Thread pools manage a group of reusable threads to perform tasks efficiently. CachedThreadPool creates new threads as needed and reuses idle threads.
+
+
+
+26. New Fixed Thread Pool and New Fixed Executor
+Both refer to Executors.newFixedThreadPool(int n) creating a fixed-size thread pool.
+
+
+
+27. Different types of queues in Java, SynchronousQueue?
+· 
+ArrayBlockingQueue, LinkedBlockingQueue, PriorityBlockingQueue
+· 
+· 
+SynchronousQueue – no internal capacity; handoffs directly between producer and consumer threads.
+· 
+
+
+9. What is the return type of different List interface methods?
+Examples:
+· 
+add(E e) – boolean
+· 
+· 
+get(int index) – E
+· 
+· 
+remove(int index) – E
+· 
+· 
+size() – int
+· 
+· 
+iterator() – Iterator
+· 
+
+
+ 
+## 2. What is the difference between execution in Executor Framework?
+ 
+| Method          | Description                                          | Return Type |
+|-----------------|------------------------------------------------------|-------------|
+| `execute(Runnable)` | Submits a task for execution, no result returned. | void        |
+| `submit(Runnable/Callable)` | Submits a task and returns a `Future` representing the result or status. | Future<?> |
+ 
+**Example:**
+ 
+```java
+ExecutorService executor = Executors.newFixedThreadPool(2);
+ 
+executor.execute(() -> System.out.println("Run task"));
+ 
+Future<Integer> future = executor.submit(() -> {
+    Thread.sleep(1000);
+    return 123;
+});
+Integer result = future.get();  // Blocks until done
+
+
+
+3. What is a BlockingQueue?
+· 
+A thread-safe queue that blocks producer threads when full and consumer threads when empty.
+· 
+· 
+Used for producer-consumer patterns.
+· 
+Common Implementations:
+· 
+ArrayBlockingQueue
+· 
+· 
+LinkedBlockingQueue
+· 
+· 
+PriorityBlockingQueue
+· 
+· 
+SynchronousQueue (special case with zero capacity)
+· 
+Example:
+BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
+queue.put("item");       // Blocks if full
+String item = queue.take(); // Blocks if empty
+
+
+
+4. How do we know thread pool is exhausted or has empty thread?
+· 
+Use ThreadPoolExecutor methods:
+· 
+o 
+getActiveCount() returns number of threads currently executing tasks
+o 
+o 
+getPoolSize() returns current number of threads in the pool
+o 
+· 
+When active count equals max pool size, the pool is exhausted.
+· 
+ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
+int active = executor.getActiveCount();
+int max = executor.getMaximumPoolSize();
+ 
+if (active == max) {
+    System.out.println("Thread pool exhausted");
+}
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[                  ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][[[[[[[[[[[[[[[[[                             [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+
+Interview coding test questions
+
+
+DESIGN PATTERNS (WHAT TO NAME + 1-LINE USE)
+Singleton (one instance, config/cache)
+Factory (create objects without exposing concrete classes)
+Builder (build complex objects stepwise, immutable)
+Strategy (swap algorithms at runtime)
+Observer (publish/subscribe events)
+Template Method (fixed steps, override hooks)
+Decorator (add behavior without subclassing)
+Proxy (lazy/load, security, AOP)
+
+WHAT IS CQRS
+CQRS = separate Commands (writes) from Queries (reads).
+Commands update write model (often emit events). Queries read from a read model/materialized view tuned for queries.
+Often paired with Event Sourcing (state = events).
+
+HOW SPRING BOOT WORKS (STEP-BY-STEP)
+@SpringBootApplication → component scan + auto-config.
+SpringApplication.run() creates ApplicationContext.
+Scans @Component/@Service/@Repository/@Controller and registers beans.
+Applies AutoConfiguration (starters) based on classpath/props.
+Creates DispatcherServlet, starts embedded Tomcat/Jetty.
+Maps routes (@RequestMapping/@GetMapping…), wires dependencies, app ready.
+
+
+13. Common Spring Boot Annotations (brief cheat-sheet)
+* @SpringBootApplication — main entry.
+* @Configuration — marks config class.
+* @Bean — defines a bean in config.
+* @Component, @Service, @Repository — stereotype annotations (auto-detected).
+* @Controller / @RestController — MVC controller (@RestController = @Controller + @ResponseBody).
+* @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping — map HTTP endpoints.
+* @RequestParam — query param; @PathVariable — path param; @RequestBody — request JSON -> object.
+* @Autowired — dependency injection (constructor injection preferred).
+* @Qualifier / @Primary — disambiguate beans.
+* @Value("${prop}") — inject property.
+* @ConfigurationProperties — bind complex props.
+* @Entity, @Table, @Id, @GeneratedValue — JPA mapping.
+* @Transactional — transaction boundary.
+* @ControllerAdvice / @ExceptionHandler — global error handling.
+* @Valid — trigger bean validation on request body.
+* @EnableScheduling / @Scheduled — scheduled tasks.
+
+
+
+Great question! This is a classic Java interview puzzle about try-catch-finally and return statements.
+
+🧪 Code:
+public int test() {
+    try {
+        int result = 10 / 0;
+        return result;
+    } catch (ArithmeticException e) {
+        return 1;
+    } finally {
+        return 2;
+    }
+}
+
+🔍 Explanation:
+* 10 / 0 → throws ArithmeticException
+* Control goes to the catch block → returns 1
+* But then finally block overrides the return and returns 2
+
+✅ Final Output: 2
+
+🧠 Interview Tip:
+“If both catch and finally have return statements, the return from finally overrides everything else — even exceptions or returns from try and catch blocks.”
+Let me know if you want a version where finally doesn't return, so you can compare!
+
+Great question! This is a frequently asked Java interview question related to String creation and memory management.
+
+🧪 Code:
+String str1 = "ra";
+String str2 = new String("ra");
+
+✅ How Many Objects Will Be Created?
+🔹 1. String str1 = "ra";
+* This will create 1 object in the String Pool if "ra" is not already there.
+* If "ra" is already in the pool, no new object is created.
+
+🔹 2. new String("ra")
+* This always creates a new object in the heap, regardless of whether "ra" exists in the pool or not.
+* It also checks if "ra" is in the pool:
+    * If not present: it adds 1 more object to the pool.
+    * But since "ra" was already created in step 1, no new pool object is created here.
+
+✅ Final Answer:
+* 1 object in the String Pool
+* 1 object in the Heap
+🔹 Total: 2 String objects
+
+🧠 Interview Summary:
+“String str = "ra" uses the String pool. new String("ra") creates a new heap object even if the string exists in the pool. So, total 2 objects are created — 1 in the pool and 1 in the heap.”
+Let me know if you'd like a memory diagram for this!
+
+
+Great question! You're testing inheritance, method overriding, and polymorphism in Java.
+
+🧪 Given Code:
+public class A {
+    A() { }
+
+    public void init() {
+        System.out.println("a");
+    }
+}
+
+class B extends A {
+    B() { }
+
+    public void init() {
+        System.out.println("b");
+    }
+}
+📌 Test Class:
+A a = new B();
+a.init();
+
+🔍 What Happens?
+1. A a = new B();
+    * You are creating an object of B, but referencing it using a variable of type A.
+    * This is runtime polymorphism.
+2. a.init();
+    * Even though a is declared as type A, the actual object is of type B.
+    * So, the overridden init() method in class B is called.
+
+✅ Output:
+b
+
+🧠 Interview Summary:
+“Even though the reference is of type A, since the actual object is of type B and init() is overridden, Java uses dynamic dispatch to call B's version of the method.”
+Let me know if you want constructor execution flow or to add super.init() as well!
+
+
+Great! Let's explore your question: "Can we apply overloading to the above example, and what will be the output?"
+
+🔁 First: Quick Recap of Overriding vs Overloading
+Concept	Overriding	Overloading
+Method name	Same	Same
+Parameters	Same	Different
+Inheritance	Required (child overrides parent)	Not required
+Runtime or Compile-time	Runtime (polymorphism)	Compile-time (method resolution)
+🔧 Modified Code with Overloading:
+public class A {
+    A() { }
+
+    public void init() {
+        System.out.println("A");
+    }
+
+    public void init(String msg) {
+        System.out.println("A: " + msg);
+    }
+}
+
+class B extends A {
+    B() { }
+
+    @Override
+    public void init() {
+        System.out.println("B");
+    }
+
+    public void init(int value) {
+        System.out.println("B value: " + value);
+    }
+}
+
+✅ Test Class:
+public class Test {
+    public static void main(String[] args) {
+        A a = new B();     // Reference type is A, object is B
+        a.init();          // calls overridden method in B
+        a.init("hello");   // calls method in A (String version)
+        
+        // a.init(10);     // ❌ Compile-time error: A doesn't have init(int)
+        
+        // To access init(int), you must cast:
+        ((B) a).init(10);  // ✅ Safe cast, object is really B
+    }
+}
+
+📤 Output:
+B
+A: hello
+B value: 10
+
+🧠 Interview Summary:
+“Overloading depends on reference type at compile time, while overriding depends on actual object at runtime. So a.init() calls B’s version (override), but a.init(int) fails unless casted, because A doesn’t declare it.”
+Let me know if you want the same logic with constructors or static methods too!
+
+
+
+
+
+Main Components
+1. Class Loader Subsystem
+    * Loads .class files into memory.
+    * Phases: Loading → Linking → Initialization.
+    * Delegation model (Bootstrap → Extension → Application classloader).
+2. Runtime Data Areas
+    * Method Area: Stores class metadata, static variables.
+    * Heap: Stores objects (shared memory).
+    * Stack: Each thread has its own stack → stores method frames, local variables.
+    * PC Register: Stores address of current instruction for each thread.
+    * Native Method Stack: For methods written in C/C++ (JNI).
+3. Execution Engine
+    * Interpreter: Reads bytecode line by line (slow).
+    * JIT Compiler: Compiles hot code into native code for speed.
+    * Garbage Collector (GC): Manages memory (removes unused objects).
+4. Native Libraries
+    * JNI interface → connects JVM with OS-dependent native libraries.
+
+Real-Time Example to Impress Interviewer
+👉 Suppose you run a Spring Boot microservice.
+1. JVM loads classes like EmployeeService.class via Class Loader.
+2. Heap stores all Employee objects created when requests come.
+3. Stack stores request thread variables (like requestId).
+4. JIT optimizes repeated service methods.
+5. GC removes old Employee objects after request completes.
+
+5. Quick Summary (Good to tell interviewer)
+👉 JVM Architecture = Class Loader + Runtime Data Areas + Execution Engine.
+* Class Loader → loads classes.
+* Memory Areas → stores code, objects, variables.
+* Execution Engine → runs bytecode (Interpreter + JIT + GC).
+
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+Java Memory Management — Interview-Ready Explanation
+“Java memory management is primarily handled by the JVM, and it ensures efficient allocation, usage, and cleanup of memory during program execution. It’s divided into several key areas, each with a specific role.”
+
+    * Method Area: Stores class metadata, static variables.
+    * Heap: Stores objects (shared memory).
+    * Stack: Each thread has its own stack → stores method frames, local variables. ; Stores method calls, local variables, and references. Each thread has its own stack.
+    * PC Register: Stores address of current instruction for each thread.
+    * Native Method Stack: For methods written in C/C++ (JNI).
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+Garbage Collection in Java — Interview-Ready Explanation
+“Garbage Collection in Java is an automatic memory management process handled by the JVM. Its main job is to identify and remove objects that are no longer reachable, freeing up heap memory and preventing memory leaks.”
+
+
+How GC Works — Step-by-Step
+1. Object Allocation
+    * Objects are created in the heap using new.
+    * References to these objects are stored in the stack.
+2. Reachability Analysis
+    * GC checks which objects are reachable from active threads, static references, or method stacks.
+    * Unreachable objects are marked for collection.
+3. Mark-and-Sweep Algorithm
+    * Mark: Traverse object graph and mark reachable objects.
+    * Sweep: Remove unmarked (unreachable) objects from memory.
+4. Compacting (Optional)
+    * After sweeping, GC may compact memory to reduce fragmentation.
+
+Types of Garbage Collectors
+Java offers several GC algorithms:
+GC Type	Best For
+Serial GC	Single-threaded, good for small apps
+Parallel GC	Multi-threaded, high throughput
+CMS (Concurrent Mark-Sweep)	Low pause time
+G1 GC	Balanced performance, default in Java 9+
+ZGC / Shenandoah	Ultra-low pause time, large heaps
+
+
+Category	Purpose	Examples
+Creational	Object creation mechanisms	Singleton, Factory, Builder
+Structural	Composition of classes and objects	Adapter, Decorator, Composite
+Behavioral	Communication between objects	Observer, Strategy, Command
+
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+What is CQRS
+CQRS (Command Query Responsibility Segregation)
+* Separates writes/commands from reads/queries.
+* Write model optimized for updates/business rules; read model optimized for querying (often denormalized).
+* Often paired with Event Sourcing (store events rather than current state). Real-world example: E-commerce orders
+* Command: PlaceOrderCommand handled by command handler -> persists order, emits OrderPlacedEvent.
+* Query: GetOrderSummaryQuery reads from a denormalized read store (fast query). Benefits: scalability, independent optimization, simpler read models. Tradeoffs: complexity, eventual consistency between write/read models.
+Practical Approaches
+1. Direct Read from Write Store (Bypass Read Model)
+* For critical queries where the latest value is needed (e.g., “get latest balance”), bypass the read model.
+* Query the write database (source of truth) directly.
+👉 Example:
+* In a banking app, transaction history can come from read DB (slightly stale),
+* But current balance comes from write DB to avoid stale data.
+
+2. Eventual Consistency with Real-Time Sync
+* Keep read and write models synced asynchronously via events (Kafka, RabbitMQ, etc.).
+* Use fast event propagation to reduce lag.
+* Still eventual consistency, but usually good enough.
+👉 Example: E-commerce → After placing order (write side), an OrderCreatedEvent updates the read store immediately. UI queries read DB for the latest order.
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+How Spring Boot Works — step by step
+1. Main class with @SpringBootApplication and public static void main calls SpringApplication.run().
+2. SpringApplication bootstraps: creates ApplicationContext, loads Environment and properties.
+3. Auto-configuration: Spring Boot scans spring.factories and applies auto-configs based on classpath and properties.
+4. Component scan registers @Component/@Service/@Controller/@Repository beans.
+5. Embedded server (Tomcat/Jetty/Undertow) starts if web app. Spring registers DispatcherServlet.
+6. Beans initialization: lifecycle callbacks (PostConstruct, InitializingBean) run.
+7. ApplicationStarted/ApplicationReady events fired — user code can listen.
+8. Application runs, handling requests through DispatcherServlet → controllers.
+
+
+Flow of a REST Service (request → response)
+1. Client sends HTTP request.
+2. Network/Load Balancer → hits application instance.
+3. Servlet Container receives request; DispatcherServlet (Spring MVC) receives it.
+4. HandlerMapping finds Controller method (based on @RequestMapping, HTTP verb).
+5. Interceptors / Filters run (preHandle).
+    1. Controller method executes — calls Service layer → Repository/DAO layer to access DB.
+6. Service returns DTO; Controller returns ResponseEntity (status + body).
+7. HTTP Message Converters serialize object to JSON (Jackson).
+8. Interceptors / Filters (postHandle, afterCompletion) run, response is sent.
+9. Client receives response.
+
+
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+
+
+SELECT *                    
+FROM employee
+WHERE salary = (SELECT MAX(salary) FROM employee);     or.   
+
+   SELECT * FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 0;
+
+
+SELECT DISTINCT salary
+FROM employee
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+
+
+@FunctionalInterface
+interface StudentFactory {
+    Student create(int id, String name, String location, String address);
+}
+
+@FunctionalInterface
+interface MathOperation {
+    int operate(int a, int b);
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Student Creation
+        StudentFactory factory = (id, name, location, address) -> new Student(id, name, location, address);
+
+        Student s1 = factory.create(1, "Rajesh", "Hyderabad", "Kukatpally");
+        System.out.println(s1);
+
+        // Math Operations
+        MathOperation sum = (a, b) -> a + b;
+        MathOperation multiply = (a, b) -> a * b;
+
+        System.out.println("Sum: " + sum.operate(10, 20));
+        System.out.println("Multiply: " + multiply.operate(10, 20));
+    }
+}
+
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+[[[[[[[[[[[[[[[[            ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]          [[[[[[[[[[[[[[[[.       ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  
+| Feature        | `map()`                        | `flatMap()`                           |
+| -------------- | ------------------------------ | ------------------------------------- |
+| Mapping type   | 1-to-1 transformation          | 1-to-many transformation              |
+| Output         | Stream of transformed elements | Flattened Stream of all elements      |
+| Nested Streams | Can produce nested streams     | Flattens nested streams automatically |
+| Use-case       | Transform object to object     | Transform object to multiple objects  |
+
+
+
+23. Java 17 Features Implemented
+* Sealed Classes: Control subclassing (used in transaction types).
+* Records: Immutable data carriers (record CustomerDTO(String id, String name)).
+* Pattern Matching for instanceof: Simplifies casting.
+* Text Blocks: Multi-line SQL queries cleanly.
+* Switch Expressions: Cleaner control flow.
+
+21. Multithreading, Multi-JVM, and Synchronized
+* Multithreading: Multiple threads share same memory → need synchronization.
+* synchronized keyword ensures atomic access to shared resources.
+* Multi-JVM: Different JVMs have separate memory → use distributed cache or message queues for coordination.
+Example:Example: In a payment gateway, synchronized ensures one thread updates account balance at a time.
+
+---
+
+### **1. Why do we have `static` keyword in Java?**
+
+* The `static` keyword allows members (variables/methods/blocks) to belong to the **class** rather than an **instance**.
+* Use-cases:
+
+  * **Memory efficiency:** Shared across all instances.
+  * **Utility methods:** Methods that do not depend on instance data (e.g., `Math.max()`).
+  * **Constants:** `static final` variables (e.g., `public static final int MAX_USERS = 100;`).
+
+**Example:**
+
+```java
+class Bank {
+    static String bankName = "ABC Bank"; // shared across all accounts
+}
+```
+
+---
+
+### **2. Why we create static methods and their benefits**
+
+* Belong to class rather than instance.
+* Can be called without creating an object.
+* Benefits:
+
+  * Memory-efficient.
+  * Easy utility methods (like `Collections.sort()`).
+  * Improves performance when shared logic is needed.
+
+---
+
+### **3. Try with multiple catch & exception handling**
+
+* Java allows **multiple catch blocks** to handle different exceptions separately.
+* **Exception handling flow:** JVM looks for matching catch block; if none found, exception propagates.
+
+**Example:**
+
+```java
+try {
+    int[] arr = new int[5];
+    arr[10] = 100; // ArrayIndexOutOfBoundsException
+} catch (ArithmeticException e) {
+    System.out.println("Arithmetic error: " + e.getMessage());
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Array index error: " + e.getMessage());
+} finally {
+    System.out.println("Cleanup code runs here.");
+}
+```
+
+---
+
+### **4. How `HashMap` identifies unique objects**
+
+* HashMap uses **hashCode()** and **equals()**:
+
+  * `hashCode()` → identifies bucket location.
+  * `equals()` → checks if two keys are logically equal.
+* If `hashCode()` matches but `equals()` is false → treated as unique key.
+
+---
+
+### **5. How to create synchronized ArrayList**
+
+```java
+List<String> list = Collections.synchronizedList(new ArrayList<>());
+```
+
+* Ensures thread-safe operations on the list.
+* In high-concurrency, `CopyOnWriteArrayList` is better.
+
+---
+
+### **6. Interfaces in Java**
+
+* Define **contract** without implementation.
+* Types:
+
+  * **Marker interface:** e.g., `Serializable`.
+  * **Functional interface:** e.g., `Runnable`, `Callable`.
+  * **Normal interface:** e.g., `List`.
+* **Runnable vs Callable:**
+
+| Feature     | Runnable                | Callable                     |
+| ----------- | ----------------------- | ---------------------------- |
+| Return type | void                    | T (generic type)             |
+| Exception   | Cannot throw checked    | Can throw checked exceptions |
+| Used with   | Thread, ExecutorService | ExecutorService + Future     |
+
+---
+
+### **7. `Thread.yield()`**
+
+* Suggests scheduler to **pause current thread** and allow other threads to execute.
+* No guarantee; purely a hint to JVM.
+
+---
+
+### **8. Read a file from a directory**
+
+```java
+Path path = Paths.get("C:/data/input.txt");
+List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+lines.forEach(System.out::println);
+```
+
+---
+
+### **9. `ConcurrentHashMap`**
+
+* Thread-safe alternative to HashMap.
+* Internal working:
+
+  * Uses **lock striping / segments** (Java 8 uses **synchronized on bins + CAS operations**).
+  * Allows **concurrent read/writes** without blocking entire map.
+
+---
+
+### **10. Internal working of HashMap**
+
+* Buckets based on `hashCode() % capacity`.
+* **Collision resolution:** Linked list → Java 8 uses **balanced tree (Red-Black Tree)** if list grows beyond threshold.
+* **Put operation:**
+
+  1. Compute hash
+  2. Locate bucket
+  3. Check `equals()` for duplicate keys
+  4. Add/update value
+* **Remove:** Locate bucket → remove node → rehash if needed.
+
+---
+
+### **11. Immutable objects & classes**
+
+* **Immutable class rules:**
+
+  * Mark class as `final`.
+  * Fields `private final`.
+  * No setters; only getters.
+  * Deep copy mutable fields in constructor.
+
+**Example:**
+
+```java
+final class Employee {
+    private final String name;
+    private final int id;
+    public Employee(String name, int id) { this.name = name; this.id = id; }
+    public String getName() { return name; }
+    public int getId() { return id; }
+}
+```
+
+---
+
+### **12. Create a final class**
+
+```java
+public final class Utility {
+    // No subclass can extend
+}
+```
+
+---
+
+### **13. Object class methods**
+
+* Every class inherits from `Object`.
+* Important methods:
+
+  * `toString()`, `equals()`, `hashCode()`, `clone()`, `finalize()`.
+* Internally:
+
+  * `equals()` compares references unless overridden.
+  * `hashCode()` provides integer representation for hashing.
+
+---
+
+### **14. OOP vs Functional Programming**
+
+| Feature  | OOP                   | Functional Programming      |
+| -------- | --------------------- | --------------------------- |
+| Paradigm | Object-oriented       | Function-oriented           |
+| State    | Mutable               | Immutable                   |
+| Example  | Java, C++             | Java Streams, Lambda        |
+| Focus    | Objects and behaviors | Functions & transformations |
+
+---
+
+### **15. JVM**
+
+* **Java Virtual Machine:** Runs bytecode on any platform.
+* Components:
+
+  * Class Loader
+  * Memory Area (Heap, Stack)
+  * Execution Engine
+  * Garbage Collector
+
+---
+
+### **16. Inheritance, Association, Composition**
+
+* **Inheritance:** `extends` (is-a relation).
+* **Association:** Object uses another object (has-a).
+* **Composition:** Stronger association; part cannot exist without whole.
+
+---
+
+### **17. Aggregation**
+
+* Weak association; part can exist independently.
+* Example: `Library` has many `Books` → books can exist outside library.
+
+---
+
+### **18. Abstract class**
+
+* Cannot be instantiated; can have both abstract and concrete methods.
+* Call methods via subclass:
+
+```java
+abstract class Shape { abstract void draw(); }
+class Circle extends Shape { void draw() { System.out.println("Circle"); } }
+```
+
+---
+
+### **19. String immutability**
+
+* Strings are **final and immutable**.
+* Benefits:
+
+  * Thread-safe
+  * Memory-efficient (String Pool)
+  * Safe as Map key
+
+---
+
+### **20. HashMap vs ConcurrentHashMap**
+
+| Feature          | HashMap              | ConcurrentHashMap                         |
+| ---------------- | -------------------- | ----------------------------------------- |
+| Thread-safety    | No                   | Yes                                       |
+| Null keys/values | Allowed              | Null keys not allowed                     |
+| Locking          | None / external sync | Bucket-level (Java 8: CAS + synchronized) |
+| Use-case         | Single-threaded      | Multi-threaded                            |
+
+---
+
+### **21. TreeSet internal working**
+
+* Implemented using **Red-Black tree**.
+* Automatically sorts elements.
+* No duplicates allowed.
+
+---
+
+### **22. HashMap `remove()`**
+
+* `map.remove(key)` → removes key-value pair, returns value.
+
+---
+
+### **23. Synchronized vs Concurrent Collections**
+
+| Feature     | Synchronized Collection        | Concurrent Collection                       |
+| ----------- | ------------------------------ | ------------------------------------------- |
+| Locking     | Full object lock               | Fine-grained locking (bucket-level)         |
+| Performance | Low under concurrency          | High under concurrency                      |
+| Examples    | `Collections.synchronizedList` | `ConcurrentHashMap`, `CopyOnWriteArrayList` |
+
+---
+
+### **24. Remove duplicates from ArrayList**
+
+```java
+List<Integer> list = Arrays.asList(1,2,2,3);
+List<Integer> uniqueList = new ArrayList<>(new HashSet<>(list));
+```
+
+---
+
+### **25. Convert List to Array**
+
+```java
+List<String> list = Arrays.asList("A","B");
+String[] arr = list.toArray(new String[0]);
+```
+
+---
+
+### **26. Thread Concepts**
+
+* **Thread Creation:** `extends Thread` or `implements Runnable`.
+* **Thread States:** New, Runnable, Running, Waiting, Timed Waiting, Terminated.
+* **Synchronization:** Prevents race conditions.
+* **Deadlocks:** Occur when threads wait infinitely for each other.
+* **Volatile:** Ensures visibility across threads.
+* **Synchronized method/block:** Locks to avoid conflicts.
+* **Thread Dump:** Snapshot of thread states for debugging.
+
+---
+
+### **27. Thread creation example**
+
+```java
+class MyThread extends Thread {
+    public void run() { System.out.println("Thread running"); }
+}
+new MyThread().start();
+```
+
+**Difference:**
+
+| Method    | Description                       |
+| --------- | --------------------------------- |
+| `start()` | Creates new thread, calls `run()` |
+| `run()`   | Executes in current thread        |
+
+---
+
+### **28. Executor Framework**
+
+* Manages thread pools efficiently.
+* Key classes:
+
+  * `ThreadPoolExecutor`, `ScheduledThreadPoolExecutor`
+  * `Callable` + `Future` for async tasks
+  * `ThreadLocal` for thread-specific storage
+
+---
+
+### **29. Java 8 HashMap updates**
+
+* Collisions handled with **Red-Black tree** if bucket > 8.
+* More efficient get/put operations.
+* Improved iteration using **forEach, stream**.
+
+---
+
+### **30. Synchronize a collection**
+
+```java
+List<String> list = Collections.synchronizedList(new ArrayList<>());
+```
+
+---
+
+### **31. Design Patterns**
+
+* Common patterns used in enterprise:
+
+  * **Singleton:** DB connection pool
+  * **Factory:** Create service objects based on type
+  * **Proxy:** Remote service proxy
+  * **Observer:** Event listeners
+
+**Proxy pattern:** Controls access to object (e.g., lazy loading in Hibernate).
+**Factory pattern:** Encapsulates object creation (e.g., `ShapeFactory.create("Circle")`).
+
+
+
+Feature	stream()	parallelStream()
+Execution	Single thread	Multiple threads (ForkJoinPool)
+Order	Preserved	Not guaranteed
+Performance	Good for small tasks	Good for large CPU-heavy tasks
+Safety	Safe if stateless	Must avoid shared mutable state
+Splitting	No splitting	Splits data source into chunks
+
+Explain Collection vs Stream
+1) Nature
+* Collection: A data structure that stores elements in memory (e.g., List, Set, Map). Represents data at rest.
+* Stream: A data processing pipeline that operates on elements from a source (like a collection). Represents data in motion.
+2) Storage
+* Collection: Physically stores elements; you can add, remove, or update data.
+* Stream: Does not store elements; only processes them.
+3) Mutability
+* Collection: Mutable — elements can be added, removed, or updated.
+* Stream: Immutable — operations produce new streams, source remains unchanged.
+4) Operations
+* Collection: CRUD operations (Create, Read, Update, Delete).
+* Stream: Functional operations — map, filter, reduce, collect.
+
+Functional Interfaces (Real-life Usage)
+Predicate
+Predicate<User> isActive = user -> user.isActive();
+
+List<User> activeUsers = users.stream()
+    .filter(isActive)
+    .collect(Collectors.toList());
+Consumer
+Consumer<User> sendNotification = user -> notificationService.send(user);
+
+users.forEach(sendNotification);
+Function
+Function<User, UserDTO> toDTO = user -> new UserDTO(user.getId(), user.getName());
+
+List<UserDTO> dtoList = users.stream()
+    .map(toDTO)
+    .collect(Collectors.toList());
+
+CopyOnWriteArrayList — What & When to Use
+Definition
+A thread-safe list using a copy-on-write strategy:
+* Every write (add/remove) → creates a new copy of the internal array.
+* Reads are fast, lock-free, and use a snapshot.
+* Iterators never throw ConcurrentModificationException.
+How It Works
+* Reads: Happen on a volatile snapshot → super fast.
+* Writes: Lock, copy array, modify, replace reference.
+* Iterators: Snapshot-based, fail-safe.
+Best Use Case
+* Read-heavy, rarely updated lists (e.g., listeners, app config lists).
+* Avoid for large lists or frequent writes.
+
+How Resize Happens in HashMap
+HashMap resizes by doubling capacity when size exceeds capacity * loadFactor.
+* Entries are redistributed.
+* Since Java 8, rehashing uses a bitwise method (low/high bucket split).
+* Maintains O(1) amortized performance.
+
+Internal Working of ConcurrentHashMap
+Key Concepts
+* Thread-safe without locking the entire map.
+* Uses CAS, bucket-level locking, and parallel resizing.
+* Reads: Lock-free
+* Writes: Lock only the bucket
+* Much more scalable than Hashtable or synchronizedMap.
+
+Java 17 Features (Implemented)
+* Sealed Classes → Controlled inheritance
+* Records → Immutable DTOs
+* Pattern Matching for instanceof
+* Switch Expressions
+* Text Blocks → Clean JSON/SQL
+
+ClassNotFoundException vs NoClassDefFoundError
+ClassNotFoundException
+* Checked exception
+* Occurs when: Class is dynamically loaded (Class.forName, ClassLoader.loadClass) but not found at runtime.
+Real Example: JDBC driver missing from classpath → Class.forName("com.mysql.Driver") fails.
+NoClassDefFoundError
+* Unchecked error
+* Occurs when: Class was present at compile time but missing/corrupted at runtime.
+Real Example: Deployed JAR missing a dependency → application crashes immediately.
+
+Why synchronized Doesn’t Scale
+* Works only inside a single JVM.
+* Causes blocking & lock contention.
+* Not suitable for distributed systems or high concurrency.
+* Use distributed locks or concurrent utilities instead.
+
+How to Improve JVM Performance
+* Tune GC
+* Optimize heap regions
+* Reduce object creation
+* Use JIT optimizations
+* Minimize lock contention
+* Use profilers (JFR, VisualVM, YourKit)
+* Reduce allocations and synchronized blocks
+
+What Does Immutable Mean?
+An object whose state cannot change after creation. Example: String — stored in String Pool, safe for caching, thread-safe.
+
+map() vs flatMap()
+Feature	map()	flatMap()
+Transformation	One-to-one	One-to-many
+Output	Same size as input	Flattened stream
+Use Case	Convert strings → lengths	Combine lists of phone numbers
+Checked vs Unchecked Exception
+* Checked: Must handle (IOException, SQLException, ClassNotFoundException).
+* Unchecked: No handling required (NullPointerException, ArithmeticException).
+
+
+
+---
+
+

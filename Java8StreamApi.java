@@ -5,244 +5,353 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Java8StreamApi{
+    
+   public static void main(String[] args) {
+        int[] w = {1,2, 3,4};
+        rotateNumber(w);
 
-    record Car(String type , String make , String model, Integer engineCapacity){}
+        String str = "abcabcbb";
+        findSubString(str);
+        //prime
+        int n=50;
+        primeNumber(n);
 
-    public static void main(String[] args) {
-           List<Car> cars = List.of(
-                   new Car("sedan" , "BMW", "530",1998),
-                   new Car("sedan", "AUDi", "A5" , 1998),
-                   new Car("sedan", "mercedes", "E-class", 2500),
-                   new Car("hatchBack" , "skoda", "Octavia", 1600),
-                   new Car("hatchBack", "Toyata", "TypeR",1450)
-           );
-         // the above questions i written a code please correct if any mistake and provide me correct code
-
-
-
-        //1. **Find the only hatchback in the list of cars.**
-        List<Car> hatchBack = cars.stream().filter(e -> e.type.equalsIgnoreCase("hatchBack")).toList();
-       // System.out.println("only hatchback" + hatchBack);
-
-        //2. **Filter all cars with an engine capacity greater than 2000cc.**
-        List<Car> engineCapacityGreaterthan = cars.stream().filter(e -> e.engineCapacity > 2000).toList();
-       // System.out.println("engineCapacityGreaterthan" + engineCapacityGreaterthan);
+        //output : R
+        String nonRepeated ="Rajesh";
+        findFirstNonRepeatedChar(nonRepeated);
         
-        //3. **Find all cars that are of type "sedan" in the list.**
-        List<Car> sedanAllCars = cars.stream().filter(e -> e.type.equalsIgnoreCase("sedan")).toList();
-        //System.out.println("sedanAllCars" + sedanAllCars);
+        String str11 = "badasgffgwxb";
+        String str22 = "xcaxbabg";
+        //find common duplicate in String
+        //out put: [a, a, b, b, g, g, x] print common duplicate
+        findCommonDuplicate(str11,str22);
 
-        //4. **Get the car with the highest engine capacity.**
-        Optional<Car> highestEngineCapacity = cars.stream().max(Comparator.comparingInt(Car::engineCapacity));
-      // System.out.println("highestEngineCapacity"+highestEngineCapacity);
-        
-        //5. **Count how many cars are of type "sedan."**
-        Long countSedan = cars.stream().filter(e -> e.type.equalsIgnoreCase("sedan")).collect(Collectors.counting());
-       // System.out.println("count" +  countSedan);
-        
-        //6. **Find all cars made by BMW.**
-        List<Car> findBmw = cars.stream().filter(e -> e.make.equalsIgnoreCase("BMW")).toList();
-      //  System.out.println("findBMWCar" + findBmw);
+        // palidrome
+        String s4 = "madam";
+        checkPalidrome(s4);
 
-        //7. **Get a list of all car makes in uppercase.**
-        List<String> allCarMake = cars.stream().map(Car::make).map(String::toUpperCase).toList();
-       // System.out.println("allCarMake" + allCarMake);
+        //Anagram
+        String str10 = "listen";
+        String str20 = "silentg";
+        checkAnagram(str10,str20);
 
-        //8. **Check if there is any car in the list with a capacity less than 1500cc.**
-        Car capacityLessThan1500cc = cars.stream().filter(e -> e.engineCapacity < 1500).findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Not avaliable 1500 ..."));
-       // System.out.println("capacityLessThan1500cc" + capacityLessThan1500cc);
+        //find Vowels
+        String inputVowels = "This is a sample string with vowels";
+        findOutVowels(inputVowels);
 
-        //9. **Sort the cars by engine capacity in descending order.**
-        List<Integer> descendingEngineCapacity = cars.stream().map(Car::engineCapacity).
-                sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-       // System.out.println("descendingEngineCapacity" + descendingEngineCapacity);
-        
-        //10. **Find the first car made by Toyota.**
-        List<Car> findToyata = cars.stream().filter(e -> e.make.equalsIgnoreCase("Toyata")).collect(Collectors.toList());
-       // System.out.println("findToyata" + findToyata);
+        // find common word
+        String[] commonStr = {"flow", "flight", "flower"};
+        commonWord(commonStr);
 
-        //11. **Group the cars by their type (e.g., sedan, hatchback).**
-        List<Car> groupSedanAndHatchBack = cars.stream().filter(e -> e.type.equalsIgnoreCase("sedan")
-                || e.type.equalsIgnoreCase("hatchBack")).collect(Collectors.toList());
-       // System.out.println("groupSedanAndHatchBack " + groupSedanAndHatchBack);
-        
-        //12. **Get a list of all unique car makes.**
-        List<String> allUniqueCarMakes = cars.stream().map(Car::make).distinct().collect(Collectors.toList());
-        //System.out.println("allUniqueCarMakes" + allUniqueCarMakes);
+        //Max and Min words lenght
+        String minAndMax ="Rajesh mogga and rajesh";
+       findMinAndMinWord(minAndMax);
 
-        //13. **Find all cars with an engine capacity less than 2000cc.**
-        List<Car> capacityLessThan2000cc = cars.stream().filter(e -> e.engineCapacity < 2000).collect(Collectors.toList());
-       // System.out.println("capacityLessThan2000cc" + capacityLessThan2000cc);
+        //Each word count
+        String eachWordCount = "Java Developer Interview Java";
+        eachCountWord(eachWordCount);
 
-        //14. **Calculate the average engine capacity of all cars in the list.**
-        OptionalDouble averageEngineCapacity = cars.stream().mapToInt(Car::engineCapacity).average();
-      //  System.out.println("averageEngineCapacity" + averageEngineCapacity);
 
-        //15. **Find the car with the smallest engine capacity.**
-        Optional<Car> smallestEngineCapacity = cars.stream().min(Comparator.comparingInt(Car::engineCapacity));
-       // System.out.println("smallestEngineCapacity " + smallestEngineCapacity);
+        //print reversenumber
+        int reverseNumber = 12345;
+        printReverseNum(reverseNumber);
 
-        //16. **List all cars where the make starts with 'B'.**
-        List<Car> StartWithB = cars.stream().filter(e -> e.make.startsWith("B")).collect(Collectors.toList());
-       // System.out.println("StartWithB" + StartWithB);
+        // get value of g OutPut : {g=2}
+        String stri = "Rajesh Mogga Rajesh";
+        countG(stri);
 
-        //17. **Filter all cars made by "Mercedes" and have an engine capacity over 2500cc.**
-        List<Car> mercedesAndEngine = cars.stream().filter(e -> e.make.equalsIgnoreCase("Mercedes")
-                && e.engineCapacity > 2500).collect(Collectors.toList());
+        // even and Odd [2, 4, 6, 8]even and odd[1, 3, 5, 7, 9]
+        List<Integer> numss = List.of(1,2,3,4,5,6,7,8,9);
+        printEvenAndOdd(numss);
 
-        mercedesAndEngine.forEach(car -> System.out.println(car));
-       // System.out.println("mercedesAndEngine  " + mercedesAndEngine);
+        //missing number
+        int[] arr = {1,2,4};
+        int nu = 4;
+        missingNumber(arr, nu);
 
-        //18. **Check if all cars are sedans.**
-        boolean checkIfSedan = cars.stream().allMatch(e -> e.type.equalsIgnoreCase("sedan"));
-       // System.out.println("checkIfSedan " + checkIfSedan);
+        int[] numSum={3,4,7,2,-3,1};
+        int k = 7;
+        subArraySum(numSum,k);
+        System.out.println(" print subarray "+subArraySum(numSum,k));
 
-        //19. **Find the car with the longest model name.**
-        List<String> longestModelName = cars.stream().map(Car::model)
-                .reduce((word1, word2) -> word1.length() > word2.length() ? word1 : word2).stream().collect(Collectors.toList());
-        //System.out.println("LongestModelName " + longestModelName);
+        int[] nums = {1, 2, 3, 4, 5, 6, 7};
+        int kk = 3;
+        int nn = nums.length;
+        kk = kk % nn;
 
-        //20. **Sort the cars alphabetically by their model names.**
-        List<String> alphabeticallyOrderModel = cars.stream().map(Car::model).sorted().collect(Collectors.toList());
-       // System.out.println("alphabeticallyOrderModel " + alphabeticallyOrderModel);
+        int[] rotated = new int[ nn ];
+        System.arraycopy(nums, nn - kk, rotated, 0, kk);
+        System.arraycopy(nums, 0, rotated, kk, nn - kk);
+        System.out.println(Arrays.toString(rotated));
 
-        //21. **Find if there is any car of type "hatchback" with an engine capacity greater than 1500cc.**
-        boolean hatchbackAndEngine = cars.stream()
-                .anyMatch(car -> car.type().equalsIgnoreCase("hatchBack") && car.engineCapacity() > 1500);
+        int[] twoSum ={2,11,7,15};
+        int target =9;
+        twoSumProg(twoSum, target);
+        System.out.println(Arrays.toString(twoSumProg(twoSum, target)));
 
-       // System.out.println("hatchbackAndEngine " + hatchbackAndEngine);
+        //check the number twice in int
+        int[] i1 = {1, 2, 3, 1};
+        checktwice(i1);
+        System.out.println( checktwice(i1));
 
-        //22. **Get the total sum of engine capacities of all cars.**
-        int sumEngineCapa = cars.stream().mapToInt(Car::engineCapacity).sum();
-       // System.out.println("sumEngineCapa " + sumEngineCapa);
+        List<String> names = Arrays.asList("Alice", "Bob", "Andrew", "Charlie", "anna");
+        long count = names.stream()
+                .filter(name -> name.toLowerCase().startsWith("a"))
+                .count();
+        System.out.println("Count of names starting with 'a': " + count);
 
-        //23. **Find all cars where the model name contains the letter "A."**
-        List<Car> modelLetterA = cars.stream().filter(e -> e.model.contains("A")).collect(Collectors.toList());
-       // System.out.println("modelLetterA " + modelLetterA);
-        
-        //24. **Remove all cars of type "sedan" from the list.**
+        //// Output: [2, 2]
+        List<Integer> i11 = new ArrayList<>(Arrays.asList(1, 2, 2, 1));
+        List<Integer> i22 = new ArrayList<>(Arrays.asList(2, 2));
+        checkDuplicate(i11,i22);
+        System.out.println("  Check Duplicate TWice" + checkDuplicate(i11,i22));
 
-     /*   List<Car> toRemoveSedan  = new ArrayList<>();
-        for(Car carss : cars){
-            if(carss.type.equalsIgnoreCase("sedan")){
-                toRemoveSedan.add(carss);
+    }
+
+    private static void checkDuplicate(List<Integer> i11, List<Integer> i22) {
+        List<Integer> list = new ArrayList<>();
+        for (Integer num : i22) {
+            if (i11.contains(num)){
+                list.add(num);
             }
         }
-        cars.removeAll(toRemoveSedan);
-      //  System.out.println(cars);
-        // java to java8
-      cars = cars.stream()
-                .filter(car -> !car.type().equalsIgnoreCase("sedan"))  // Keep only cars that are not of type "sedan"
-                .collect(Collectors.toList());  // Collect the filtered results back into a list
-                
-      */
+       System.out.println(list);
+    }
 
-
-        //25. **Get the car with the second highest engine capacity.**
-        List<Car> sortedSecondHighestEng1 = cars.stream().sorted(Comparator.comparingInt(Car::engineCapacity).reversed())
-                .skip(1).findFirst().stream().collect(Collectors.toList());
-        Optional<Integer> sortedSecondHighestEng = cars.stream().map(Car::engineCapacity).sorted(Comparator.reverseOrder())
-                .skip(1).findFirst();
-       // System.out.println("sortedSecondHighestEng" + sortedSecondHighestEng);
-
-        //26. **Find all cars whose make ends with "a."**
-        List<Car> endWithA = cars.stream().filter(e -> e.make.endsWith("a")).collect(Collectors.toList());
-       // System.out.println("endWithA" + endWithA);
-
-        //27. **List all cars sorted by their make in ascending order.**
-        List<String> ascedingOrderMake = cars.stream().map(Car::make).sorted().collect(Collectors.toList());
-        //System.out.println("ascedingOrderMake " +ascedingOrderMake);
-
-        //28. **Get a map of car types to lists of cars.**
-        List<String> listofTypes = cars.stream().map(Car::type).collect(Collectors.toList());
-       // System.out.println("listofTypes " + listofTypes);
-
-        //29. **Find the average engine capacity of hatchback cars only.**
-        OptionalDouble OnlyHatchCapAverage = cars.stream().filter(e -> e.type.equals("hatchBack")).mapToInt(Car::engineCapacity).average();
-        if(OnlyHatchCapAverage.isPresent()) {
-            //System.out.println("OnlyHatchCapAverage" + OnlyHatchCapAverage);
+    private static boolean checktwice(int[] i1) {
+        Set<Integer> set = new HashSet<>();
+        for (Integer num :i1 ) {
+            if (!set.add(num)){
+                return true;
+            }
         }
-        else {
-           // System.out.println("OnlyHatchCapAverage Not found" );
+        return false;
+    }
 
+    private static int[] twoSumProg(int[] twoSum, int target) {
+        Map<Integer,Integer> map = new HashMap<>();
+        for (int i = 0; i < twoSum.length; i++) {
+            int component = target - twoSum[i];
+            if (map.containsKey(component)){
+                return  new int[] {map.get(component),i};
+            }
+            else {
+                map.put(twoSum[i], i);
+            }
         }
+        return new int[] {};
+
+    }
 
 
-        //30. **Check if there is a car with an engine capacity exactly equal to 1998cc.**
-        List<Car> exactEqualCap = cars.stream().filter(e -> e.engineCapacity.equals(1998)).collect(Collectors.toList());
-       // System.out.println("exactEqualCap" + exactEqualCap);
+    private static int subArraySum(int[] numSum, int k) {
+        Map<Integer,Integer> map = new HashMap<>();
+        map.put(0,1);
+        int ans =0;
+        int sum =0;
 
-        //31. **Create a list of all car models that are from "Audi" and "BMW" only.**
-        List<String> allModelAudiBMW = cars.stream().filter(e -> e.make.equalsIgnoreCase("AUDi")
-                || e.make.equalsIgnoreCase("BMW")).map(car ->  car.model).collect(Collectors.toList());
-        //System.out.println("allModelAudiBMW "  + allModelAudiBMW);
+        for (int i = 0; i < numSum.length; i++) {
+            sum += numSum[i];
 
-        //32. **Find the make of the car with the longest engine capacity.**
-        //Answwer 4th
+            if(map.containsKey( sum - k)){
+                ans += map.get(sum-k);
+            }
 
-        //33. **Get a list of all "sedan" cars, sorted by their model names.**
-        List<Car> allSedanSortByModel = cars.stream().filter(e -> e.type.equalsIgnoreCase("sedan"))
-                .sorted(Comparator.comparing(Car::model)).collect(Collectors.toList());
-       // System.out.println("allSedanSortByModel"  + allSedanSortByModel);
+            map.put(sum, map.getOrDefault(sum,0) +1);
+        }
+        return ans;
+    }
 
-        //34. **Find if there is a car whose model name is exactly "A5."**
-       // 35. **Create a map of car types to the count of cars of each type.**
-        Map<String, Long> eachCarTypeCount = cars.stream().map(Car::type).map(String::toUpperCase)
+    private static void missingNumber(int[] arr, int nu) {
+        Set<Integer>set = new HashSet<>();
+        Set<Integer> collect1 = Arrays.stream(arr).boxed().collect(Collectors.toSet());
+        List<Integer> collect = IntStream.range(1, 4).boxed().filter(e -> !collect1.contains(e))
+                .collect(Collectors.toList());
+        System.out.println(collect);
+
+
+    }
+
+    private static void printEvenAndOdd(List<Integer> numss) {
+        Map<Boolean, List<Integer>> evenANDOdd = numss.stream().collect(Collectors.partitioningBy(n -> n % 2 == 0));
+        List<Integer> even = evenANDOdd.get(true);
+        List<Integer> Odd = evenANDOdd.get(false);
+        System.out.println(even + "even and odd" + Odd);
+
+    }
+
+    private static void countG(String stri) {
+        String ss = new StringBuilder(stri).reverse().toString();
+        System.out.println(ss);
+
+        Map<String, Long> collect3 = Arrays.stream(stri.split("")).filter(e -> e.equals("g"))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-       // System.out.println("eachCarTypeCount  " + eachCarTypeCount);
-        
-        //36. **Get a list of all cars with an engine capacity between 1500 and 2000cc:**
-        //    `[530, A5, Octavia]`
-        List<String> capacityBetween = cars.stream().filter(e-> e.engineCapacity > 1500 && e.engineCapacity <2000)
-                .map(Car::model).collect(Collectors.toList());
-       // System.out.println("capacityBetween  " + capacityBetween);
+        System.out.println(collect3 +" get value of g OutPut ");
+    }
 
-        //37. **Find the first car of type "hatchback":**
-        //    `Octavia`
-        List<String> firstCarHatchBack1 = cars.stream().filter(e -> e.type.equalsIgnoreCase("hatchBack"))
-                .map(Car::model).findFirst().stream().toList();
-      //  System.out.println("firstCarHatchBack1  " + firstCarHatchBack1);
+    private static void printReverseNum(int reverseNumber) {
+        int reversed = Integer.parseInt(new StringBuilder(String.valueOf(reverseNumber))
+                .reverse()
+                .toString()
+        );
+        System.out.println("Reversed: " + reversed);
 
+    }
 
-        //38. **Group the cars by their engine capacity ranges (e.g., less than 1500cc, 1500-2000cc, etc.):**
-         //`{<1500cc=[TypeR], 1500-2000cc=[Octavia, A5, 530], >2000cc=[E-class]}`
+    private static void eachCountWord(String eachWordCount) {
+        Map<String, Long> wordCount1 = Arrays.stream(eachWordCount.split(" "))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        Map<String, List<String>> groupByEngCapEachModel = cars.stream().collect(Collectors.groupingBy(
-                car -> {
-                    if (car.engineCapacity < 1500)
-                        return "<1500CC";
-                    else if (car.engineCapacity <= 2000)
-                        return "1500 - 2000CC";
-                    else return ">2000CC";
-                },
-                Collectors.mapping(Car::model, Collectors.toList())
-        ));
-        //System.out.println("groupByEngCapEachModel ...!" + groupByEngCapEachModel);
+        wordCount1.forEach((k,v) -> System.out.println(k + " each word count by name" + v));
+        List<String> list = Arrays.asList("apple banana cherry ","apple cherry" );
 
-        Map<String, List<String>> grpCarByMakeandListModel = cars.stream().collect(Collectors.groupingBy(Car::make,
-                Collectors.mapping(Car::model, Collectors.toList())));
-       // System.out.println("grpCarByMakeandListModel....." + grpCarByMakeandListModel);
-        
-        
-        //List all unique car types
-        List<String> uniqueCar = cars.stream().map(Car::type).distinct().collect(Collectors.toList());
-        //System.out.println("uniqueCar..." + uniqueCar);
+        Map<String, Long> collect = list.stream().flatMap(st -> Arrays.stream(st.trim().split("\\s+")))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        Map<Boolean, List<Car>> partitSedan = cars.stream().collect(Collectors.partitioningBy(car -> car.type.equals("sedan")));
-        //System.out.println(partitSedan);
-
-        //49. **Return the list of all cars whose make is not "BMW":** `[A5, E-class, Octavia, TypeR]`
-        List<String> notBMW = cars.stream().filter(e -> e.make != "BMW").map(Car::model).collect(Collectors.toList());
-       // System.out.println("notBMW ......!" + notBMW);
-
-        //39. **List all car makes in the list and display the car count for each make in descending order:**
-        // `[BMW: 1, AUDi: 1, mercedes: 1, skoda: 1, Toyata: 1]`
-        Map<String, Long> countEachMake = cars.stream().map(Car::make).sorted().collect(Collectors
-                .groupingBy(Function.identity(), Collectors.counting()));
-       // System.out.println("countEachMake ....!" + countEachMake);
+        collect.forEach((k, v) -> System.out.println(k + " " + v));
 
 
 
     }
+
+    private static void findMinAndMinWord(String minAndMax) {
+        Map<String, Long> collectMain = Arrays.stream(minAndMax.toLowerCase().split("\\s+"))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        Map.Entry<String, Long> maxWOrd = collectMain.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
+        Map.Entry<String, Long> minWord = collectMain.entrySet().stream().min(Map.Entry.comparingByValue()).orElse(null);
+
+        System.out.println(maxWOrd + " max and min " + minWord);
+
+    }
+
+    private static void commonWord(String[] commonStr) {
+        String prefix = Arrays.stream(commonStr)
+                .reduce((s1, s2) -> {
+                    int i = 0;
+                    while (i < s1.length() && i < s2.length() && s1.charAt(i) == s2.charAt(i)) {
+                        i++;
+                    }
+                    return s1.substring(0, i);
+                })
+                .orElse("");
+    }
+
+    private static void findOutVowels(String inputVowels) {
+        Map<Character, Long> vowelCount = inputVowels.toLowerCase()
+                .chars()
+                .mapToObj(c -> (char) c)
+                .filter(ch -> "aeiou".indexOf(ch) != -1)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println(vowelCount);
+    }
+
+    private static void checkAnagram(String str10, String str20) {
+        String anagram1 = str10.replaceAll("\\s", "").toLowerCase();
+        String anagram2 = str20.replaceAll("\\s", "").toLowerCase();
+
+        boolean prgAnagram = anagram1.chars().sorted().boxed().collect(Collectors.toList())
+                .equals(anagram2.chars().sorted().boxed().collect(Collectors.toList()));
+        System.out.println(prgAnagram + " check the anangram");
+
+        List<String> list4 = Arrays.asList("act", "tub", "god", "cat", "dog", "tac", "but");
+        Collection<List<String>> result = list4.stream()
+                .collect(Collectors.groupingBy(s -> {
+                    char[] chars = s.toCharArray();
+                    Arrays.sort(chars);
+                    return new String(chars);
+                }))
+                .values();
+
+        System.out.println(result + " anagram check ");
+
+    }
+
+    private static void checkPalidrome(String s4) {
+        String reverse = new StringBuilder(s4).reverse().toString();
+        if(s4.equals(reverse)){
+            System.out.println("its palidorme");
+        }else {
+            System.out.println("not palidrome");
+        }
+        List<String> rightStr = Arrays.asList("mission","nissan","tit","tat","oyo");
+
+        String sy = rightStr.stream().filter(e -> e.equalsIgnoreCase(new StringBuilder(e).reverse().toString()))
+                .findFirst().get();
+        System.out.println(sy);
+    }
+
+    private static void findCommonDuplicate(String str1, String str2) {
+        List<Character> duplicateOne = str1.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+        List<Character> duplicateTwo = str2.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+
+        List<Character> commonDuplicate = duplicateOne.stream().filter(duplicateTwo::contains).collect(Collectors.toList());
+        List<String> duplicate = commonDuplicate.stream().sorted().map(String::valueOf).collect(Collectors.toList());
+        System.out.println(duplicate + " print common duplicate");
+
+    }
+    
+
+    private static void findFirstNonRepeatedChar(String nonRepeated) {
+
+        String key = Arrays.stream(nonRepeated.split(""))
+                .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream().filter(v -> v.getValue() == 1).findFirst().get().getKey();
+        System.out.println(key);
+    }
+
+    private static void primeNumber(int n) {
+
+        for(int i =2; i <= n; i++){
+            boolean isPrime = true;
+            for (int j =2; j <= i/2; j++){
+                if( i%j == 0){
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime){
+                System.out.println(i +" is prime");
+            }
+        }
+    }
+
+
+    private static void findSubString(String str) {
+        int start =0; int end = 0; int max_lenght =0 ;  int max_Sustring =0;
+
+        List<Character> list = new ArrayList<>();
+
+        while (end < str.length()){
+
+            char endChar = str.charAt(end);
+            char startChar = str.charAt(start);
+
+            if (!list.contains(endChar)){
+                list.add(endChar);
+                end++;
+                if(list.size() > max_lenght){
+                    max_lenght = list.size();
+                    max_Sustring = start;
+                }
+             }
+            else {
+                list.remove(Character.valueOf(startChar));
+                start++;
+            }
+         }
+        String substring = str.substring(max_Sustring, max_Sustring + max_lenght);
+        System.out.println(substring);
+        System.out.println(max_lenght);
+    }
+
+    private static void rotateNumber(int[] w) {
+        List<Integer> collect = Arrays.stream(w).boxed().collect(Collectors.toList());
+        for(int i =0 ; i < 4; i++ ){
+            Collections.rotate(collect , 1);
+            System.out.println(collect.toString().replaceAll("[\\[\\]]","" + "rotate values "));
+        }
+
+    }
+    
 }
