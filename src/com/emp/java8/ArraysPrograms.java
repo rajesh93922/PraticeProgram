@@ -19,7 +19,6 @@ public class ArraysPrograms {
         int[] insertRandom = {20, 30, 40};
         int ramdomValue = 10 ;
         insertValueRandom(insertRandom , ramdomValue);
-
     }
 
     private static void insertValueRandom(int[] oringnalValue, int ramdomValue) {
