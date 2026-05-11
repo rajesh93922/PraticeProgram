@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Java8Fequentasking {
-	
+	//DSA COURSE LINK link : https://github.com/ashishps1/awesome-leetcode-resources 
+	//Link : https://drive.google.com/drive/mobile/folders/1L7A941Lz6N7oQarlS8j3eoasVPhmOS8l?utm_source=sp_auto_dm&fbclid=PAVERFWARpmldleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadnKrdBLtLUwL6n2PaWMJXltzSQXLMFY6ZJ80kJKjfHF7wkhX-kuyumUjudHQ_aem_8hf_5oycfDYUvadcM7dzbg
+	//Link : https://github.com/ashishps1/awesome-leetcode-resources?fbclid=PAVERFWARplRpleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAaemoANkCIIiUwepPVT7V0mMFU_yrbkgKz7wBwwYDQCFrWJ1P-XiI8Ei840-8Q_aem_AOhLDxQggGgg5HxYfg0rqA
 	public static void main(String[] args) {
 		
 		/*  1. find each char occure */
